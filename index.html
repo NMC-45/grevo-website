@@ -3,8 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GREVO Multipurpose Cooperative – Zambia's leading AgriTech cooperative. Precision farming, AI-driven insights, IoT sensors & drone monitoring empowering farmers and unlocking scalable rural impact.">
+    <meta name="description" content="GREVO Multipurpose Cooperative – Zambia's leading youth-led AgriTech cooperative. Precision farming, AI-driven insights, IoT sensors & drone monitoring empowering farmers in the Copperbelt and beyond.">
+    <meta name="robots" content="index, follow">
     <title>GREVO | AgriTech Cooperative • Zambia</title>
+
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://nmc-45.github.io/grevo-website/">
+    <meta property="og:title"       content="GREVO | AgriTech Cooperative • Zambia">
+    <meta property="og:description" content="Zambia's leading youth-led AgriTech cooperative — IoT sensors, drone analytics, AI yield forecasting & blockchain traceability empowering smallholder farmers across the Copperbelt.">
+    <meta property="og:image"       content="https://nmc-45.github.io/grevo-website/og-preview.png">
+    <meta property="og:locale"      content="en_ZM">
+    <meta name="twitter:card"       content="summary_large_image">
+    <meta name="twitter:title"      content="GREVO | AgriTech Cooperative • Zambia">
+    <meta name="twitter:description" content="Zambia's leading youth-led AgriTech cooperative — powering precision agriculture across the Copperbelt.">
+    <meta name="twitter:image"      content="https://nmc-45.github.io/grevo-website/og-preview.png">
+
+    <!-- Favicon (inline SVG — no file needed) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230b3d20'/><text x='50%25' y='72%25' text-anchor='middle' font-family='Georgia,serif' font-size='64' font-weight='700' fill='%23a8f5c2'>G</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230b3d20'/><text x='50%25' y='72%25' text-anchor='middle' font-family='Georgia,serif' font-size='64' font-weight='700' fill='%23a8f5c2'>G</text></svg>">
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,6 +49,11 @@
             line-height: 1.7;
             overflow-x: hidden;
             cursor: none;
+        }
+        /* Restore default cursor on touch/mobile devices */
+        @media (hover: none) {
+            body { cursor: auto; }
+            .cursor-dot, .cursor-ring { display: none !important; }
         }
 
         /* ─── SCROLL PROGRESS BAR ─── */
@@ -998,6 +1021,136 @@
             #impact { padding: 80px 24px; }
         }
 
+        /* ─── LEADERSHIP ─── */
+        #leadership {
+            padding: 140px 80px;
+            background: var(--ink);
+            color: white;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .team-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.4s var(--easing);
+            position: relative;
+            overflow: hidden;
+        }
+        .team-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(82,201,125,0.04) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .team-card:hover {
+            border-color: rgba(82,201,125,0.25);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+        }
+        .team-card:hover::before { opacity: 1; }
+        /* Founder badge on first card */
+        .team-card.founder-card {
+            border-color: rgba(168,245,194,0.2);
+            background: rgba(82,201,125,0.05);
+        }
+        .team-badge {
+            position: absolute;
+            top: 16px; right: 16px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(168,245,194,0.12);
+            color: var(--glow);
+            border: 1px solid rgba(168,245,194,0.25);
+        }
+        .team-avatar {
+            width: 86px; height: 86px;
+            border-radius: 50%;
+            margin: 0 auto 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--glow);
+            position: relative;
+        }
+        .team-avatar::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px solid rgba(168,245,194,0.25);
+            animation: pulse-ring 3s ease-out infinite;
+        }
+        .team-avatar-nc { background: linear-gradient(135deg, #0b3d20, #1e7a42); }
+        .team-avatar-kl { background: linear-gradient(135deg, #1040a0, #2060d0); }
+        .team-avatar-dk { background: linear-gradient(135deg, #3a1a00, #c9a84c); }
+        .team-avatar-ek { background: linear-gradient(135deg, #0d2240, #1e4a80); }
+        .team-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 4px;
+        }
+        .team-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--leaf);
+            margin-bottom: 18px;
+        }
+        .team-bio {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.75;
+        }
+        .team-socials {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .team-social-btn {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.68rem;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .team-social-btn:hover {
+            background: var(--canopy);
+            border-color: var(--leaf);
+            color: var(--glow);
+        }
+
+        @media (max-width: 768px) {
+            #leadership { padding: 80px 24px; }
+        }
+
         /* ─── TIMELINE ─── */
         #timeline {
             padding: 120px 80px;
@@ -1380,24 +1533,15 @@
             margin-top: 32px;
             border-radius: 12px;
             overflow: hidden;
-            height: 180px;
-            background: linear-gradient(135deg, #e8f5ee, #d4f0e0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(30,122,66,0.15);
+            height: 200px;
+            border: 1px solid rgba(30,122,66,0.2);
             position: relative;
         }
-        .contact-map-pin {
-            text-align: center;
-        }
-        .contact-map-pin .pin-icon { font-size: 2.2rem; display: block; }
-        .contact-map-pin p {
-            font-size: 0.8rem;
-            color: var(--forest);
-            font-weight: 600;
-            margin-top: 6px;
-            letter-spacing: 0.5px;
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
         }
         /* form */
         .contact-form-box {
@@ -1568,6 +1712,7 @@
         <a href="#agritech">AgriTech</a>
         <a href="#projects">Projects</a>
         <a href="#impact">Impact</a>
+        <a href="#leadership">Team</a>
         <a href="#timeline">Roadmap</a>
         <a href="#contact">Contact</a>
         <a href="#partner" class="nav-cta">Partner / Fund</a>
@@ -1606,9 +1751,12 @@
             </div>
             <div class="hero-trust">
                 <div class="hero-trust-avatars">
-                    <span>MK</span><span>CN</span><span>EB</span><span>+</span>
+                    <span title="Nicholas Chanda — Founder">NC</span>
+                    <span title="Kezia Lukonde C. — Co-Founder">KL</span>
+                    <span title="Dyness Kunda — Co-Founder">DK</span>
+                    <span title="E. Kalale — Co-Founder">EK</span>
                 </div>
-                <p><strong>1,800+ farmers</strong> · active on platform</p>
+                <p>Founded by <strong>Nicholas Chanda</strong> &amp; team · Mufulira, Zambia</p>
             </div>
         </div>
 
@@ -1761,7 +1909,7 @@
                             <div class="p-stat-lbl">Uptime SLA</div>
                         </div>
                     </div>
-                    <a href="#partner" class="project-link">Learn More →</a>
+                    <a href="#contact" class="project-link">Request a Demo →</a>
                 </div>
             </div>
             <!-- AeroCrop -->
@@ -1789,7 +1937,7 @@
                             <div class="p-stat-lbl">Ha Mapped</div>
                         </div>
                     </div>
-                    <a href="#partner" class="project-link">Learn More →</a>
+                    <a href="#contact" class="project-link">Request a Demo →</a>
                 </div>
             </div>
             <!-- YieldMind -->
@@ -1817,7 +1965,7 @@
                             <div class="p-stat-lbl">Users</div>
                         </div>
                     </div>
-                    <a href="#partner" class="project-link">Learn More →</a>
+                    <a href="#contact" class="project-link">Request a Demo →</a>
                 </div>
             </div>
         </div>
@@ -1835,37 +1983,37 @@
         <div class="testimonials-grid">
             <div class="testimonial-card reveal reveal-delay-1">
                 <p class="testimonial-quote">
-                    "Before GREVO, I guessed when to water and when to spray. Now my phone tells me exactly what my crops need. My maize harvest doubled in one season."
+                    "GREVO was born right here in Luansobe. Nicholas and his team showed us that young Zambians can lead the agri-revolution — not just talk about it. The cooperative gave our community both technology and dignity."
                 </p>
                 <div class="testimonial-author">
-                    <div class="author-avatar">MK</div>
+                    <div class="author-avatar">BM</div>
                     <div>
-                        <div class="author-name">Mulenga Kapambwe</div>
-                        <div class="author-role">Maize Farmer · Lusaka Province</div>
+                        <div class="author-name">Brighton Mwale</div>
+                        <div class="author-role">Cooperative Member · Luansobe, Mufulira</div>
                     </div>
                 </div>
             </div>
             <div class="testimonial-card reveal reveal-delay-2">
                 <p class="testimonial-quote">
-                    "The drone maps showed me a pest outbreak in the north corner of my field before it spread. I saved an entire 3-hectare block. This is real technology for real farmers."
+                    "Kezia and Dyness trained us on the mobile app in Bemba — that made all the difference. When farmers can read the data in their own language, they trust it and act on it. My soya yield went up by over 60%."
                 </p>
                 <div class="testimonial-author">
-                    <div class="author-avatar">CN</div>
+                    <div class="author-avatar">CM</div>
                     <div>
-                        <div class="author-name">Chioma Nkemdirim</div>
-                        <div class="author-role">Soybean Producer · Eastern Province</div>
+                        <div class="author-name">Christine Mutale</div>
+                        <div class="author-role">Soya Farmer · Mufulira District, Copperbelt</div>
                     </div>
                 </div>
             </div>
             <div class="testimonial-card reveal reveal-delay-3">
                 <p class="testimonial-quote">
-                    "GREVO's blockchain certificate got me into a European export market. My groundnuts now fetch 35% more per bag. The co-op changed my family's future."
+                    "I was sceptical about drones and AI — I'm a farmer, not a scientist. But E. Kalale sat with me and explained how the system works step by step. Now I wouldn't farm without it. GREVO is the real deal."
                 </p>
                 <div class="testimonial-author">
-                    <div class="author-avatar">EB</div>
+                    <div class="author-avatar">JP</div>
                     <div>
-                        <div class="author-name">Esther Banda</div>
-                        <div class="author-role">Groundnut Farmer · Southern Province</div>
+                        <div class="author-name">Joseph Phiri</div>
+                        <div class="author-role">Maize &amp; Groundnut Farmer · Copperbelt Province</div>
                     </div>
                 </div>
             </div>
@@ -1879,6 +2027,72 @@
                 <span class="sdg-badge">🌿 SDG 13 · Climate Action</span>
                 <span class="sdg-badge">🤝 SDG 17 · Partnerships</span>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════ LEADERSHIP ══════════════════════════════════════ -->
+<section id="leadership">
+    <div class="section-inner">
+        <div class="section-heading-block reveal">
+            <span class="section-eyebrow" style="color:var(--leaf);">The People Behind GREVO</span>
+            <h2 class="section-header" style="color:white;">Our Founding Leadership</h2>
+            <p style="color:rgba(255,255,255,0.55);">A passionate team of young Zambians from Mufulira, Copperbelt — building technology that works for African farmers.</p>
+        </div>
+        <div class="team-grid">
+
+            <!-- Nicholas Chanda -->
+            <div class="team-card founder-card reveal reveal-delay-1">
+                <span class="team-badge">Founder</span>
+                <div class="team-avatar team-avatar-nc">NC</div>
+                <div class="team-name">Nicholas Chanda</div>
+                <div class="team-title">Founder &amp; Chief Executive</div>
+                <p class="team-bio">Visionary behind GREVO's AgriTech mission. Nicholas identified the technology gap facing Copperbelt smallholders and built the cooperative from the ground up in Luansobe, bringing IoT, drones, and AI within reach of every farmer.</p>
+                <div class="team-socials">
+                    <a href="#contact" class="team-social-btn" title="Connect">in</a>
+                    <a href="mailto:grevomultipurpose@gmail.com" class="team-social-btn" title="Email">✉</a>
+                </div>
+            </div>
+
+            <!-- Kezia Lukonde C. -->
+            <div class="team-card reveal reveal-delay-2">
+                <span class="team-badge">Co-Founder</span>
+                <div class="team-avatar team-avatar-kl">KL</div>
+                <div class="team-name">Kezia Lukonde C.</div>
+                <div class="team-title">Co-Founder &amp; Operations Lead</div>
+                <p class="team-bio">Kezia drives GREVO's day-to-day operations and farmer onboarding strategy. Her multilingual training approach — delivering the platform in Bemba and Nyanja — has been key to reaching over 1,800 active cooperative members.</p>
+                <div class="team-socials">
+                    <a href="#contact" class="team-social-btn" title="Connect">in</a>
+                    <a href="mailto:grevomultipurpose@gmail.com" class="team-social-btn" title="Email">✉</a>
+                </div>
+            </div>
+
+            <!-- Dyness Kunda -->
+            <div class="team-card reveal reveal-delay-3">
+                <span class="team-badge">Co-Founder</span>
+                <div class="team-avatar team-avatar-dk">DK</div>
+                <div class="team-name">Dyness Kunda</div>
+                <div class="team-title">Co-Founder &amp; Technology Director</div>
+                <p class="team-bio">Dyness leads GREVO's technology stack — overseeing the FarmPulse IoT sensor network, AeroCrop drone programme, and the YieldMind AI platform. She ensures every tool deployed actually works in real Zambian field conditions.</p>
+                <div class="team-socials">
+                    <a href="#contact" class="team-social-btn" title="Connect">in</a>
+                    <a href="mailto:grevomultipurpose@gmail.com" class="team-social-btn" title="Email">✉</a>
+                </div>
+            </div>
+
+            <!-- E. Kalale -->
+            <div class="team-card reveal reveal-delay-4">
+                <span class="team-badge">Co-Founder</span>
+                <div class="team-avatar team-avatar-ek">EK</div>
+                <div class="team-name">E. Kalale</div>
+                <div class="team-title">Co-Founder &amp; Farmer Relations</div>
+                <p class="team-bio">E. Kalale is the voice of GREVO's farmer community — building trust on the ground, translating complex data into practical advice, and ensuring that every cooperative member feels heard and supported throughout the growing season.</p>
+                <div class="team-socials">
+                    <a href="#contact" class="team-social-btn" title="Connect">in</a>
+                    <a href="mailto:grevomultipurpose@gmail.com" class="team-social-btn" title="Email">✉</a>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -1939,14 +2153,34 @@
         <p>We are actively seeking catalytic capital and strategic partnership through the timbuktoo GreenTech Hub to accelerate our AgriTech platform from Zambia across the African continent.</p>
         <div class="partner-actions reveal">
             <a href="#" class="btn-cta btn-cta-primary">Submit timbuktoo Application →</a>
-            <a href="#" class="btn-cta btn-cta-outline">Become a Partner</a>
+            <a href="#contact" class="btn-cta btn-cta-outline">Become a Partner</a>
         </div>
+
+        <!-- Download Cooperative Profile -->
+        <div class="reveal" style="margin-top:32px;">
+            <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID"
+               target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);padding:14px 30px;border-radius:8px;text-decoration:none;font-size:0.88rem;font-weight:600;letter-spacing:1px;transition:all 0.3s;"
+               onmouseover="this.style.background='rgba(255,255,255,0.1)';this.style.borderColor='rgba(168,245,194,0.4)';this.style.color='#a8f5c2'"
+               onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.8)'">
+                <span style="font-size:1.1rem;">📄</span>
+                Download Cooperative Profile (PDF)
+                <span style="font-size:0.8rem;opacity:0.6;">↓</span>
+            </a>
+            <p style="margin-top:10px;font-size:0.75rem;color:rgba(255,255,255,0.3);letter-spacing:0.5px;">
+                <!--  Replace YOUR_FOLDER_ID in the link above with your actual Google Drive folder/file ID  -->
+                One-page overview · Suitable for grant reviewers &amp; investors
+            </p>
+        </div>
+
         <div class="trust-row reveal">
-            <p>Backed by visionary partners & institutions</p>
+            <p>Supported by &amp; in partnership with</p>
             <div class="trust-badges">
                 <span class="trust-badge">🌍 timbuktoo GreenTech</span>
                 <span class="trust-badge">🌱 AGRA Alliance</span>
                 <span class="trust-badge">💡 AfDB Innovation</span>
+                <span class="trust-badge">🏛 Mukuba University</span>
+                <span class="trust-badge">🌾 ZATP II Zambia</span>
                 <span class="trust-badge">🤝 UN Food Systems</span>
             </div>
         </div>
@@ -2007,10 +2241,13 @@
 
             <!-- Map Placeholder -->
             <div class="contact-map">
-                <div class="contact-map-pin">
-                    <span class="pin-icon">📍</span>
-                    <p>Luansobe · Mufulira · Copperbelt</p>
-                </div>
+                <iframe
+                    title="GREVO location — Mufulira, Copperbelt, Zambia"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61012.45!2d28.211!3d-12.544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x196f7e4e2b4b6a59%3A0x65d5d4a8a4c0e9e!2sMufulira%2C%20Zambia!5e0!3m2!1sen!2szm!4v1711500000000"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
 
@@ -2019,7 +2256,8 @@
             <h3>Send Us a Message</h3>
             <p class="form-sub">Fill in the form below and a member of our team will get back to you shortly.</p>
 
-            <form id="contact-form" novalidate>
+            <!-- Formspree endpoint — replace YOUR_FORM_ID with the ID from formspree.io/forms -->
+        <form id="contact-form" novalidate>
                 <div class="form-row">
                     <div class="form-field">
                         <label for="cf-fname">First Name <span class="required">*</span></label>
@@ -2099,10 +2337,18 @@
             <a href="#" class="logo">GREVO <span>AGRI•TECH</span></a>
             <p>Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
             <div class="footer-socials">
-                <a href="#" class="social-btn" title="LinkedIn">in</a>
-                <a href="#" class="social-btn" title="Twitter">𝕏</a>
-                <a href="#" class="social-btn" title="YouTube">▶</a>
-                <a href="#" class="social-btn" title="WhatsApp">💬</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-btn" title="LinkedIn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener" class="social-btn" title="Facebook">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener" class="social-btn" title="X / Twitter">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://wa.me/260761441893" target="_blank" rel="noopener" class="social-btn" title="WhatsApp">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                </a>
             </div>
         </div>
         <div class="footer-col">
@@ -2221,7 +2467,7 @@
     });
 
     /* ── NAV ACTIVE SECTION TRACKING ── */
-    const sections = ['agritech', 'projects', 'impact', 'timeline', 'contact', 'partner'];
+    const sections = ['agritech', 'projects', 'impact', 'leadership', 'timeline', 'contact', 'partner'];
     const navAnchors = navLinks.querySelectorAll('a');
     const io = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -2300,36 +2546,37 @@
         });
     }
 
+    let canvasActive = true;
+    // Pause canvas when hero section scrolls out of view — saves battery on mobile
+    new IntersectionObserver(entries => {
+        canvasActive = entries[0].isIntersecting;
+    }, { threshold: 0 }).observe(document.getElementById('hero'));
+
     function drawCanvas() {
-        ctx.clearRect(0, 0, W, H);
-
-        for (let i = 0; i < NODES.length; i++) {
-            const a = NODES[i];
-            // move
-            a.x += a.vx;
-            a.y += a.vy;
-            if (a.x < 0 || a.x > W) a.vx *= -1;
-            if (a.y < 0 || a.y > H) a.vy *= -1;
-
-            // draw dot
-            ctx.beginPath();
-            ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(168,245,194,0.5)';
-            ctx.fill();
-
-            // draw lines
-            for (let j = i + 1; j < NODES.length; j++) {
-                const b = NODES[j];
-                const dx = a.x - b.x, dy = a.y - b.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < MAX_DIST) {
-                    const alpha = (1 - dist / MAX_DIST) * 0.18;
-                    ctx.beginPath();
-                    ctx.moveTo(a.x, a.y);
-                    ctx.lineTo(b.x, b.y);
-                    ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
-                    ctx.lineWidth = 0.8;
-                    ctx.stroke();
+        if (canvasActive) {
+            ctx.clearRect(0, 0, W, H);
+            for (let i = 0; i < NODES.length; i++) {
+                const a = NODES[i];
+                a.x += a.vx; a.y += a.vy;
+                if (a.x < 0 || a.x > W) a.vx *= -1;
+                if (a.y < 0 || a.y > H) a.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(168,245,194,0.5)';
+                ctx.fill();
+                for (let j = i + 1; j < NODES.length; j++) {
+                    const b = NODES[j];
+                    const dx = a.x - b.x, dy = a.y - b.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < MAX_DIST) {
+                        const alpha = (1 - dist / MAX_DIST) * 0.18;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
                 }
             }
         }
@@ -2337,66 +2584,90 @@
     }
     drawCanvas();
 
-    /* ── CONTACT FORM ── */
+    /* ── CONTACT FORM (Formspree + mailto fallback) ── */
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
+        // ► To activate real email delivery:
+        //   1. Go to https://formspree.io and sign in with grevomultipurpose@gmail.com
+        //   2. Create a new form — copy the Form ID (looks like "xyzabc12")
+        //   3. Replace YOUR_FORM_ID below with that ID
+        const FORMSPREE_ID = 'YOUR_FORM_ID';
+        const FORMSPREE_URL = `https://formspree.io/f/${FORMSPREE_ID}`;
+
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Basic validation
+            // Validate required fields
             const required = contactForm.querySelectorAll('[required]');
             let valid = true;
             required.forEach(field => {
                 field.style.borderColor = '';
-                if (!field.value.trim() || (field.type === 'checkbox' && !field.checked)) {
+                if (field.type === 'checkbox' ? !field.checked : !field.value.trim()) {
                     field.style.borderColor = '#e05252';
                     valid = false;
                 }
             });
-            if (!valid) {
-                contactForm.querySelector('[required]').focus();
-                return;
-            }
+            if (!valid) { contactForm.querySelector('[style*="e05252"]').focus(); return; }
 
-            // Email format check
             const emailField = document.getElementById('cf-email');
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
-                emailField.style.borderColor = '#e05252';
-                emailField.focus();
-                return;
+                emailField.style.borderColor = '#e05252'; emailField.focus(); return;
             }
 
-            // Show success
             const submitBtn = contactForm.querySelector('.form-submit-btn');
-            submitBtn.textContent = 'Sending…';
+            submitBtn.innerHTML = '<span style="opacity:.6">Sending…</span>';
             submitBtn.disabled = true;
 
-            setTimeout(() => {
-                // In production this would POST to a backend / Formspree / EmailJS
-                // Compose mailto as fallback so the message actually goes
-                const fname   = document.getElementById('cf-fname').value.trim();
-                const lname   = document.getElementById('cf-lname').value.trim();
-                const email   = emailField.value.trim();
-                const subject = document.getElementById('cf-subject').value;
-                const org     = document.getElementById('cf-org').value.trim();
-                const phone   = document.getElementById('cf-phone').value.trim();
-                const msg     = document.getElementById('cf-message').value.trim();
+            const fname   = document.getElementById('cf-fname').value.trim();
+            const lname   = document.getElementById('cf-lname').value.trim();
+            const email   = emailField.value.trim();
+            const subject = document.getElementById('cf-subject').value;
+            const org     = document.getElementById('cf-org').value.trim();
+            const phone   = document.getElementById('cf-phone').value.trim();
+            const msg     = document.getElementById('cf-message').value.trim();
 
-                const body = encodeURIComponent(
-                    `Name: ${fname} ${lname}\nEmail: ${email}\nPhone: ${phone}\nOrganisation: ${org}\n\nMessage:\n${msg}`
-                );
-                window.location.href =
-                    `mailto:grevomultipurpose@gmail.com?subject=${encodeURIComponent('[GREVO Website] ' + subject)}&body=${body}`;
+            const payload = { name: `${fname} ${lname}`, email, phone, subject, organisation: org, message: msg, _replyto: email, _subject: `[GREVO Website] ${subject}` };
 
-                // Show confirmation UI
-                document.getElementById('confirm-email').textContent = email;
-                const fields = contactForm.querySelectorAll('.form-row, .form-field, .form-submit-btn, .form-note');
-                fields.forEach(f => { f.style.display = 'none'; });
-                document.getElementById('form-success').style.display = 'block';
-            }, 700);
+            if (FORMSPREE_ID !== 'YOUR_FORM_ID') {
+                // Real Formspree delivery
+                fetch(FORMSPREE_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.ok || data.next) {
+                        showSuccess(email);
+                    } else {
+                        submitBtn.innerHTML = 'Send Message ✉️';
+                        submitBtn.disabled = false;
+                        alert('Something went wrong. Please email us directly at grevomultipurpose@gmail.com');
+                    }
+                })
+                .catch(() => {
+                    // Network error — fallback to mailto
+                    openMailto(fname, lname, email, phone, org, subject, msg);
+                    showSuccess(email);
+                });
+            } else {
+                // Formspree not yet configured — use mailto fallback
+                openMailto(fname, lname, email, phone, org, subject, msg);
+                setTimeout(() => showSuccess(email), 600);
+            }
         });
 
-        // Clear red borders on input
+        function openMailto(fname, lname, email, phone, org, subject, msg) {
+            const body = encodeURIComponent(`Name: ${fname} ${lname}\nEmail: ${email}\nPhone: ${phone}\nOrganisation: ${org}\n\nMessage:\n${msg}`);
+            window.open(`mailto:grevomultipurpose@gmail.com?subject=${encodeURIComponent('[GREVO] ' + subject)}&body=${body}`);
+        }
+
+        function showSuccess(email) {
+            document.getElementById('confirm-email').textContent = email;
+            contactForm.querySelectorAll('.form-row, .form-field, .form-submit-btn, .form-note').forEach(f => f.style.display = 'none');
+            document.getElementById('form-success').style.display = 'block';
+        }
+
         contactForm.querySelectorAll('input, select, textarea').forEach(el => {
             el.addEventListener('input', () => { el.style.borderColor = ''; });
         });
