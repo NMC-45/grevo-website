@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        
+
         :root {
             --forest:    #0b3d20;
             --canopy:    #145c30;
@@ -24,31 +24,111 @@
         }
 
         html { scroll-behavior: smooth; }
-
         body {
             font-family: 'Outfit', sans-serif;
             background: var(--parchment);
             color: var(--ink);
             line-height: 1.7;
             overflow-x: hidden;
+            cursor: none;
         }
 
-        /* Custom Tech Cursor */
-        .cursor {
+        /* ─── SCROLL PROGRESS BAR ─── */
+        #progress-bar {
             position: fixed;
             top: 0; left: 0;
-            width: 12px; height: 12px;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--leaf), var(--tech));
+            z-index: 9999;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px var(--tech);
+        }
+
+        /* ─── LOADING SCREEN ─── */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--ink);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            transition: opacity 0.6s var(--easing), visibility 0.6s;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; }
+        .loader-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            animation: fadeInUp 0.8s var(--easing) forwards;
+            opacity: 0;
+        }
+        .loader-logo span { color: var(--glow); }
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            animation: fadeInUp 0.8s 0.2s var(--easing) forwards;
+            opacity: 0;
+        }
+        .loader-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--leaf), var(--tech));
+            border-radius: 2px;
+            animation: loader-fill 1.4s var(--easing) forwards;
+        }
+        @keyframes loader-fill {
+            from { width: 0%; }
+            to   { width: 100%; }
+        }
+        .loader-sub {
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            animation: fadeInUp 0.8s 0.4s var(--easing) forwards;
+            opacity: 0;
+        }
+
+        /* ─── CUSTOM CURSOR ─── */
+        .cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 8px; height: 8px;
             background: var(--tech);
             border-radius: 50%;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 9998;
             transform: translate(-50%, -50%);
-            transition: all 0.2s var(--easing);
-            mix-blend-mode: multiply;
-            box-shadow: 0 0 15px var(--tech);
+            box-shadow: 0 0 12px var(--tech), 0 0 30px rgba(0,212,255,0.4);
+            transition: transform 0.1s, background 0.2s;
+        }
+        .cursor-ring {
+            position: fixed;
+            top: 0; left: 0;
+            width: 40px; height: 40px;
+            border: 1.5px solid rgba(0,212,255,0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9997;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s var(--easing), width 0.3s, height 0.3s, border-color 0.3s;
+        }
+        .cursor-ring.hovering {
+            width: 60px; height: 60px;
+            border-color: var(--leaf);
+            background: rgba(82,201,125,0.06);
         }
 
-        /* NAV */
+        /* ─── NAVIGATION ─── */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -56,13 +136,13 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 56px;
+            padding: 22px 60px;
             transition: all 0.5s var(--easing);
         }
         nav.scrolled {
-            padding: 14px 56px;
+            padding: 14px 60px;
             background: rgba(11,61,32,0.96);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
             box-shadow: 0 4px 40px rgba(0,0,0,0.3);
         }
         .nav-logo-text {
@@ -70,12 +150,138 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: white;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            text-decoration: none;
         }
         .nav-logo-text span { color: var(--glow); }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0; right: 0;
+            height: 1px;
+            background: var(--glow);
+            transform: scaleX(0);
+            transition: transform 0.3s var(--easing);
+        }
+        .nav-links a:hover, .nav-links a.active { color: white; }
+        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+        .nav-cta {
+            background: var(--leaf);
+            color: var(--forest) !important;
+            padding: 12px 28px;
+            border-radius: 4px;
+            font-weight: 700 !important;
+            transition: all 0.3s !important;
+        }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover {
+            background: var(--glow) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(82,201,125,0.35) !important;
+        }
+        /* hamburger */
+        .nav-burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: none;
+            padding: 4px;
+        }
+        .nav-burger span {
+            display: block;
+            width: 24px; height: 2px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s var(--easing);
+        }
+        .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        /* HERO */
+        @media (max-width: 768px) {
+            nav { padding: 18px 24px; }
+            nav.scrolled { padding: 14px 24px; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0; right: 0;
+                background: rgba(11,61,32,0.98);
+                backdrop-filter: blur(24px);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px 24px 28px;
+                gap: 0;
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 14px 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.06); }
+            .nav-cta { margin-top: 16px; }
+            .nav-burger { display: flex; }
+        }
+
+        /* ─── SCROLL REVEAL ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--easing), transform 0.8s var(--easing);
+        }
+        .reveal.revealed { opacity: 1; transform: none; }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ─── KEYFRAMES ─── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes spin-slow {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spin-ccw {
+            to { transform: rotate(-360deg); }
+        }
+        @keyframes pulse-ring {
+            0%   { transform: scale(1);   opacity: 0.8; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-14px); }
+        }
+        @keyframes blob-drift {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: scale(1) translate(0,0); }
+            33%       { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; transform: scale(1.04) translate(12px,-8px); }
+            66%       { border-radius: 50% 40% 60% 30% / 40% 50% 60% 50%; transform: scale(0.97) translate(-10px,10px); }
+        }
+        @keyframes data-blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.3; }
+        }
+        @keyframes shimmer {
+            from { background-position: -200% center; }
+            to   { background-position: 200% center; }
+        }
+
+        /* ─── HERO ─── */
         #hero {
             min-height: 100vh;
             background: var(--forest);
@@ -83,6 +289,11 @@
             display: flex;
             align-items: center;
             overflow: hidden;
+        }
+        .hero-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
         }
         .hero-bg {
             position: absolute;
@@ -93,53 +304,74 @@
         .hero-inner {
             position: relative;
             z-index: 2;
-            max-width: 1280px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 140px 80px 100px;
+            padding: 150px 80px 110px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             align-items: center;
+            width: 100%;
         }
-        .hero-content h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3.2rem, 5.8vw, 5.4rem);
-            font-weight: 300;
-            line-height: 1.05;
-            color: white;
-            letter-spacing: -2px;
-        }
-        .hero-content h1 strong {
-            font-weight: 700;
-            color: var(--glow);
-        }
-        .hero-content .tag {
+        .hero-tag {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             background: rgba(82,201,125,0.15);
+            border: 1px solid rgba(168,245,194,0.25);
             color: var(--glow);
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             font-weight: 600;
-            padding: 6px 18px;
+            padding: 7px 20px;
             border-radius: 30px;
-            letter-spacing: 2px;
-            margin-bottom: 24px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
         }
-        .hero-content p {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.75);
-            max-width: 480px;
-            line-height: 1.8;
+        .hero-tag .pulse-dot {
+            width: 7px; height: 7px;
+            background: var(--leaf);
+            border-radius: 50%;
+            animation: data-blink 1.4s ease-in-out infinite;
+        }
+        .hero-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 5.5vw, 5.2rem);
+            font-weight: 300;
+            line-height: 1.06;
+            color: white;
+            letter-spacing: -2px;
+            margin-bottom: 28px;
+        }
+        .hero-content h1 strong {
+            font-weight: 700;
+            color: var(--glow);
+            display: block;
+        }
+        .hero-content > p {
+            font-size: 1.08rem;
+            color: rgba(255,255,255,0.72);
+            max-width: 490px;
+            line-height: 1.85;
+        }
+        .hero-actions {
+            margin-top: 44px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
         }
         .btn-primary {
-            padding: 18px 42px;
+            display: inline-block;
+            padding: 18px 44px;
             background: var(--leaf);
             color: var(--forest);
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 0.88rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             border-radius: 4px;
+            text-decoration: none;
             transition: all 0.4s var(--easing);
         }
         .btn-primary:hover {
@@ -147,158 +379,2030 @@
             transform: translateY(-4px);
             box-shadow: 0 20px 60px rgba(82,201,125,0.4);
         }
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .btn-ghost:hover { color: var(--glow); }
+        .btn-ghost svg { transition: transform 0.3s; }
+        .btn-ghost:hover svg { transform: translateX(4px); }
+        .hero-trust {
+            margin-top: 48px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .hero-trust-avatars {
+            display: flex;
+        }
+        .hero-trust-avatars span {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--forest);
+            background: var(--canopy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--glow);
+            margin-left: -10px;
+        }
+        .hero-trust-avatars span:first-child { margin-left: 0; }
+        .hero-trust p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.5);
+        }
+        .hero-trust p strong { color: rgba(255,255,255,0.85); }
 
-        /* METRICS */
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 480px;
+        }
+        .orbit-wrapper {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+        .orbit-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(168,245,194,0.2);
+        }
+        .orbit-ring-1 {
+            inset: 0;
+            animation: spin-slow 60s linear infinite;
+        }
+        .orbit-ring-2 {
+            inset: 40px;
+            border-color: rgba(0,212,255,0.15);
+            animation: spin-slow 40s linear infinite reverse;
+        }
+        .orbit-ring-3 {
+            inset: 90px;
+            border-color: rgba(82,201,125,0.2);
+            animation: spin-slow 25s linear infinite;
+        }
+        .orbit-center {
+            position: absolute;
+            inset: 130px;
+            background: radial-gradient(circle, rgba(0,212,255,0.15) 0%, rgba(20,92,48,0.3) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0,212,255,0.3);
+            animation: float 4s ease-in-out infinite;
+            box-shadow: 0 0 60px rgba(0,212,255,0.15), inset 0 0 40px rgba(82,201,125,0.08);
+        }
+        .orbit-center-inner {
+            text-align: center;
+        }
+        .orbit-icon {
+            font-size: 2.4rem;
+            display: block;
+        }
+        .orbit-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--tech);
+        }
+        /* orbit dots */
+        .orbit-dot {
+            position: absolute;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--leaf);
+            box-shadow: 0 0 12px var(--leaf);
+        }
+        /* floating stat cards */
+        .stat-card {
+            position: absolute;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 14px 20px;
+            white-space: nowrap;
+        }
+        .stat-card-label {
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 4px;
+        }
+        .stat-card-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: white;
+        }
+        .stat-card-value span { color: var(--glow); font-size: 1rem; }
+        .stat-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.68rem;
+            color: var(--tech);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 3px;
+        }
+        .stat-live::before {
+            content: '';
+            width: 5px; height: 5px;
+            background: var(--tech);
+            border-radius: 50%;
+            box-shadow: 0 0 6px var(--tech);
+            animation: data-blink 1.2s infinite;
+        }
+        .stat-card.top-right { top: 30px; right: -20px; animation: float 5s ease-in-out infinite; }
+        .stat-card.bottom-left { bottom: 40px; left: -30px; animation: float 6s 1s ease-in-out infinite; }
+        .stat-card.mid-left  { top: 50%; left: -50px; transform: translateY(-50%); animation: float 4.5s 0.5s ease-in-out infinite; }
+
+        @media (max-width: 1024px) {
+            .hero-inner { grid-template-columns: 1fr; text-align: center; padding: 140px 40px 80px; }
+            .hero-content > p { margin: 0 auto; }
+            .hero-actions { justify-content: center; }
+            .hero-trust { justify-content: center; }
+            .hero-visual { height: 360px; }
+            .orbit-wrapper { width: 320px; height: 320px; }
+        }
+        @media (max-width: 600px) {
+            .hero-inner { padding: 120px 24px 60px; }
+            .hero-visual { display: none; }
+        }
+
+        /* ─── METRICS ─── */
         #metrics {
-            padding: 140px 80px;
+            padding: 120px 80px;
             background: white;
         }
-        .metric-card {
+        .metrics-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .metrics-header {
             text-align: center;
-            padding: 40px 20px;
-            border-right: 1px solid #eee;
+            margin-bottom: 70px;
+        }
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--moss);
+            margin-bottom: 14px;
+        }
+        .section-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 300;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .metric-card {
+            padding: 48px 32px;
+            text-align: center;
+            border-right: 1px solid #e8e8e8;
+            position: relative;
+            transition: background 0.3s;
+        }
+        .metric-card:last-child { border-right: none; }
+        .metric-card:hover { background: #fafaf8; }
+        .metric-icon {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, rgba(30,122,66,0.1), rgba(82,201,125,0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.4rem;
         }
         .metric-number {
-            font-size: 3.8rem;
             font-family: 'Cormorant Garamond', serif;
+            font-size: 3.6rem;
+            font-weight: 600;
             color: var(--forest);
+            line-height: 1;
+        }
+        .metric-suffix {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--moss);
+        }
+        .metric-label {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
         }
 
-        /* AGRI-TECH SECTION */
+        @media (max-width: 768px) {
+            #metrics { padding: 80px 24px; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .metric-card { border-right: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; }
+            .metric-card:nth-child(2) { border-right: none; }
+        }
+
+        /* ─── AGRITECH ─── */
         #agritech {
             padding: 140px 80px;
             background: var(--canopy);
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        #agritech::before {
+            content: '';
+            position: absolute;
+            top: -200px; right: -200px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
+            pointer-events: none;
         }
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
             max-width: 1200px;
             margin: 0 auto;
         }
         .tech-card {
-            background: rgba(255,255,255,0.08);
-            padding: 48px 36px;
-            border-radius: 8px;
-            transition: all 0.4s;
+            background: rgba(255,255,255,0.06);
+            padding: 44px 36px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.4s var(--easing);
+            position: relative;
+            overflow: hidden;
+        }
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(82,201,125,0.04) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
         .tech-card:hover {
-            transform: translateY(-12px);
-            background: rgba(255,255,255,0.12);
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(168,245,194,0.2);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+        }
+        .tech-card:hover::before { opacity: 1; }
+        .tech-icon-circle {
+            width: 56px; height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 24px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .tech-icon-circle::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 20px;
+            border: 1px solid rgba(168,245,194,0.15);
+            animation: pulse-ring 2.5s ease-out infinite;
+        }
+        .tech-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            color: white;
+        }
+        .tech-card p {
+            font-size: 0.93rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.75;
+        }
+        .tech-card-footer {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .tech-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--glow);
+            background: rgba(168,245,194,0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        .tech-arrow {
+            color: rgba(255,255,255,0.3);
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        .tech-card:hover .tech-arrow { color: var(--glow); transform: translateX(4px); }
+
+        @media (max-width: 768px) {
+            #agritech { padding: 80px 24px; }
         }
 
-        /* PROJECTS & OTHER SECTIONS remain elevated with similar polish */
-        .section-header {
+        /* ─── PROJECTS ─── */
+        #projects {
+            padding: 140px 80px;
+            background: var(--ink);
+            color: white;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .project-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.5s var(--easing);
+        }
+        .project-card:hover {
+            border-color: rgba(82,201,125,0.25);
+            transform: translateY(-8px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(82,201,125,0.1);
+        }
+        .project-header {
+            height: 190px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .project-header-farmPulse {
+            background: linear-gradient(135deg, #0b3d20 0%, #1e7a42 50%, #0d4a28 100%);
+        }
+        .project-header-aeroCrop {
+            background: linear-gradient(135deg, #0d2240 0%, #1040a0 50%, #0e3060 100%);
+        }
+        .project-header-yieldMind {
+            background: linear-gradient(135deg, #2d1b00 0%, #c9a84c 50%, #4a3000 100%);
+        }
+        .project-header-icon {
+            font-size: 4rem;
+            filter: drop-shadow(0 0 30px rgba(255,255,255,0.3));
+            z-index: 2;
+            position: relative;
+        }
+        .project-header-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, transparent 70%);
+        }
+        .project-header-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .project-status {
+            position: absolute;
+            top: 16px; right: 16px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 20px;
+        }
+        .status-live { background: rgba(82,201,125,0.2); color: var(--glow); border: 1px solid rgba(82,201,125,0.3); }
+        .status-active { background: rgba(0,212,255,0.15); color: var(--tech); border: 1px solid rgba(0,212,255,0.3); }
+        .status-scaling { background: rgba(201,168,76,0.2); color: #f0cc6e; border: 1px solid rgba(201,168,76,0.3); }
+        .project-body {
+            padding: 32px;
+        }
+        .project-body h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.4rem, 4vw, 3.4rem);
+            font-size: 1.55rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .project-body p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.75;
+            margin-bottom: 24px;
+        }
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+        .p-stat {
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            padding: 12px 10px;
+            text-align: center;
+        }
+        .p-stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--glow);
+        }
+        .p-stat-lbl {
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--leaf);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: gap 0.3s, color 0.3s;
+        }
+        .project-link:hover { gap: 14px; color: var(--glow); }
+
+        @media (max-width: 768px) {
+            #projects { padding: 80px 24px; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ─── IMPACT (TESTIMONIALS) ─── */
+        #impact {
+            padding: 140px 80px;
+            background: var(--forest);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        #impact::before {
+            content: '';
+            position: absolute;
+            bottom: -150px; left: -150px;
+            width: 500px; height: 500px;
+            background: rgba(82,201,125,0.05);
+            border-radius: 50%;
+            animation: blob-drift 12s ease-in-out infinite;
+        }
+        #impact::after {
+            content: '';
+            position: absolute;
+            top: -100px; right: -100px;
+            width: 400px; height: 400px;
+            background: rgba(0,212,255,0.04);
+            border-radius: 50%;
+            animation: blob-drift 16s 3s ease-in-out infinite reverse;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            position: relative;
+            z-index: 1;
+        }
+        .testimonial-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 36px;
+            transition: all 0.4s;
+            position: relative;
+        }
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 18px; left: 28px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            color: var(--leaf);
+            opacity: 0.25;
+            line-height: 1;
+        }
+        .testimonial-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(82,201,125,0.2);
+            transform: translateY(-6px);
+        }
+        .testimonial-quote {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 28px;
+            padding-top: 16px;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .author-avatar {
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            background: var(--canopy);
+            border: 2px solid rgba(168,245,194,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--glow);
+            flex-shrink: 0;
+        }
+        .author-name {
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+        .author-role {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.45);
+            margin-top: 2px;
+        }
+        .sdg-row {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .sdg-label {
+            font-size: 0.75rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sdg-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .sdg-badge {
+            padding: 10px 22px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .sdg-badge:hover {
+            border-color: var(--glow);
+            color: var(--glow);
+            background: rgba(168,245,194,0.06);
+        }
+
+        @media (max-width: 768px) {
+            #impact { padding: 80px 24px; }
+        }
+
+        /* ─── TIMELINE ─── */
+        #timeline {
+            padding: 120px 80px;
+            background: white;
+            overflow: hidden;
+        }
+        .timeline-track {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .timeline-line {
+            position: absolute;
+            top: 60px;
+            left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--leaf), var(--tech), var(--leaf));
+        }
+        .timeline-nodes {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+        .timeline-node {
+            text-align: center;
+        }
+        .timeline-dot {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--moss);
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+        .timeline-node:hover .timeline-dot {
+            background: var(--leaf);
+            border-color: var(--forest);
+            box-shadow: 0 0 0 8px rgba(82,201,125,0.15);
+        }
+        .timeline-year {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 8px;
+        }
+        .timeline-title {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .timeline-desc {
+            font-size: 0.8rem;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 900px) {
+            #timeline { padding: 80px 24px; }
+            .timeline-nodes { grid-template-columns: 1fr; gap: 40px; }
+            .timeline-line { display: none; }
+            .timeline-dot { margin: 0 auto 14px; }
+        }
+
+        /* ─── PARTNER CTA ─── */
+        #partner {
+            padding: 130px 80px;
+            background: var(--forest);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .partner-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+        .partner-blob-1 {
+            width: 500px; height: 500px;
+            background: rgba(82,201,125,0.12);
+            top: -200px; left: -100px;
+            animation: blob-drift 14s ease-in-out infinite;
+        }
+        .partner-blob-2 {
+            width: 400px; height: 400px;
+            background: rgba(0,212,255,0.08);
+            bottom: -150px; right: -50px;
+            animation: blob-drift 18s 4s ease-in-out infinite reverse;
+        }
+        .partner-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .partner-inner h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
             font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 28px;
+            line-height: 1.15;
+        }
+        .partner-inner h2 strong { color: var(--glow); font-weight: 700; }
+        .partner-inner > p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 620px;
+            margin: 0 auto 52px;
+            line-height: 1.85;
+        }
+        .partner-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .btn-cta {
+            display: inline-block;
+            padding: 20px 52px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.4s var(--easing);
+        }
+        .btn-cta-primary {
+            background: var(--leaf);
+            color: var(--forest);
+        }
+        .btn-cta-primary:hover {
+            background: var(--glow);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(82,201,125,0.4);
+        }
+        .btn-cta-outline {
+            background: transparent;
+            color: white;
+            border: 1.5px solid rgba(255,255,255,0.3);
+        }
+        .btn-cta-outline:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.06);
+            transform: translateY(-4px);
+        }
+        .trust-row {
+            margin-top: 64px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .trust-row p {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 20px;
+        }
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .trust-badge {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.55);
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 600px) {
+            #partner { padding: 80px 24px; }
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: #080f0a;
+            color: rgba(255,255,255,0.5);
+            padding: 80px 80px 48px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .footer-brand {}
+        .footer-brand .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+        .footer-brand .logo span { color: var(--glow); }
+        .footer-brand p {
+            font-size: 0.88rem;
+            line-height: 1.75;
+            max-width: 260px;
+            margin-bottom: 24px;
+        }
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+        }
+        .social-btn {
+            width: 38px; height: 38px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .social-btn:hover {
+            background: var(--canopy);
+            border-color: var(--leaf);
+            color: var(--glow);
+        }
+        .footer-col h4 {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 20px;
+        }
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-col ul a {
+            font-size: 0.87rem;
+            color: rgba(255,255,255,0.45);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-col ul a:hover { color: var(--glow); }
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.87rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .footer-contact-item .icon {
+            color: var(--leaf);
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.8rem;
+        }
+        .footer-bottom a {
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-bottom a:hover { color: var(--glow); }
+
+        @media (max-width: 900px) {
+            footer { padding: 60px 24px 36px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+        @media (max-width: 540px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ─── CONTACT SECTION ─── */
+        #contact {
+            padding: 140px 80px;
+            background: var(--parchment);
+        }
+        .contact-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .contact-info {}
+        .contact-info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--forest);
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 18px;
+        }
+        .contact-info h2 strong { font-weight: 700; }
+        .contact-info > p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.85;
+            margin-bottom: 40px;
+            max-width: 400px;
+        }
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .contact-detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        .contact-detail-icon {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(30,122,66,0.1), rgba(82,201,125,0.12));
+            border: 1px solid rgba(30,122,66,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .contact-detail-text {}
+        .contact-detail-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--moss);
+            margin-bottom: 3px;
+        }
+        .contact-detail-value {
+            font-size: 0.92rem;
+            color: var(--ink);
+            line-height: 1.5;
+        }
+        .contact-detail-value a {
+            color: var(--forest);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .contact-detail-value a:hover { color: var(--moss); text-decoration: underline; }
+        /* map embed placeholder */
+        .contact-map {
+            margin-top: 32px;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 180px;
+            background: linear-gradient(135deg, #e8f5ee, #d4f0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(30,122,66,0.15);
+            position: relative;
+        }
+        .contact-map-pin {
+            text-align: center;
+        }
+        .contact-map-pin .pin-icon { font-size: 2.2rem; display: block; }
+        .contact-map-pin p {
+            font-size: 0.8rem;
+            color: var(--forest);
+            font-weight: 600;
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+        }
+        /* form */
+        .contact-form-box {
+            background: white;
+            border-radius: 20px;
+            padding: 52px 48px;
+            box-shadow: 0 20px 80px rgba(11,61,32,0.08), 0 2px 16px rgba(0,0,0,0.04);
+            border: 1px solid rgba(11,61,32,0.07);
+        }
+        .contact-form-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 6px;
+        }
+        .contact-form-box .form-sub {
+            font-size: 0.88rem;
+            color: #888;
+            margin-bottom: 36px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-bottom: 18px;
+        }
+        .form-field label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #555;
+        }
+        .form-field label .required { color: var(--moss); margin-left: 2px; }
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid #e4e4e4;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.93rem;
+            color: var(--ink);
+            background: #fafaf8;
+            transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+            outline: none;
+            cursor: none;
+        }
+        .form-field input::placeholder,
+        .form-field textarea::placeholder { color: #bbb; }
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            border-color: var(--moss);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(30,122,66,0.08);
+        }
+        .form-field textarea { resize: vertical; min-height: 130px; line-height: 1.7; }
+        .form-field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+        .form-submit-btn {
+            width: 100%;
+            padding: 18px 32px;
+            background: var(--forest);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 8px;
+            cursor: none;
+            transition: all 0.4s var(--easing);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .form-submit-btn:hover {
+            background: var(--moss);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 50px rgba(11,61,32,0.3);
+        }
+        .form-submit-btn:active { transform: translateY(0); }
+        .form-submit-btn .btn-icon { font-size: 1.1rem; transition: transform 0.3s; }
+        .form-submit-btn:hover .btn-icon { transform: translateX(4px); }
+        /* success state */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+        .form-success .success-icon { font-size: 3.5rem; margin-bottom: 16px; }
+        .form-success h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--forest);
+            margin-bottom: 10px;
+        }
+        .form-success p { font-size: 0.93rem; color: #666; }
+        .form-note {
+            margin-top: 18px;
+            font-size: 0.78rem;
+            color: #aaa;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 960px) {
+            #contact { padding: 80px 24px; }
+            .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+            .contact-form-box { padding: 36px 28px; }
+        }
+        @media (max-width: 540px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        /* ─── SECTION WRAPPER SHARED ─── */
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-heading-block {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+        .section-heading-block .section-header {
+            color: inherit;
+        }
+        .section-heading-block p {
+            max-width: 560px;
+            margin: 16px auto 0;
+            font-size: 1rem;
+            line-height: 1.8;
+            opacity: 0.7;
         }
     </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav>
-    <a href="#" class="nav-logo">
-        <h2 class="nav-logo-text">GREVO <span>AGRI•TECH</span></h2>
-    </a>
-    <div>
-        <a href="#agritech" style="color:white; margin-right:32px; text-decoration:none;">AgriTech</a>
-        <a href="#projects" style="color:white; margin-right:32px; text-decoration:none;">Projects</a>
-        <a href="#impact" style="color:white; margin-right:32px; text-decoration:none;">Impact</a>
-        <a href="#" onclick="document.getElementById('partner').scrollIntoView({behavior:'smooth'})" 
-           style="background:#52c97d; color:#0b3d20; padding:12px 28px; border-radius:4px; text-decoration:none; font-weight:600;">
-            Partner / Fund
-        </a>
+<!-- SCROLL PROGRESS -->
+<div id="progress-bar"></div>
+
+<!-- LOADER -->
+<div id="loader">
+    <div class="loader-logo">GREVO <span>AGRI•TECH</span></div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <p class="loader-sub">Powering Zambia's Green Revolution</p>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+    <a href="#" class="nav-logo-text">GREVO <span>AGRI•TECH</span></a>
+    <div class="nav-links" id="nav-links">
+        <a href="#agritech">AgriTech</a>
+        <a href="#projects">Projects</a>
+        <a href="#impact">Impact</a>
+        <a href="#timeline">Roadmap</a>
+        <a href="#contact">Contact</a>
+        <a href="#partner" class="nav-cta">Partner / Fund</a>
     </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
 
-<!-- HERO -->
+<!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
 <section id="hero">
     <div class="hero-bg"></div>
+    <canvas class="hero-canvas" id="hero-canvas"></canvas>
+
     <div class="hero-inner">
+        <!-- LEFT: Copy -->
         <div class="hero-content">
-            <div class="tag">🌍 TIMBUKTOO GREEN TECH • ZAMBIA</div>
-            <h1>Precision Agriculture.<br>Scalable Impact.<br><strong>Powered by AgriTech.</strong></h1>
-            <p>GREVO is Zambia’s fastest-growing AgriTech cooperative. We combine traditional farmer knowledge with IoT sensors, drone analytics, AI forecasting, and blockchain traceability to boost yields, cut costs, and create dignified rural jobs.</p>
-            <div style="margin-top:40px;">
+            <div class="hero-tag">
+                <span class="pulse-dot"></span>
+                🌍 TIMBUKTOO GREEN TECH • ZAMBIA 2026
+            </div>
+            <h1>
+                Precision Agriculture.<br>
+                Scalable Impact.<br>
+                <strong>Powered by AgriTech.</strong>
+            </h1>
+            <p>GREVO is Zambia's fastest-growing AgriTech cooperative — combining indigenous farmer knowledge with IoT sensors, drone analytics, AI forecasting, and blockchain traceability to boost yields, cut costs, and create dignified rural livelihoods.</p>
+            <div class="hero-actions">
                 <a href="#partner" class="btn-primary">Apply for timbuktoo Funding →</a>
+                <a href="#agritech" class="btn-ghost">
+                    Explore Technology
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
             </div>
-            <p style="margin-top:40px; font-size:0.95rem; opacity:0.8;">Backed by visionary partners • Ready for pan-African scale</p>
-        </div>
-        
-        <!-- Visual side with tech elements -->
-        <div style="position:relative; display:flex; justify-content:center;">
-            <div style="width:420px; height:420px; border:2px solid rgba(168,245,194,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; animation:spin-slow 60s linear infinite;">
-                <div style="width:320px; height:320px; background:rgba(255,255,255,0.08); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 80px rgba(0,212,255,0.3);">
-                    <div style="text-align:center; font-size:4rem;">📡🌾🚁</div>
+            <div class="hero-trust">
+                <div class="hero-trust-avatars">
+                    <span>MK</span><span>CN</span><span>EB</span><span>+</span>
                 </div>
+                <p><strong>1,800+ farmers</strong> · active on platform</p>
             </div>
-            <div style="position:absolute; top:80px; right:40px; background:var(--tech); color:#000; padding:8px 20px; border-radius:30px; font-size:0.8rem; font-weight:600; box-shadow:0 0 30px var(--tech);">LIVE AI DASHBOARD</div>
+        </div>
+
+        <!-- RIGHT: Animated Visual -->
+        <div class="hero-visual">
+            <div class="orbit-wrapper">
+                <div class="orbit-ring orbit-ring-1"></div>
+                <div class="orbit-ring orbit-ring-2"></div>
+                <div class="orbit-ring orbit-ring-3"></div>
+                <div class="orbit-center">
+                    <div class="orbit-center-inner">
+                        <span class="orbit-icon">🌾</span>
+                        <div class="orbit-label">GREVO NET</div>
+                    </div>
+                </div>
+                <!-- orbit dot positions via JS -->
+            </div>
+            <!-- Floating stat cards -->
+            <div class="stat-card top-right">
+                <div class="stat-card-label">Crop Health Index</div>
+                <div class="stat-card-value">94<span>%</span></div>
+                <div class="stat-live">LIVE · Updated 2m ago</div>
+            </div>
+            <div class="stat-card bottom-left">
+                <div class="stat-card-label">Soil Moisture</div>
+                <div class="stat-card-value">62<span>%</span></div>
+                <div class="stat-live">LIVE · Sensor 047</div>
+            </div>
+            <div class="stat-card mid-left">
+                <div class="stat-card-label">Yield Forecast</div>
+                <div class="stat-card-value">+87<span>%</span></div>
+                <div class="stat-live">AI MODEL V3</div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- METRICS -->
+<!-- ══════════════════════════════════════ METRICS ══════════════════════════════════════ -->
 <section id="metrics">
-    <div style="text-align:center; margin-bottom:60px;">
-        <h2 class="section-header" style="color:var(--forest);">Proven AgriTech Impact</h2>
-    </div>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); max-width:1100px; margin:auto; gap:20px;">
-        <div class="metric-card"><div class="metric-number">4,200+</div><p>Acres under IoT monitoring</p></div>
-        <div class="metric-card"><div class="metric-number">87%</div><p>Avg. yield increase via AI</p></div>
-        <div class="metric-card"><div class="metric-number">1,800+</div><p>Farmers using our mobile app</p></div>
-        <div class="metric-card"><div class="metric-number">2026</div><p>timbuktoo GreenTech scaling target</p></div>
+    <div class="metrics-inner">
+        <div class="metrics-header reveal">
+            <span class="section-eyebrow">Proven Impact</span>
+            <h2 class="section-header" style="color:var(--forest);">Real Numbers.<br>Real Farmers. Real Change.</h2>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card reveal reveal-delay-1">
+                <div class="metric-icon">📡</div>
+                <div class="metric-number"><span class="count-up" data-target="4200">0</span><span class="metric-suffix">+</span></div>
+                <div class="metric-label">Acres under IoT monitoring</div>
+            </div>
+            <div class="metric-card reveal reveal-delay-2">
+                <div class="metric-icon">📈</div>
+                <div class="metric-number"><span class="count-up" data-target="87">0</span><span class="metric-suffix">%</span></div>
+                <div class="metric-label">Average yield increase via AI</div>
+            </div>
+            <div class="metric-card reveal reveal-delay-3">
+                <div class="metric-icon">👩‍🌾</div>
+                <div class="metric-number"><span class="count-up" data-target="1800">0</span><span class="metric-suffix">+</span></div>
+                <div class="metric-label">Farmers using mobile app</div>
+            </div>
+            <div class="metric-card reveal reveal-delay-4">
+                <div class="metric-icon">🌍</div>
+                <div class="metric-number"><span class="count-up" data-target="12">0</span><span class="metric-suffix"></span></div>
+                <div class="metric-label">Districts covered across Zambia</div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- AGRI-TECH INNOVATION -->
+<!-- ══════════════════════════════════════ AGRITECH ══════════════════════════════════════ -->
 <section id="agritech">
-    <div style="max-width:1200px; margin:auto;">
-        <div style="text-align:center; margin-bottom:80px;">
+    <div class="section-inner">
+        <div class="section-heading-block reveal">
+            <span class="section-eyebrow" style="color:var(--glow);">Our Technology Stack</span>
             <h2 class="section-header" style="color:white;">AgriTech That Changes Everything</h2>
-            <p style="color:rgba(255,255,255,0.8); max-width:600px; margin:auto;">From soil to market — real-time data, predictive intelligence, and full traceability.</p>
+            <p style="color:rgba(255,255,255,0.65);">From soil to market — real-time data, predictive intelligence, and full supply chain traceability.</p>
         </div>
         <div class="tech-grid">
-            <div class="tech-card">
-                <h3 style="margin-bottom:16px;">📡 IoT Soil & Weather Network</h3>
-                <p>Real-time sensors across every acre deliver soil moisture, nutrient levels, and micro-climate data directly to farmers’ phones.</p>
+            <div class="tech-card reveal reveal-delay-1">
+                <div class="tech-icon-circle">📡</div>
+                <h3>IoT Soil & Weather Network</h3>
+                <p>Real-time sensors across every enrolled acre deliver soil moisture, NPK nutrient levels, and local micro-climate data directly to farmers' phones in their native language.</p>
+                <div class="tech-card-footer">
+                    <span class="tech-badge">4,200+ Acres</span>
+                    <span class="tech-arrow">→</span>
+                </div>
             </div>
-            <div class="tech-card">
-                <h3 style="margin-bottom:16px;">🚁 Drone Crop Intelligence</h3>
-                <p>Multispectral drones + AI detect pests, nutrient deficiencies, and water stress before they become visible.</p>
+            <div class="tech-card reveal reveal-delay-2">
+                <div class="tech-icon-circle">🚁</div>
+                <h3>Drone Crop Intelligence</h3>
+                <p>Multispectral drone flights combined with computer vision detect pest outbreaks, nutrient deficiencies, and water stress 2–3 weeks before they become visible to the naked eye.</p>
+                <div class="tech-card-footer">
+                    <span class="tech-badge">6 Drones Active</span>
+                    <span class="tech-arrow">→</span>
+                </div>
             </div>
-            <div class="tech-card">
-                <h3 style="margin-bottom:16px;">🤖 AI Yield Forecasting</h3>
-                <p>Machine learning models trained on Zambian conditions predict yields 6–8 weeks in advance with 92% accuracy.</p>
+            <div class="tech-card reveal reveal-delay-3">
+                <div class="tech-icon-circle">🤖</div>
+                <h3>AI Yield Forecasting</h3>
+                <p>Machine learning models trained exclusively on Zambian growing conditions predict crop yields 6–8 weeks in advance with 92% accuracy, enabling smarter financial planning.</p>
+                <div class="tech-card-footer">
+                    <span class="tech-badge">92% Accuracy</span>
+                    <span class="tech-arrow">→</span>
+                </div>
             </div>
-            <div class="tech-card">
-                <h3 style="margin-bottom:16px;">🔗 Blockchain Traceability</h3>
-                <p>Every harvest is tracked from farm to buyer — premium pricing and full transparency for international markets.</p>
+            <div class="tech-card reveal reveal-delay-4">
+                <div class="tech-icon-circle">🔗</div>
+                <h3>Blockchain Traceability</h3>
+                <p>Every harvest is immutably tracked from farm to buyer — enabling premium pricing, building buyer trust, and unlocking access to international ESG-conscious markets.</p>
+                <div class="tech-card-footer">
+                    <span class="tech-badge">Full Chain</span>
+                    <span class="tech-arrow">→</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- PROJECTS (elevated) -->
-<section id="projects" style="padding:140px 80px; background:var(--ink); color:white;">
-    <h2 class="section-header" style="text-align:center; margin-bottom:80px;">Our Core AgriTech Projects</h2>
-    <!-- Cards would go here – you can expand similarly to original -->
+<!-- ══════════════════════════════════════ PROJECTS ══════════════════════════════════════ -->
+<section id="projects">
+    <div class="section-inner">
+        <div class="section-heading-block reveal">
+            <span class="section-eyebrow" style="color:var(--leaf);">Core Initiatives</span>
+            <h2 class="section-header" style="color:white;">Our Flagship AgriTech Projects</h2>
+            <p style="color:rgba(255,255,255,0.55);">Three platforms, one mission — transforming Zambian agriculture from the ground up.</p>
+        </div>
+        <div class="projects-grid">
+            <!-- FarmPulse -->
+            <div class="project-card reveal reveal-delay-1">
+                <div class="project-header project-header-farmPulse">
+                    <div class="project-header-grid"></div>
+                    <div class="project-header-glow"></div>
+                    <div class="project-header-icon">📡</div>
+                    <span class="project-status status-live">● Live</span>
+                </div>
+                <div class="project-body">
+                    <h3>FarmPulse IoT Network</h3>
+                    <p>A distributed network of solar-powered soil and weather sensors giving every enrolled farmer real-time field intelligence and automated irrigation advisories — no smartphone required.</p>
+                    <div class="project-stats">
+                        <div class="p-stat">
+                            <div class="p-stat-num">320</div>
+                            <div class="p-stat-lbl">Sensors Deployed</div>
+                        </div>
+                        <div class="p-stat">
+                            <div class="p-stat-num">4.2K</div>
+                            <div class="p-stat-lbl">Acres Covered</div>
+                        </div>
+                        <div class="p-stat">
+                            <div class="p-stat-num">99%</div>
+                            <div class="p-stat-lbl">Uptime SLA</div>
+                        </div>
+                    </div>
+                    <a href="#partner" class="project-link">Learn More →</a>
+                </div>
+            </div>
+            <!-- AeroCrop -->
+            <div class="project-card reveal reveal-delay-2">
+                <div class="project-header project-header-aeroCrop">
+                    <div class="project-header-grid"></div>
+                    <div class="project-header-glow"></div>
+                    <div class="project-header-icon">🚁</div>
+                    <span class="project-status status-active">● Active</span>
+                </div>
+                <div class="project-body">
+                    <h3>AeroCrop Drone Program</h3>
+                    <p>A fleet of multispectral drones conducts weekly flyovers, generating NDVI crop-stress maps and targeted precision spraying recommendations that cut pesticide costs by up to 40%.</p>
+                    <div class="project-stats">
+                        <div class="p-stat">
+                            <div class="p-stat-num">6</div>
+                            <div class="p-stat-lbl">Drones Active</div>
+                        </div>
+                        <div class="p-stat">
+                            <div class="p-stat-num">40%</div>
+                            <div class="p-stat-lbl">Input Savings</div>
+                        </div>
+                        <div class="p-stat">
+                            <div class="p-stat-num">780</div>
+                            <div class="p-stat-lbl">Ha Mapped</div>
+                        </div>
+                    </div>
+                    <a href="#partner" class="project-link">Learn More →</a>
+                </div>
+            </div>
+            <!-- YieldMind -->
+            <div class="project-card reveal reveal-delay-3">
+                <div class="project-header project-header-yieldMind">
+                    <div class="project-header-grid"></div>
+                    <div class="project-header-glow"></div>
+                    <div class="project-header-icon">🤖</div>
+                    <span class="project-status status-scaling">● Scaling</span>
+                </div>
+                <div class="project-body">
+                    <h3>YieldMind AI Platform</h3>
+                    <p>Our proprietary ML engine ingests satellite imagery, IoT feeds, and historical yield data to generate hyper-local crop forecasts, market price alerts, and planting calendar recommendations.</p>
+                    <div class="project-stats">
+                        <div class="p-stat">
+                            <div class="p-stat-num">92%</div>
+                            <div class="p-stat-lbl">Accuracy</div>
+                        </div>
+                        <div class="p-stat">
+                            <div class="p-stat-num">6wk</div>
+                            <div class="p-stat-lbl">Horizon</div>
+                        </div>
+                        <div class="p-stat">
+                            <div class="p-stat-num">1.8K</div>
+                            <div class="p-stat-lbl">Users</div>
+                        </div>
+                    </div>
+                    <a href="#partner" class="project-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- FUNDING CTA -->
-<section id="partner" style="padding:120px 80px; background:linear-gradient(90deg, #0b3d20, #145c30); color:white; text-align:center;">
-    <h2 style="font-size:3rem; margin-bottom:24px;">Ready to scale with timbuktoo</h2>
-    <p style="font-size:1.3rem; max-width:700px; margin:auto; opacity:0.9;">We are actively seeking catalytic capital and strategic partnership through the timbuktoo GreenTech Hub to accelerate our AgriTech platform across Zambia and beyond.</p>
-    <a href="#" style="margin-top:40px; display:inline-block; background:#52c97d; color:#0b3d20; padding:20px 52px; font-size:1.1rem; font-weight:700; letter-spacing:2px; border-radius:6px;">Submit timbuktoo Application →</a>
+<!-- ══════════════════════════════════════ IMPACT ══════════════════════════════════════ -->
+<section id="impact">
+    <div class="section-inner">
+        <div class="section-heading-block reveal" style="position:relative;z-index:1;">
+            <span class="section-eyebrow" style="color:var(--glow);">Lives Transformed</span>
+            <h2 class="section-header" style="color:white;">Farmers Are the Mission</h2>
+            <p>From smallholders in Southern Province to cooperatives in the Copperbelt — GREVO is delivering measurable change.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal reveal-delay-1">
+                <p class="testimonial-quote">
+                    "Before GREVO, I guessed when to water and when to spray. Now my phone tells me exactly what my crops need. My maize harvest doubled in one season."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MK</div>
+                    <div>
+                        <div class="author-name">Mulenga Kapambwe</div>
+                        <div class="author-role">Maize Farmer · Lusaka Province</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal reveal-delay-2">
+                <p class="testimonial-quote">
+                    "The drone maps showed me a pest outbreak in the north corner of my field before it spread. I saved an entire 3-hectare block. This is real technology for real farmers."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">CN</div>
+                    <div>
+                        <div class="author-name">Chioma Nkemdirim</div>
+                        <div class="author-role">Soybean Producer · Eastern Province</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal reveal-delay-3">
+                <p class="testimonial-quote">
+                    "GREVO's blockchain certificate got me into a European export market. My groundnuts now fetch 35% more per bag. The co-op changed my family's future."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">EB</div>
+                    <div>
+                        <div class="author-name">Esther Banda</div>
+                        <div class="author-role">Groundnut Farmer · Southern Province</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sdg-row reveal">
+            <div class="sdg-label">Aligned with UN Sustainable Development Goals</div>
+            <div class="sdg-badges">
+                <span class="sdg-badge">🎯 SDG 1 · No Poverty</span>
+                <span class="sdg-badge">🌾 SDG 2 · Zero Hunger</span>
+                <span class="sdg-badge">💼 SDG 8 · Decent Work</span>
+                <span class="sdg-badge">🌿 SDG 13 · Climate Action</span>
+                <span class="sdg-badge">🤝 SDG 17 · Partnerships</span>
+            </div>
+        </div>
+    </div>
 </section>
 
-<footer style="background:#111; color:#aaa; text-align:center; padding:60px 20px;">
-    <p>© 2020–2026 GREVO Multipurpose Cooperative | Zambia’s AgriTech Leader</p>
-    <p style="margin-top:12px; font-size:0.9rem;">Empowering farmers. Driving innovation. Built for timbuktoo-scale impact.</p>
+<!-- ══════════════════════════════════════ TIMELINE ══════════════════════════════════════ -->
+<section id="timeline">
+    <div class="section-inner">
+        <div class="section-heading-block reveal">
+            <span class="section-eyebrow">Our Journey</span>
+            <h2 class="section-header" style="color:var(--forest);">Built in Zambia. Scaling Africa.</h2>
+            <p style="color:#666;">Five years of building, proving, and growing our AgriTech platform on the ground.</p>
+        </div>
+        <div class="timeline-track">
+            <div class="timeline-line"></div>
+            <div class="timeline-nodes">
+                <div class="timeline-node reveal reveal-delay-1">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-title">Cooperative Founded</div>
+                    <div class="timeline-desc">GREVO registered in Lusaka with 48 founding farmer-members and a vision for technology-driven agriculture.</div>
+                </div>
+                <div class="timeline-node reveal reveal-delay-2">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2021</div>
+                    <div class="timeline-title">FarmPulse v1 Launch</div>
+                    <div class="timeline-desc">First 40 IoT sensors deployed across 3 pilot farms. Yield data collection begins.</div>
+                </div>
+                <div class="timeline-node reveal reveal-delay-3">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-title">Drone Fleet & AI Engine</div>
+                    <div class="timeline-desc">AeroCrop program launched with 4 drones. YieldMind AI achieves 89% forecast accuracy.</div>
+                </div>
+                <div class="timeline-node reveal reveal-delay-4">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-title">1,800 Farmers Onboarded</div>
+                    <div class="timeline-desc">Mobile app reaches 1,800 active users. First export shipment with blockchain traceability.</div>
+                </div>
+                <div class="timeline-node reveal reveal-delay-4">
+                    <div class="timeline-dot" style="background:var(--leaf); border-color:var(--forest); box-shadow: 0 0 0 8px rgba(82,201,125,0.15)"></div>
+                    <div class="timeline-year" style="color:var(--moss);">2026</div>
+                    <div class="timeline-title">timbuktoo Scale-Up</div>
+                    <div class="timeline-desc">Pan-African expansion. Target: 10,000 farmers in 5 countries by year-end with timbuktoo GreenTech funding.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════ PARTNER CTA ══════════════════════════════════════ -->
+<section id="partner">
+    <div class="partner-blob partner-blob-1"></div>
+    <div class="partner-blob partner-blob-2"></div>
+    <div class="partner-inner">
+        <span class="section-eyebrow" style="color:var(--glow); display:block; margin-bottom:16px;">JOIN OUR MISSION</span>
+        <h2>Ready to Scale with <strong>timbuktoo</strong>?</h2>
+        <p>We are actively seeking catalytic capital and strategic partnership through the timbuktoo GreenTech Hub to accelerate our AgriTech platform from Zambia across the African continent.</p>
+        <div class="partner-actions reveal">
+            <a href="#" class="btn-cta btn-cta-primary">Submit timbuktoo Application →</a>
+            <a href="#" class="btn-cta btn-cta-outline">Become a Partner</a>
+        </div>
+        <div class="trust-row reveal">
+            <p>Backed by visionary partners & institutions</p>
+            <div class="trust-badges">
+                <span class="trust-badge">🌍 timbuktoo GreenTech</span>
+                <span class="trust-badge">🌱 AGRA Alliance</span>
+                <span class="trust-badge">💡 AfDB Innovation</span>
+                <span class="trust-badge">🤝 UN Food Systems</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════ CONTACT ══════════════════════════════════════ -->
+<section id="contact">
+    <div class="contact-inner">
+
+        <!-- LEFT: Info -->
+        <div class="contact-info reveal">
+            <span class="section-eyebrow">Get In Touch</span>
+            <h2>Let's Build<br>Zambia's <strong>Green Future</strong> Together</h2>
+            <p>Whether you're a farmer, investor, partner organisation, or journalist — we'd love to hear from you. Our team responds within 24 hours.</p>
+
+            <div class="contact-details">
+                <div class="contact-detail-item">
+                    <div class="contact-detail-icon">📍</div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">Our Location</div>
+                        <div class="contact-detail-value">Luansobe, Mufulira District<br>Copperbelt Province, Zambia</div>
+                    </div>
+                </div>
+                <div class="contact-detail-item">
+                    <div class="contact-detail-icon">✉️</div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">Email Address</div>
+                        <div class="contact-detail-value">
+                            <a href="mailto:grevomultipurpose@gmail.com">grevomultipurpose@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-detail-item">
+                    <div class="contact-detail-icon">🌐</div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">Website</div>
+                        <div class="contact-detail-value">
+                            <a href="#">www.grevo.co.zm</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-detail-item">
+                    <div class="contact-detail-icon">📱</div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">Phone / WhatsApp</div>
+                        <div class="contact-detail-value">0761441893 / 0761717712</div>
+                    </div>
+                </div>
+                <div class="contact-detail-item">
+                    <div class="contact-detail-icon">🕐</div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">Office Hours (CAT)</div>
+                        <div class="contact-detail-value">Mon – Fri: 08:00 – 17:00<br>Sat: 09:00 – 13:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Placeholder -->
+            <div class="contact-map">
+                <div class="contact-map-pin">
+                    <span class="pin-icon">📍</span>
+                    <p>Luansobe · Mufulira · Copperbelt</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Form -->
+        <div class="contact-form-box reveal reveal-delay-2">
+            <h3>Send Us a Message</h3>
+            <p class="form-sub">Fill in the form below and a member of our team will get back to you shortly.</p>
+
+            <form id="contact-form" novalidate>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="cf-fname">First Name <span class="required">*</span></label>
+                        <input type="text" id="cf-fname" name="firstName" placeholder="e.g. Mulenga" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="cf-lname">Last Name <span class="required">*</span></label>
+                        <input type="text" id="cf-lname" name="lastName" placeholder="e.g. Kapambwe" required>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="cf-email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="cf-email" name="email" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="cf-phone">Phone / WhatsApp</label>
+                    <input type="tel" id="cf-phone" name="phone" placeholder="e.g. 0761441893">
+                </div>
+
+                <div class="form-field">
+                    <label for="cf-subject">Subject / Reason for Contact <span class="required">*</span></label>
+                    <select id="cf-subject" name="subject" required>
+                        <option value="" disabled selected>— Select a topic —</option>
+                        <option value="partnership">Partnership / Collaboration</option>
+                        <option value="funding">Funding &amp; Investment Enquiry</option>
+                        <option value="farmer">Join as a Farmer Member</option>
+                        <option value="technology">Technology Demo Request</option>
+                        <option value="media">Media &amp; Press</option>
+                        <option value="general">General Enquiry</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="cf-org">Organisation / Farm Name</label>
+                    <input type="text" id="cf-org" name="organisation" placeholder="e.g. Timbuktoo Fund / My Farm">
+                </div>
+
+                <div class="form-field">
+                    <label for="cf-message">Message <span class="required">*</span></label>
+                    <textarea id="cf-message" name="message" placeholder="Tell us how we can help, what you're working on, or how you'd like to collaborate..." required></textarea>
+                </div>
+
+                <div class="form-field" style="flex-direction:row; align-items:center; gap:12px; margin-bottom:28px;">
+                    <input type="checkbox" id="cf-consent" name="consent" required
+                        style="width:18px;height:18px;flex-shrink:0;accent-color:var(--moss);cursor:none;">
+                    <label for="cf-consent" style="font-size:0.8rem;color:#777;text-transform:none;letter-spacing:0;font-weight:400;">
+                        I agree to GREVO processing my data to respond to this enquiry. We never share your information with third parties.
+                    </label>
+                </div>
+
+                <button type="submit" class="form-submit-btn">
+                    Send Message <span class="btn-icon">✉️</span>
+                </button>
+
+                <div class="form-success" id="form-success">
+                    <div class="success-icon">🎉</div>
+                    <h4>Message Sent!</h4>
+                    <p>Thank you for reaching out to GREVO. We'll reply to<br><strong id="confirm-email"></strong> within 24 hours.</p>
+                </div>
+
+                <p class="form-note">
+                    By submitting this form, you agree to our <a href="#" style="color:var(--moss);">Privacy Policy</a>.<br>
+                    We typically respond within 1 business day.
+                </p>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════ FOOTER ══════════════════════════════════════ -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="#" class="logo">GREVO <span>AGRI•TECH</span></a>
+            <p>Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
+            <div class="footer-socials">
+                <a href="#" class="social-btn" title="LinkedIn">in</a>
+                <a href="#" class="social-btn" title="Twitter">𝕏</a>
+                <a href="#" class="social-btn" title="YouTube">▶</a>
+                <a href="#" class="social-btn" title="WhatsApp">💬</a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#agritech">AgriTech Solutions</a></li>
+                <li><a href="#projects">Our Projects</a></li>
+                <li><a href="#impact">Farmer Impact</a></li>
+                <li><a href="#timeline">Our Roadmap</a></li>
+                <li><a href="#partner">Partnership</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>AgriTech</h4>
+            <ul>
+                <li><a href="#">FarmPulse IoT</a></li>
+                <li><a href="#">AeroCrop Drones</a></li>
+                <li><a href="#">YieldMind AI</a></li>
+                <li><a href="#">Blockchain Trace</a></li>
+                <li><a href="#">Mobile App</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <div class="footer-contact-item">
+                <span class="icon">📍</span>
+                <span>Luansobe, Mufulira District,<br>Copperbelt Province, Zambia</span>
+            </div>
+            <div class="footer-contact-item">
+                <span class="icon">✉️</span>
+                <a href="mailto:grevomultipurpose@gmail.com" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">grevomultipurpose@gmail.com</a>
+            </div>
+            <div class="footer-contact-item">
+                <span class="icon">🌐</span>
+                <a href="#" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">www.grevo.co.zm</a>
+            </div>
+            <div class="footer-contact-item">
+                <span class="icon">📱</span>
+                <span>0761441893 / 0761717712</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2020–2026 GREVO Multipurpose Cooperative Society. All rights reserved.</p>
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Data Policy</a>
+        </div>
+    </div>
 </footer>
 
+<!-- ══════════════════════════════════════ JAVASCRIPT ══════════════════════════════════════ -->
+<script>
+(function () {
+    'use strict';
+
+    /* ── LOADER ── */
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('hidden');
+        }, 1800);
+    });
+
+    /* ── CUSTOM CURSOR ── */
+    const dot  = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mouseX = 0, mouseY = 0;
+    let ringX  = 0, ringY  = 0;
+
+    document.addEventListener('mousemove', e => {
+        mouseX = e.clientX; mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top  = mouseY + 'px';
+    });
+
+    (function animateRing() {
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        ring.style.left = ringX + 'px';
+        ring.style.top  = ringY + 'px';
+        requestAnimationFrame(animateRing);
+    })();
+
+    document.querySelectorAll('a, button, .tech-card, .project-card, .testimonial-card').forEach(el => {
+        el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+        el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+    });
+
+    /* ── SCROLL PROGRESS BAR ── */
+    const progressBar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (scrolled / maxScroll * 100) + '%';
+    }, { passive: true });
+
+    /* ── NAV SCROLL EFFECT ── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ── MOBILE HAMBURGER ── */
+    const burger   = document.getElementById('nav-burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => {
+        burger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            burger.classList.remove('open');
+            navLinks.classList.remove('open');
+        });
+    });
+
+    /* ── NAV ACTIVE SECTION TRACKING ── */
+    const sections = ['agritech', 'projects', 'impact', 'timeline', 'contact', 'partner'];
+    const navAnchors = navLinks.querySelectorAll('a');
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navAnchors.forEach(a => a.classList.remove('active'));
+                const active = navLinks.querySelector(`a[href="#${entry.target.id}"]`);
+                if (active) active.classList.add('active');
+            }
+        });
+    }, { threshold: 0.4 });
+    sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) io.observe(el);
+    });
+
+    /* ── SCROLL REVEAL ── */
+    const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ── COUNT-UP ANIMATION ── */
+    function animateCountUp(el) {
+        const target = parseInt(el.dataset.target, 10);
+        const duration = 1800;
+        const start = performance.now();
+        function update(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target).toLocaleString();
+            if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+    }
+
+    const countObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.count-up').forEach(animateCountUp);
+                countObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    const metricsSection = document.getElementById('metrics');
+    if (metricsSection) countObserver.observe(metricsSection);
+
+    /* ── HERO CANVAS ── */
+    const canvas = document.getElementById('hero-canvas');
+    const ctx    = canvas.getContext('2d');
+    let W, H;
+
+    function resize() {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const NODES = [];
+    const NODE_COUNT = 70;
+    const MAX_DIST = 140;
+
+    for (let i = 0; i < NODE_COUNT; i++) {
+        NODES.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            r: Math.random() * 2.5 + 1,
+        });
+    }
+
+    function drawCanvas() {
+        ctx.clearRect(0, 0, W, H);
+
+        for (let i = 0; i < NODES.length; i++) {
+            const a = NODES[i];
+            // move
+            a.x += a.vx;
+            a.y += a.vy;
+            if (a.x < 0 || a.x > W) a.vx *= -1;
+            if (a.y < 0 || a.y > H) a.vy *= -1;
+
+            // draw dot
+            ctx.beginPath();
+            ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(168,245,194,0.5)';
+            ctx.fill();
+
+            // draw lines
+            for (let j = i + 1; j < NODES.length; j++) {
+                const b = NODES[j];
+                const dx = a.x - b.x, dy = a.y - b.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAX_DIST) {
+                    const alpha = (1 - dist / MAX_DIST) * 0.18;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(drawCanvas);
+    }
+    drawCanvas();
+
+    /* ── CONTACT FORM ── */
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Basic validation
+            const required = contactForm.querySelectorAll('[required]');
+            let valid = true;
+            required.forEach(field => {
+                field.style.borderColor = '';
+                if (!field.value.trim() || (field.type === 'checkbox' && !field.checked)) {
+                    field.style.borderColor = '#e05252';
+                    valid = false;
+                }
+            });
+            if (!valid) {
+                contactForm.querySelector('[required]').focus();
+                return;
+            }
+
+            // Email format check
+            const emailField = document.getElementById('cf-email');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
+                emailField.style.borderColor = '#e05252';
+                emailField.focus();
+                return;
+            }
+
+            // Show success
+            const submitBtn = contactForm.querySelector('.form-submit-btn');
+            submitBtn.textContent = 'Sending…';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                // In production this would POST to a backend / Formspree / EmailJS
+                // Compose mailto as fallback so the message actually goes
+                const fname   = document.getElementById('cf-fname').value.trim();
+                const lname   = document.getElementById('cf-lname').value.trim();
+                const email   = emailField.value.trim();
+                const subject = document.getElementById('cf-subject').value;
+                const org     = document.getElementById('cf-org').value.trim();
+                const phone   = document.getElementById('cf-phone').value.trim();
+                const msg     = document.getElementById('cf-message').value.trim();
+
+                const body = encodeURIComponent(
+                    `Name: ${fname} ${lname}\nEmail: ${email}\nPhone: ${phone}\nOrganisation: ${org}\n\nMessage:\n${msg}`
+                );
+                window.location.href =
+                    `mailto:grevomultipurpose@gmail.com?subject=${encodeURIComponent('[GREVO Website] ' + subject)}&body=${body}`;
+
+                // Show confirmation UI
+                document.getElementById('confirm-email').textContent = email;
+                const fields = contactForm.querySelectorAll('.form-row, .form-field, .form-submit-btn, .form-note');
+                fields.forEach(f => { f.style.display = 'none'; });
+                document.getElementById('form-success').style.display = 'block';
+            }, 700);
+        });
+
+        // Clear red borders on input
+        contactForm.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('input', () => { el.style.borderColor = ''; });
+        });
+    }
+
+})();
+</script>
 </body>
 </html>
