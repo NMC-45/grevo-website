@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo & Video Gallery — GREVO AgriTech Cooperative. See our farms, technology, team, and impact across Zambia's Copperbelt.">
+    <title>Gallery — GREVO AgriTech Cooperative</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f0f4f0'/%3E%3Cpath d='M100 155 a55 55 0 1 1 55-55' fill='none' stroke='%231040a0' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --forest: #0b3d20; --canopy: #145c30; --moss: #1e7a42;
+            --leaf: #52c97d; --glow: #a8f5c2; --tech: #00d4ff;
+            --cobalt: #1040a0; --gold: #c9a84c; --parchment: #f5f1e8;
+            --ink: #0d1a10; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--parchment); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+        .hero { background: linear-gradient(135deg, var(--ink) 0%, var(--forest) 50%, var(--canopy) 100%); padding: 140px 60px 80px; text-align: center; }
+        .breadcrumb { color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+        .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700; color: white; margin-bottom: 16px; }
+        .hero .subtitle { color: rgba(255,255,255,0.6); font-size: 1.05rem; }
+
+        .gallery-wrap { max-width: 1200px; margin: 0 auto; padding: 64px 40px 80px; }
+        .filter-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+        .filter-btn { padding: 10px 24px; border-radius: 24px; border: 2px solid rgba(11,61,32,0.15); background: white; color: #556; font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; }
+        .filter-btn:hover { border-color: var(--leaf); color: var(--forest); }
+        .filter-btn.active { background: var(--forest); color: white; border-color: var(--forest); }
+
+        .gallery-grid { columns: 3; column-gap: 20px; }
+        @media (max-width: 900px) { .gallery-grid { columns: 2; } }
+        @media (max-width: 560px) { .gallery-grid { columns: 1; } }
+
+        .gallery-card { break-inside: avoid; margin-bottom: 20px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.3s var(--easing), box-shadow 0.3s; }
+        .gallery-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 12px 48px rgba(0,0,0,0.15); }
+        .gallery-card.hidden { display: none; }
+
+        .card-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+        .card-visual .emoji { font-size: 3.5rem; position: relative; z-index: 2; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); }
+        .card-caption { background: white; padding: 14px 18px; }
+        .card-caption h4 { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+        .card-caption p { font-size: 0.78rem; color: #778; }
+        .card-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .tag-farm { background: rgba(82,201,125,0.12); color: var(--forest); }
+        .tag-team { background: rgba(201,168,76,0.15); color: #5a3800; }
+        .tag-tech { background: rgba(0,212,255,0.12); color: #0a4060; }
+
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; z-index: 9000; background: rgba(13,26,16,0.95); align-items: center; justify-content: center; padding: 32px; }
+        .lightbox.active { display: flex; }
+        .lightbox-inner { max-width: 700px; width: 100%; background: white; border-radius: 16px; overflow: hidden; position: relative; }
+        .lightbox-visual { width: 100%; min-height: 300px; display: flex; align-items: center; justify-content: center; font-size: 6rem; }
+        .lightbox-info { padding: 24px 28px; }
+        .lightbox-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--forest); margin-bottom: 6px; }
+        .lightbox-info p { color: #556; font-size: 0.9rem; }
+        .lightbox-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; color: white; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; }
+        .lightbox-nav { display: flex; gap: 12px; margin-top: 16px; }
+        .lightbox-nav button { padding: 8px 20px; border-radius: 6px; border: none; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.85rem; }
+        .lb-prev { background: rgba(0,0,0,0.08); color: #556; }
+        .lb-next { background: var(--forest); color: white; }
+
+        /* Video section */
+        .video-section { background: var(--forest); padding: 72px 40px; text-align: center; }
+        .video-placeholder { max-width: 640px; margin: 0 auto; }
+        .video-placeholder h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: white; margin-bottom: 12px; }
+        .video-placeholder p { color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+        .yt-placeholder { background: rgba(255,255,255,0.05); border: 2px dashed rgba(255,255,255,0.15); border-radius: 16px; padding: 56px 24px; }
+        .yt-icon { font-size: 3.5rem; margin-bottom: 16px; }
+        .yt-placeholder p { color: rgba(255,255,255,0.4); font-size: 0.9rem; }
+
+        /* Submit CTA */
+        .submit-cta { padding: 64px 40px; text-align: center; background: white; }
+        .submit-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--forest); margin-bottom: 12px; }
+        .submit-cta p { color: #556; margin-bottom: 24px; }
+        .submit-cta a { background: var(--leaf); color: var(--forest); padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; }
+
+        @media (max-width: 768px) { .hero { padding: 120px 24px 60px; } .gallery-wrap { padding: 48px 16px 60px; } .video-section { padding: 56px 20px; } .submit-cta { padding: 48px 20px; } }
+    </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(11,61,32,0.97);backdrop-filter:blur(24px);box-shadow:0 4px 40px rgba(0,0,0,0.3);">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:white;letter-spacing:3px;text-transform:uppercase;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <a href="index.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Home</a>
+        <a href="products.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Products</a>
+        <a href="membership.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Membership</a>
+        <a href="news.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">News</a>
+        <a href="faq.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">FAQ</a>
+        <a href="index.html#contact" style="background:#52c97d;color:#0b3d20;padding:10px 22px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Gallery</div>
+    <h1>Our Farm, Our People, Our Story</h1>
+    <p class="subtitle">Glimpses of GREVO's work across Zambia's Copperbelt — farms, technology, and the people behind it all</p>
+</section>
+
+<div class="gallery-wrap">
+    <div class="filter-row">
+        <button class="filter-btn active" onclick="filterGallery('all', this)">All Photos</button>
+        <button class="filter-btn" onclick="filterGallery('farm', this)">Farm Operations</button>
+        <button class="filter-btn" onclick="filterGallery('team', this)">Team &amp; Training</button>
+        <button class="filter-btn" onclick="filterGallery('tech', this)">Technology</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+
+        <!-- Card 1 - Farm -->
+        <div class="gallery-card" data-category="farm" onclick="openLightbox(0)">
+            <div class="card-visual" style="height:200px;background:linear-gradient(135deg,#1a5c30,#3dc048,#a8f5c2);">
+                <span class="emoji">🚁</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-farm">Farm Operations</span>
+                <h4>Drone Survey — Luansobe 2024</h4>
+                <p>AeroCrop aerial survey over the main cooperative farm block</p>
+            </div>
+        </div>
+
+        <!-- Card 2 - Tech -->
+        <div class="gallery-card" data-category="tech" onclick="openLightbox(1)">
+            <div class="card-visual" style="height:240px;background:linear-gradient(135deg,#0a3050,#1040a0,#00d4ff);">
+                <span class="emoji">📡</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-tech">Technology</span>
+                <h4>FarmPulse Sensor Installation</h4>
+                <p>IoT soil moisture sensors being deployed across a 5-acre plot</p>
+            </div>
+        </div>
+
+        <!-- Card 3 - Farm -->
+        <div class="gallery-card" data-category="farm" onclick="openLightbox(2)">
+            <div class="card-visual" style="height:180px;background:linear-gradient(135deg,#fff3e0,#ff8a50,#e64a19);">
+                <span class="emoji">🐔</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-farm">Farm Operations</span>
+                <h4>Broiler Farm — 500 Birds</h4>
+                <p>Managed broiler facility at Luansobe — weekly harvest programme</p>
+            </div>
+        </div>
+
+        <!-- Card 4 - Farm -->
+        <div class="gallery-card" data-category="farm" onclick="openLightbox(3)">
+            <div class="card-visual" style="height:220px;background:linear-gradient(135deg,#f9fbe7,#dce775,#afb42b);">
+                <span class="emoji">🌾</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-farm">Farm Operations</span>
+                <h4>Maize Harvest 2024</h4>
+                <p>Record 87% yield increase across member farms — Copperbelt</p>
+            </div>
+        </div>
+
+        <!-- Card 5 - Team -->
+        <div class="gallery-card" data-category="team" onclick="openLightbox(4)">
+            <div class="card-visual" style="height:260px;background:linear-gradient(135deg,#fce4ec,#e91e63,#880e4f);">
+                <span class="emoji">👩‍🌾</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-team">Team &amp; Training</span>
+                <h4>Team Training — Bemba Programme</h4>
+                <p>Farmer orientation session in Bemba language — Mufulira hub</p>
+            </div>
+        </div>
+
+        <!-- Card 6 - Tech -->
+        <div class="gallery-card" data-category="tech" onclick="openLightbox(5)">
+            <div class="card-visual" style="height:200px;background:linear-gradient(135deg,#e3f2fd,#42a5f5,#1565c0);">
+                <span class="emoji">🌱</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-tech">Technology</span>
+                <h4>Soil Moisture Sensors in the Field</h4>
+                <p>FarmPulse sensors monitoring soil health at 30cm depth</p>
+            </div>
+        </div>
+
+        <!-- Card 7 - Team -->
+        <div class="gallery-card" data-category="team" onclick="openLightbox(6)">
+            <div class="card-visual" style="height:190px;background:linear-gradient(135deg,#f3e5f5,#ab47bc,#4a148c);">
+                <span class="emoji">🎓</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-team">Team &amp; Training</span>
+                <h4>Kezia Training Farmers</h4>
+                <p>Co-founder Kezia Mwale leading a women's agronomy workshop</p>
+            </div>
+        </div>
+
+        <!-- Card 8 - Tech -->
+        <div class="gallery-card" data-category="tech" onclick="openLightbox(7)">
+            <div class="card-visual" style="height:230px;background:linear-gradient(135deg,#e8f5e9,#66bb6a,#1b5e20);">
+                <span class="emoji">🤖</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-tech">Technology</span>
+                <h4>YieldMind AI Dashboard</h4>
+                <p>Crop yield forecast and input optimisation — 2024 maize season</p>
+            </div>
+        </div>
+
+        <!-- Card 9 - Team -->
+        <div class="gallery-card" data-category="team" onclick="openLightbox(8)">
+            <div class="card-visual" style="height:200px;background:linear-gradient(135deg,#fff8e1,#ffca28,#f57f17);">
+                <span class="emoji">🤝</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-team">Team &amp; Training</span>
+                <h4>Mufulira Cooperative Meeting</h4>
+                <p>Annual General Meeting — 200+ members in attendance</p>
+            </div>
+        </div>
+
+        <!-- Card 10 - Farm -->
+        <div class="gallery-card" data-category="farm" onclick="openLightbox(9)">
+            <div class="card-visual" style="height:210px;background:linear-gradient(135deg,#fbe9e7,#ff7043,#bf360c);">
+                <span class="emoji">🥜</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-farm">Farm Operations</span>
+                <h4>Groundnut Processing</h4>
+                <p>Post-harvest groundnut cleaning and grading at the cooperative store</p>
+            </div>
+        </div>
+
+        <!-- Card 11 - Tech -->
+        <div class="gallery-card" data-category="tech" onclick="openLightbox(10)">
+            <div class="card-visual" style="height:240px;background:linear-gradient(135deg,#e0f7fa,#00bcd4,#006064);">
+                <span class="emoji">🚁</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-tech">Technology</span>
+                <h4>AeroCrop Drone Fleet</h4>
+                <p>Six-unit AeroCrop fleet — GREVO's aerial surveillance programme</p>
+            </div>
+        </div>
+
+        <!-- Card 12 - Team -->
+        <div class="gallery-card" data-category="team" onclick="openLightbox(11)">
+            <div class="card-visual" style="height:200px;background:linear-gradient(135deg,#e8eaf6,#5c6bc0,#1a237e);">
+                <span class="emoji">👨‍💼</span>
+            </div>
+            <div class="card-caption">
+                <span class="card-tag tag-team">Team &amp; Training</span>
+                <h4>Nicholas Chanda — CEO Field Visit</h4>
+                <p>GREVO CEO Nicholas Chanda conducting a member farm assessment</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Video section -->
+<section class="video-section">
+    <div class="video-placeholder">
+        <h2>Video Gallery</h2>
+        <p>Documentaries, farm tours, training videos, and member stories — coming soon to our YouTube channel.</p>
+        <div class="yt-placeholder">
+            <div class="yt-icon">▶️</div>
+            <p style="color:rgba(255,255,255,0.5);font-size:0.95rem;margin-bottom:8px;">Video Gallery Coming Soon</p>
+            <p>Subscribe to GREVO on YouTube to be the first to see farm tours, drone footage, and farmer success stories from across the Copperbelt.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Submit CTA -->
+<section class="submit-cta">
+    <h2>Share Your Farm Story</h2>
+    <p>Are you a GREVO member with photos from your farm or cooperative activities? We'd love to feature your story in our gallery and social media.</p>
+    <a href="https://wa.me/260761441893?text=I%20want%20to%20submit%20farm%20photos%20for%20the%20GREVO%20gallery" target="_blank">📸 Submit Your Farm Photo</a>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
+    <div class="lightbox-inner">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <div class="lightbox-visual" id="lbVisual"></div>
+        <div class="lightbox-info">
+            <h3 id="lbTitle"></h3>
+            <p id="lbDesc"></p>
+            <div class="lightbox-nav">
+                <button class="lb-prev" onclick="navigate(-1)">← Previous</button>
+                <button class="lb-next" onclick="navigate(1)">Next →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer style="background:#0d1a10;padding:48px 60px 24px;border-top:1px solid rgba(82,201,125,0.12);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div style="display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;">
+            <div style="flex:2;min-width:220px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:12px;">
+                    <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+                    <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:white;letter-spacing:3px;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+                </a>
+                <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:1.7;max-width:300px;">Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Quick Links</h4>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                    <li><a href="products.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Products &amp; Produce</a></li>
+                    <li><a href="membership.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Membership</a></li>
+                    <li><a href="gallery.html" style="color:#a8f5c2;text-decoration:none;font-size:0.88rem;">Gallery</a></li>
+                    <li><a href="news.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">News &amp; Blog</a></li>
+                    <li><a href="faq.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">FAQ</a></li>
+                    <li><a href="find-us.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Find Us</a></li>
+                </ul>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Contact</h4>
+                <div style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:2;">
+                    <div>📍 Luansobe, Mufulira, Copperbelt, Zambia</div>
+                    <div>✉️ <a href="mailto:grevomultipurpose@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">grevomultipurpose@gmail.com</a></div>
+                    <div>📱 <a href="https://wa.me/260761441893" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">+260 761 441 893</a></div>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">© 2020–2026 GREVO Multipurpose Cooperative Society. All rights reserved.</p>
+            <div style="display:flex;gap:20px;">
+                <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Privacy Policy</a>
+                <a href="terms-of-use.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Terms of Use</a>
+                <a href="data-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Data Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<a href="https://wa.me/260761441893?text=Hello%20GREVO%20Team!" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:900;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(37,211,102,0.5);text-decoration:none;" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const cards = [
+    { emoji: '🚁', title: 'Drone Survey — Luansobe 2024', desc: 'AeroCrop aerial survey over the main cooperative farm block, mapping 400+ acres in a single flight.', bg: 'linear-gradient(135deg,#1a5c30,#3dc048,#a8f5c2)' },
+    { emoji: '📡', title: 'FarmPulse Sensor Installation', desc: 'GREVO technicians deploying IoT soil sensors across a 5-acre smallholder plot in Mufulira district.', bg: 'linear-gradient(135deg,#0a3050,#1040a0,#00d4ff)' },
+    { emoji: '🐔', title: 'Broiler Farm — 500 Birds', desc: 'GREVO\'s managed broiler facility at Luansobe, running weekly harvest cycles since 2022.', bg: 'linear-gradient(135deg,#fff3e0,#ff8a50,#e64a19)' },
+    { emoji: '🌾', title: 'Maize Harvest 2024', desc: 'Members celebrating a record 87% yield increase across all Copperbelt cooperative farms in the 2024 season.', bg: 'linear-gradient(135deg,#f9fbe7,#dce775,#afb42b)' },
+    { emoji: '👩‍🌾', title: 'Team Training — Bemba Programme', desc: 'Farmer orientation session in the Bemba language at Mufulira community hub. 40+ women attended this cohort.', bg: 'linear-gradient(135deg,#fce4ec,#e91e63,#880e4f)' },
+    { emoji: '🌱', title: 'Soil Moisture Sensors in the Field', desc: 'FarmPulse sensors monitoring soil health at 30cm depth during the 2024 planting season.', bg: 'linear-gradient(135deg,#e3f2fd,#42a5f5,#1565c0)' },
+    { emoji: '🎓', title: 'Kezia Training Farmers', desc: 'Co-founder and Training Coordinator Kezia Mwale leading a women\'s precision agronomy workshop.', bg: 'linear-gradient(135deg,#f3e5f5,#ab47bc,#4a148c)' },
+    { emoji: '🤖', title: 'YieldMind AI Dashboard', desc: 'YieldMind AI crop yield forecast for the 2024 maize season — 92% accuracy validated post-harvest.', bg: 'linear-gradient(135deg,#e8f5e9,#66bb6a,#1b5e20)' },
+    { emoji: '🤝', title: 'Mufulira Cooperative Meeting', desc: 'Annual General Meeting with 200+ members — discussing profit distribution and 2025 expansion plans.', bg: 'linear-gradient(135deg,#fff8e1,#ffca28,#f57f17)' },
+    { emoji: '🥜', title: 'Groundnut Processing', desc: 'Post-harvest groundnut cleaning and grading at the cooperative store, Luansobe.', bg: 'linear-gradient(135deg,#fbe9e7,#ff7043,#bf360c)' },
+    { emoji: '🚁', title: 'AeroCrop Drone Fleet', desc: 'GREVO\'s six-unit AeroCrop drone fleet lined up before a district-wide aerial survey operation.', bg: 'linear-gradient(135deg,#e0f7fa,#00bcd4,#006064)' },
+    { emoji: '👨‍💼', title: 'Nicholas Chanda — CEO Field Visit', desc: 'GREVO CEO Nicholas Chanda conducting a member farm assessment in the Copperbelt.', bg: 'linear-gradient(135deg,#e8eaf6,#5c6bc0,#1a237e)' }
+];
+let currentIndex = 0;
+
+function openLightbox(idx) {
+    currentIndex = idx;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+}
+function closeLightboxBg(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
+function navigate(dir) {
+    currentIndex = (currentIndex + dir + cards.length) % cards.length;
+    updateLightbox();
+}
+function updateLightbox() {
+    const c = cards[currentIndex];
+    document.getElementById('lbVisual').style.background = c.bg;
+    document.getElementById('lbVisual').innerHTML = '<span style="font-size:6rem;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.2))">' + c.emoji + '</span>';
+    document.getElementById('lbTitle').textContent = c.title;
+    document.getElementById('lbDesc').textContent = c.desc;
+}
+
+function filterGallery(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.gallery-card').forEach(card => {
+        if (cat === 'all' || card.dataset.category === cat) card.classList.remove('hidden');
+        else card.classList.add('hidden');
+    });
+}
+
+document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+    if (e.key === 'Escape') closeLightbox();
+});
+</script>
+</body>
+</html>

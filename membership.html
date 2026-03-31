@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join GREVO — Become a member of Zambia's leading AgriTech cooperative. Access IoT technology, AI forecasting, training, and markets.">
+    <title>Join GREVO — Membership | AgriTech Cooperative Zambia</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f0f4f0'/%3E%3Cpath d='M100 155 a55 55 0 1 1 55-55' fill='none' stroke='%231040a0' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --forest: #0b3d20; --canopy: #145c30; --moss: #1e7a42;
+            --leaf: #52c97d; --glow: #a8f5c2; --tech: #00d4ff;
+            --cobalt: #1040a0; --gold: #c9a84c; --parchment: #f5f1e8;
+            --ink: #0d1a10; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--parchment); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+        .hero {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--canopy) 50%, #0a2a50 100%);
+            padding: 140px 60px 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 80px; background: var(--parchment); clip-path: ellipse(60% 100% at 50% 100%); }
+        .breadcrumb { color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; position: relative; z-index: 2; }
+        .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 700; color: white; margin-bottom: 16px; position: relative; z-index: 2; }
+        .hero .subtitle { color: rgba(255,255,255,0.65); font-size: 1.05rem; position: relative; z-index: 2; }
+        .hero-stat { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; background: rgba(82,201,125,0.15); border: 1px solid rgba(82,201,125,0.35); padding: 10px 24px; border-radius: 28px; position: relative; z-index: 2; }
+        .hero-stat span { color: var(--glow); font-size: 1.3rem; font-weight: 700; font-family: 'Cormorant Garamond', serif; }
+        .hero-stat p { color: rgba(255,255,255,0.65); font-size: 0.85rem; }
+
+        /* Benefits */
+        .benefits-section { padding: 90px 40px; max-width: 1200px; margin: 0 auto; }
+        .section-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--leaf); margin-bottom: 12px; }
+        .section-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--forest); margin-bottom: 12px; }
+        .section-p { color: #556; margin-bottom: 48px; font-size: 0.95rem; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+        .benefit-card { background: white; border-radius: 14px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border-bottom: 3px solid var(--leaf); transition: transform 0.3s, box-shadow 0.3s; }
+        .benefit-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+        .benefit-icon { width: 52px; height: 52px; background: rgba(82,201,125,0.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 16px; }
+        .benefit-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
+        .benefit-card p { color: #556; font-size: 0.88rem; line-height: 1.65; }
+
+        /* Who Can Join */
+        .eligibility-section { background: var(--forest); padding: 80px 40px; }
+        .eligibility-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .elig-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; color: white; margin-bottom: 16px; }
+        .elig-text p { color: rgba(255,255,255,0.65); font-size: 0.93rem; margin-bottom: 24px; }
+        .elig-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .elig-list li { display: flex; align-items: flex-start; gap: 12px; color: rgba(255,255,255,0.8); font-size: 0.92rem; }
+        .elig-list li::before { content: '✓'; color: var(--leaf); font-weight: 700; font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+        .elig-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .elig-stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; text-align: center; }
+        .elig-stat .num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--glow); }
+        .elig-stat .label { color: rgba(255,255,255,0.5); font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+        /* Process */
+        .process-section { padding: 90px 40px; background: white; }
+        .process-inner { max-width: 900px; margin: 0 auto; }
+        .process-steps { display: flex; flex-direction: column; gap: 0; margin-top: 48px; position: relative; }
+        .process-steps::before { content: ''; position: absolute; left: 28px; top: 28px; bottom: 28px; width: 2px; background: linear-gradient(to bottom, var(--leaf), rgba(82,201,125,0.1)); }
+        .process-step { display: flex; gap: 28px; align-items: flex-start; padding: 0 0 40px; }
+        .step-circle { width: 58px; height: 58px; min-width: 58px; background: var(--forest); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--glow); font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; z-index: 1; box-shadow: 0 0 0 6px white; }
+        .process-content h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--forest); font-weight: 700; margin-bottom: 8px; }
+        .process-content p { color: #556; font-size: 0.9rem; }
+        .fee-badge { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: #7a5a00; padding: 4px 14px; border-radius: 4px; font-size: 0.82rem; font-weight: 700; margin-top: 8px; }
+
+        /* Form */
+        .form-section { padding: 90px 40px; background: var(--parchment); }
+        .form-inner { max-width: 700px; margin: 0 auto; }
+        .form-card { background: white; border-radius: 16px; padding: 48px; box-shadow: 0 8px 48px rgba(0,0,0,0.08); }
+        .form-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--forest); margin-bottom: 8px; }
+        .form-card .sub { color: #778; font-size: 0.9rem; margin-bottom: 32px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.82rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #556; margin-bottom: 8px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px 16px; border: 1.5px solid rgba(0,0,0,0.12); border-radius: 8px;
+            font-family: 'Outfit', sans-serif; font-size: 0.92rem; color: var(--ink);
+            background: #fafafa; transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--leaf); box-shadow: 0 0 0 3px rgba(82,201,125,0.12); background: white;
+        }
+        .form-group textarea { resize: vertical; min-height: 90px; }
+        .submit-btn { width: 100%; padding: 16px; background: var(--forest); color: white; border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+        .submit-btn:hover { background: var(--canopy); transform: translateY(-2px); }
+        .form-success { display: none; text-align: center; padding: 32px; }
+        .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--forest); margin-bottom: 8px; }
+        .form-success p { color: #556; }
+
+        /* Mini FAQ */
+        .mini-faq { padding: 72px 40px; background: white; border-top: 1px solid rgba(0,0,0,0.06); }
+        .mini-faq-inner { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid rgba(0,0,0,0.07); padding: 20px 0; }
+        .faq-q { font-weight: 600; color: var(--forest); font-size: 0.95rem; display: flex; justify-content: space-between; gap: 16px; cursor: pointer; }
+        .faq-a { color: #556; font-size: 0.9rem; margin-top: 12px; line-height: 1.7; display: none; }
+
+        /* CTA bottom */
+        .cta-bottom { background: linear-gradient(135deg, var(--leaf), var(--moss)); padding: 60px 40px; text-align: center; }
+        .cta-bottom h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--forest); margin-bottom: 12px; }
+        .cta-bottom p { color: rgba(11,61,32,0.7); margin-bottom: 28px; }
+        .cta-bottom a { background: var(--forest); color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; }
+
+        @media (max-width: 768px) {
+            .hero { padding: 120px 24px 70px; }
+            .benefits-section { padding: 60px 20px; }
+            .eligibility-inner { grid-template-columns: 1fr; gap: 32px; }
+            .eligibility-section { padding: 60px 20px; }
+            .process-section { padding: 60px 20px; }
+            .form-section { padding: 60px 20px; }
+            .form-card { padding: 28px 20px; }
+            .form-row { grid-template-columns: 1fr; }
+            .mini-faq { padding: 56px 20px; }
+            .cta-bottom { padding: 48px 20px; }
+        }
+    </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(11,61,32,0.97);backdrop-filter:blur(24px);box-shadow:0 4px 40px rgba(0,0,0,0.3);">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:white;letter-spacing:3px;text-transform:uppercase;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <a href="index.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Home</a>
+        <a href="products.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Products</a>
+        <a href="membership.html" style="color:#a8f5c2;text-decoration:none;font-size:0.85rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">Membership</a>
+        <a href="news.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">News</a>
+        <a href="faq.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">FAQ</a>
+        <a href="index.html#contact" style="background:#52c97d;color:#0b3d20;padding:10px 22px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Membership</div>
+    <h1>Join 1,800+ Farmers in Zambia's AgriTech Revolution</h1>
+    <p class="subtitle">Access the tools, training, and markets that transform smallholder farming into a dignified livelihood</p>
+    <div class="hero-stat">
+        <span>1,800+</span>
+        <p>active members across 12 districts</p>
+    </div>
+</section>
+
+<!-- Benefits -->
+<section style="background:var(--parchment);">
+    <div class="benefits-section">
+        <p class="section-label">Member Benefits</p>
+        <h2 class="section-h2">Why Join GREVO?</h2>
+        <p class="section-p">GREVO membership opens the door to Africa's most integrated smallholder farming ecosystem — technology, training, markets, and community in one cooperative.</p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">📡</div>
+                <h3>IoT Sensor Access</h3>
+                <p>Get connected to the FarmPulse network — real-time soil moisture, temperature, and crop health data delivered to your phone. Farm smarter, not harder.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🤖</div>
+                <h3>YieldMind AI Forecasting</h3>
+                <p>Our AI analyses your farm's data and provides personalised planting dates, input recommendations, and yield projections — tailored to your specific land and climate.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🚁</div>
+                <h3>Drone Crop Surveys</h3>
+                <p>AeroCrop drone fleet surveys member farms to detect crop stress, pest pressure, and irrigation needs before problems become visible to the naked eye.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📚</div>
+                <h3>Training in Bemba &amp; English</h3>
+                <p>All GREVO training — from agronomy to financial literacy — is delivered in both English and Bemba, ensuring no language barrier limits your progress.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🌍</div>
+                <h3>Pan-African Market Access</h3>
+                <p>GREVO connects your produce to buyers across Zambia and the wider African market, with blockchain traceability ensuring your goods command premium prices.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>Profit Sharing</h3>
+                <p>As a cooperative, GREVO distributes surpluses back to members based on participation and production. Your work builds shared wealth — not someone else's profit.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Who Can Join -->
+<section class="eligibility-section">
+    <div class="eligibility-inner">
+        <div class="elig-text">
+            <h2>Who Can Join?</h2>
+            <p>GREVO membership is open to any eligible person committed to transforming agriculture in Zambia. We actively encourage women, youth, and first-time farmers to apply.</p>
+            <ul class="elig-list">
+                <li>Zambian citizen (or permanent resident with valid documentation)</li>
+                <li>Smallholder farmer, agribusiness operator, or agricultural professional</li>
+                <li>18 years of age or older</li>
+                <li>Willing to adopt and engage with modern agricultural technology</li>
+                <li>Committed to the cooperative's values of transparency and shared progress</li>
+                <li>Located in Zambia (priority: Copperbelt, but all provinces welcome)</li>
+            </ul>
+        </div>
+        <div class="elig-visual">
+            <div class="elig-stat">
+                <div class="num">1,800+</div>
+                <div class="label">Active Members</div>
+            </div>
+            <div class="elig-stat">
+                <div class="num">12</div>
+                <div class="label">Districts</div>
+            </div>
+            <div class="elig-stat">
+                <div class="num">48</div>
+                <div class="label">Founding Members</div>
+            </div>
+            <div class="elig-stat">
+                <div class="num">87%</div>
+                <div class="label">Yield Increase</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process -->
+<section class="process-section">
+    <div class="process-inner">
+        <p class="section-label" style="color:var(--leaf);">How to Join</p>
+        <h2 class="section-h2">The Membership Process</h2>
+        <p class="section-p">Simple, transparent, and designed for farmers — not bureaucrats.</p>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-circle">1</div>
+                <div class="process-content">
+                    <h3>Complete the Online Application</h3>
+                    <p>Fill in the membership form below with your details — name, location, farm size, and crops grown. It takes less than 5 minutes. You can also apply in person at our Luansobe office.</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-circle">2</div>
+                <div class="process-content">
+                    <h3>Pay the Joining Fee</h3>
+                    <p>A once-off registration fee of ZMW 500 is required to process your membership. This covers your GREVO farmer ID card, orientation materials, and initial platform onboarding. Annual membership fees are determined at the AGM.</p>
+                    <span class="fee-badge">ZMW 500 — Once-off Registration</span>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-circle">3</div>
+                <div class="process-content">
+                    <h3>Attend Farmer Orientation</h3>
+                    <p>Join one of our regular orientation sessions at Luansobe or a designated district hub. You'll learn how to use the FarmPulse app, understand your member rights, and meet fellow cooperative members. Conducted in English and Bemba.</p>
+                </div>
+            </div>
+            <div class="process-step" style="padding-bottom: 0;">
+                <div class="step-circle">4</div>
+                <div class="process-content">
+                    <h3>Receive Your GREVO Farmer ID</h3>
+                    <p>Upon completion, you receive your official GREVO Farmer ID — your passport to the full technology ecosystem, market access, drone surveys, and training programmes. Welcome to the cooperative.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Membership Form -->
+<section class="form-section" id="apply">
+    <div class="form-inner">
+        <div class="form-card">
+            <h2>Apply for Membership</h2>
+            <p class="sub">Complete this form and our team will contact you within 48 hours to confirm next steps.</p>
+
+            <form id="membershipForm" action="https://formspree.io/f/maqlqyaa" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullname">Full Name *</label>
+                        <input type="text" id="fullname" name="fullname" required placeholder="e.g. Agnes Mwansa">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone / WhatsApp *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+260 7XX XXX XXX">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com (optional)">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="district">District / Location *</label>
+                        <input type="text" id="district" name="district" required placeholder="e.g. Mufulira, Ndola">
+                    </div>
+                    <div class="form-group">
+                        <label for="farmsize">Farm Size (hectares) *</label>
+                        <input type="text" id="farmsize" name="farmsize" required placeholder="e.g. 2.5 hectares">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="crops">Crops Currently Grown *</label>
+                    <input type="text" id="crops" name="crops" required placeholder="e.g. Maize, Groundnuts, Vegetables">
+                </div>
+                <div class="form-group">
+                    <label for="referral">How Did You Hear About GREVO?</label>
+                    <select id="referral" name="referral">
+                        <option value="">Select an option</option>
+                        <option>WhatsApp / Social Media</option>
+                        <option>Friend / Family Member</option>
+                        <option>Existing GREVO Member</option>
+                        <option>Radio / Television</option>
+                        <option>Ministry of Agriculture</option>
+                        <option>NGO / Aid Organisation</option>
+                        <option>Google / Internet Search</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <input type="hidden" name="_subject" value="New GREVO Membership Application">
+                <button type="submit" class="submit-btn">Submit Application →</button>
+            </form>
+
+            <div class="form-success" id="formSuccess">
+                <div style="font-size:3rem;margin-bottom:12px;">🌱</div>
+                <h3>Application Received!</h3>
+                <p>Thank you for applying to join GREVO. Our team will contact you within 48 hours via WhatsApp or email to confirm your next steps.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mini FAQ -->
+<section class="mini-faq">
+    <div class="mini-faq-inner">
+        <h2 class="section-h2" style="margin-bottom:8px;">Membership Questions</h2>
+        <p style="color:#778;margin-bottom:32px;font-size:0.92rem;">Quick answers for new applicants. See our full <a href="faq.html" style="color:var(--moss);">FAQ page</a> for more.</p>
+        <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+                Can I join if I don't own a smartphone?
+                <span>+</span>
+            </div>
+            <div class="faq-a">
+                Yes. While a smartphone enhances your GREVO experience through the mobile app, it is not a requirement for membership. Our field coordinators provide support and data access for members without smartphones, and we run regular in-person training sessions in local community centres and cooperative hubs.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+                Is membership available to women and youth?
+                <span>+</span>
+            </div>
+            <div class="faq-a">
+                Absolutely — GREVO actively encourages and prioritises the inclusion of women and young farmers. Over 40% of our members are women. We have specific training tracks and mentorship programmes designed for women and first-time farmers. The cooperative was founded on the principle that every Zambian farmer deserves equal access to technology and markets.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+                What happens after I submit the form?
+                <span>+</span>
+            </div>
+            <div class="faq-a">
+                After submitting, our membership coordinator will contact you within 48 hours via WhatsApp or phone call to verify your details, answer any questions, and guide you through payment of the ZMW 500 joining fee. You'll then receive your invitation to the next orientation session and your GREVO Farmer ID upon completion.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Bottom -->
+<section class="cta-bottom">
+    <h2>Already a Member?</h2>
+    <p>Contact your local district coordinator or reach our central office for any membership-related support, ID replacements, or programme queries.</p>
+    <a href="https://wa.me/260761441893?text=I%20am%20a%20GREVO%20member%20and%20need%20support" target="_blank">📱 Contact Your Coordinator</a>
+</section>
+
+<footer style="background:#0d1a10;padding:48px 60px 24px;border-top:1px solid rgba(82,201,125,0.12);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div style="display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;">
+            <div style="flex:2;min-width:220px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:12px;">
+                    <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+                    <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:white;letter-spacing:3px;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+                </a>
+                <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:1.7;max-width:300px;">Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Quick Links</h4>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                    <li><a href="products.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Products &amp; Produce</a></li>
+                    <li><a href="membership.html" style="color:#a8f5c2;text-decoration:none;font-size:0.88rem;">Membership</a></li>
+                    <li><a href="gallery.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Gallery</a></li>
+                    <li><a href="news.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">News &amp; Blog</a></li>
+                    <li><a href="faq.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">FAQ</a></li>
+                    <li><a href="find-us.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Find Us</a></li>
+                </ul>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Contact</h4>
+                <div style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:2;">
+                    <div>📍 Luansobe, Mufulira, Copperbelt, Zambia</div>
+                    <div>✉️ <a href="mailto:grevomultipurpose@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">grevomultipurpose@gmail.com</a></div>
+                    <div>📱 <a href="https://wa.me/260761441893" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">+260 761 441 893</a></div>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">© 2020–2026 GREVO Multipurpose Cooperative Society. All rights reserved.</p>
+            <div style="display:flex;gap:20px;">
+                <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Privacy Policy</a>
+                <a href="terms-of-use.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Terms of Use</a>
+                <a href="data-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Data Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<a href="https://wa.me/260761441893?text=Hello%20GREVO%20Team!" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:900;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(37,211,102,0.5);text-decoration:none;" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+<script>
+function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    const icon = el.querySelector('span');
+    const isOpen = answer.style.display === 'block';
+    answer.style.display = isOpen ? 'none' : 'block';
+    icon.textContent = isOpen ? '+' : '−';
+}
+
+document.getElementById('membershipForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = this;
+    const btn = form.querySelector('.submit-btn');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+    try {
+        const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+            form.style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
+        } else {
+            btn.textContent = 'Error — Please Try Again';
+            btn.disabled = false;
+        }
+    } catch {
+        btn.textContent = 'Error — Please Try Again';
+        btn.disabled = false;
+    }
+});
+</script>
+</body>
+</html>

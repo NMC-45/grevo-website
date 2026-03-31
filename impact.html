@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Impact & Transparency — GREVO AgriTech Cooperative. Real numbers, real change, real Zambia. Our impact on farmers, yields, and livelihoods.">
+    <title>Impact & Transparency — GREVO AgriTech Cooperative</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f0f4f0'/%3E%3Cpath d='M100 155 a55 55 0 1 1 55-55' fill='none' stroke='%231040a0' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --forest: #0b3d20; --canopy: #145c30; --moss: #1e7a42;
+            --leaf: #52c97d; --glow: #a8f5c2; --tech: #00d4ff;
+            --cobalt: #1040a0; --gold: #c9a84c; --parchment: #f5f1e8;
+            --ink: #0d1a10; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--parchment); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+        .hero { background: linear-gradient(135deg, var(--ink) 0%, var(--forest) 50%, #0a2a50 100%); padding: 140px 60px 90px; text-align: center; position: relative; overflow: hidden; }
+        .hero-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(ellipse, rgba(82,201,125,0.12) 0%, transparent 70%); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+        .breadcrumb { color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; position: relative; z-index: 2; }
+        .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 700; color: white; margin-bottom: 16px; position: relative; z-index: 2; }
+        .hero .subtitle { color: rgba(255,255,255,0.65); font-size: 1.05rem; position: relative; z-index: 2; }
+
+        /* Stats */
+        .stats-section { background: var(--forest); padding: 80px 40px; }
+        .stats-inner { max-width: 1200px; margin: 0 auto; }
+        .stats-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: white; text-align: center; margin-bottom: 8px; }
+        .stats-sub { color: rgba(255,255,255,0.55); text-align: center; font-size: 0.92rem; margin-bottom: 56px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+        .stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 28px 20px; text-align: center; transition: background 0.3s; }
+        .stat-card:hover { background: rgba(82,201,125,0.1); border-color: rgba(82,201,125,0.3); }
+        .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: var(--glow); line-height: 1; }
+        .stat-label { color: rgba(255,255,255,0.6); font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 8px; }
+        .stat-desc { color: rgba(255,255,255,0.35); font-size: 0.78rem; margin-top: 4px; }
+
+        /* SDGs */
+        .sdg-section { padding: 80px 40px; background: white; }
+        .sdg-inner { max-width: 1100px; margin: 0 auto; }
+        .section-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--leaf); margin-bottom: 12px; }
+        .section-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--forest); margin-bottom: 12px; }
+        .section-p { color: #556; margin-bottom: 48px; font-size: 0.95rem; }
+        .sdg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+        .sdg-card { border-radius: 14px; padding: 28px; position: relative; overflow: hidden; }
+        .sdg-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+        .sdg-1::before { background: #e5243b; }
+        .sdg-2::before { background: #dda63a; }
+        .sdg-8::before { background: #a21942; }
+        .sdg-13::before { background: #3f7e44; }
+        .sdg-17::before { background: #19486a; }
+        .sdg-1 { background: #fff5f5; } .sdg-2 { background: #fffaf0; }
+        .sdg-8 { background: #fdf5f8; } .sdg-13 { background: #f0f8f0; }
+        .sdg-17 { background: #f0f5fa; }
+        .sdg-badge { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+        .sdg-num { width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.85rem; }
+        .n-1 { background: #e5243b; } .n-2 { background: #dda63a; }
+        .n-8 { background: #a21942; } .n-13 { background: #3f7e44; }
+        .n-17 { background: #19486a; }
+        .sdg-badge span { font-weight: 700; font-size: 0.85rem; color: #334; }
+        .sdg-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+        .sdg-card p { color: #556; font-size: 0.88rem; line-height: 1.7; }
+
+        /* Testimonials */
+        .testimonials-section { padding: 80px 40px; background: var(--parchment); }
+        .testimonials-inner { max-width: 1100px; margin: 0 auto; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; margin-top: 48px; }
+        .testimonial-card { background: white; border-radius: 14px; padding: 32px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); position: relative; }
+        .testimonial-card::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 4rem; color: var(--glow); position: absolute; top: 16px; left: 24px; line-height: 1; }
+        .testimonial-card blockquote { margin-top: 28px; color: #334; font-size: 0.93rem; line-height: 1.75; font-style: italic; margin-bottom: 20px; }
+        .testimonial-author { display: flex; align-items: center; gap: 14px; }
+        .author-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+        .author-info .name { font-weight: 700; color: var(--forest); font-size: 0.9rem; }
+        .author-info .loc { color: #778; font-size: 0.8rem; }
+
+        /* Transparency */
+        .transparency-section { background: linear-gradient(135deg, var(--cobalt), var(--forest)); padding: 72px 40px; }
+        .transp-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+        .transp-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: white; margin-bottom: 16px; }
+        .transp-text p { color: rgba(255,255,255,0.65); font-size: 0.92rem; margin-bottom: 20px; }
+        .transp-text a { color: var(--glow); }
+        .impact-table { width: 100%; border-collapse: collapse; }
+        .impact-table th { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); padding: 10px 14px; text-align: left; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; }
+        .impact-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.07); color: rgba(255,255,255,0.75); font-size: 0.88rem; }
+        .impact-table tr:last-child td { border-bottom: none; }
+        .impact-table td strong { color: var(--glow); }
+
+        @media (max-width: 768px) {
+            .hero { padding: 120px 24px 60px; }
+            .stats-section { padding: 60px 20px; }
+            .sdg-section { padding: 60px 20px; }
+            .testimonials-section { padding: 60px 20px; }
+            .transparency-section { padding: 56px 20px; }
+            .transp-inner { grid-template-columns: 1fr; gap: 32px; }
+        }
+    </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(11,61,32,0.97);backdrop-filter:blur(24px);box-shadow:0 4px 40px rgba(0,0,0,0.3);">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:white;letter-spacing:3px;text-transform:uppercase;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <a href="index.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Home</a>
+        <a href="products.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Products</a>
+        <a href="membership.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Membership</a>
+        <a href="news.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">News</a>
+        <a href="faq.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">FAQ</a>
+        <a href="index.html#contact" style="background:#52c97d;color:#0b3d20;padding:10px 22px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-glow"></div>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Impact &amp; Transparency</div>
+    <h1>Real Numbers. Real Change. Real Zambia.</h1>
+    <p class="subtitle">GREVO measures every outcome — because accountability is as important as ambition</p>
+</section>
+
+<!-- Key Stats -->
+<section class="stats-section">
+    <div class="stats-inner">
+        <h2 class="stats-title">Our Impact at a Glance</h2>
+        <p class="stats-sub">Cumulative figures as of March 2026 across all GREVO cooperative programmes</p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-num" data-target="1800" data-suffix="+">0</div>
+                <div class="stat-label">Active Farmers</div>
+                <div class="stat-desc">Across 12 Zambian districts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-target="4200" data-suffix="+">0</div>
+                <div class="stat-label">Acres Monitored</div>
+                <div class="stat-desc">FarmPulse IoT network coverage</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-target="87" data-suffix="%">0</div>
+                <div class="stat-label">Yield Increase</div>
+                <div class="stat-desc">Average across member farms</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-target="12" data-suffix="">0</div>
+                <div class="stat-label">Districts</div>
+                <div class="stat-desc">Active cooperative presence</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-target="48" data-suffix="">0</div>
+                <div class="stat-label">Founding Members</div>
+                <div class="stat-desc">Who started it all in 2020</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-target="6" data-suffix="">0</div>
+                <div class="stat-label">Active Drones</div>
+                <div class="stat-desc">AeroCrop aerial survey fleet</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-target="92" data-suffix="%">0</div>
+                <div class="stat-label">AI Accuracy</div>
+                <div class="stat-desc">YieldMind maize forecasting</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-prefix="ZMW " data-target="2.4" data-suffix="M+">ZMW 0</div>
+                <div class="stat-label">Generated for Farmers</div>
+                <div class="stat-desc">Cumulative member income</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SDG Alignment -->
+<section class="sdg-section">
+    <div class="sdg-inner">
+        <p class="section-label">Global Goals</p>
+        <h2 class="section-h2">UN SDG Alignment</h2>
+        <p class="section-p">GREVO's work directly advances five United Nations Sustainable Development Goals. Here's precisely how our cooperative contributes.</p>
+        <div class="sdg-grid">
+            <div class="sdg-card sdg-1">
+                <div class="sdg-badge">
+                    <div class="sdg-num n-1">1</div>
+                    <span>No Poverty</span>
+                </div>
+                <h3>Ending Rural Poverty</h3>
+                <p>By increasing average farmer incomes by 87% and distributing ZMW 2.4M+ in cooperative surpluses, GREVO directly lifts member households above subsistence. Our profit-sharing model ensures technology creates shared prosperity rather than concentrating wealth.</p>
+            </div>
+            <div class="sdg-card sdg-2">
+                <div class="sdg-badge">
+                    <div class="sdg-num n-2">2</div>
+                    <span>Zero Hunger</span>
+                </div>
+                <h3>Food Security for All</h3>
+                <p>GREVO's precision agriculture approach has increased maize, soybean, and groundnut yields across 4,200+ acres, directly improving food availability in the Copperbelt. Our crop data informs regional food security planning with the Ministry of Agriculture.</p>
+            </div>
+            <div class="sdg-card sdg-8">
+                <div class="sdg-badge">
+                    <div class="sdg-num n-8">8</div>
+                    <span>Decent Work</span>
+                </div>
+                <h3>Dignified Agricultural Livelihoods</h3>
+                <p>GREVO transforms subsistence farming into dignified, technology-enabled livelihoods. We create direct employment through our drone fleet, IoT installation teams, training programmes, and cooperative administration — with fair wages and skills development.</p>
+            </div>
+            <div class="sdg-card sdg-13">
+                <div class="sdg-badge">
+                    <div class="sdg-num n-13">13</div>
+                    <span>Climate Action</span>
+                </div>
+                <h3>Climate-Smart Agriculture</h3>
+                <p>IoT monitoring enables precise irrigation, reducing water waste by up to 35%. AI recommendations minimise fertiliser overuse and associated greenhouse gas emissions. Drone monitoring detects early crop stress from climate events, helping farmers adapt in real time.</p>
+            </div>
+            <div class="sdg-card sdg-17">
+                <div class="sdg-badge">
+                    <div class="sdg-num n-17">17</div>
+                    <span>Partnerships</span>
+                </div>
+                <h3>Catalysing Collaborative Impact</h3>
+                <p>GREVO exemplifies SDG 17 through active partnerships with timbuktoo, AGRA, Mukuba University, ZATP II, UNDP Zambia, and the Ministry of Agriculture — demonstrating how public-private-cooperative collaboration drives scalable agricultural transformation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+    <div class="testimonials-inner">
+        <p class="section-label">Farmer Voices</p>
+        <h2 class="section-h2">Stories from the Field</h2>
+        <p class="section-p">The most important measure of GREVO's impact is the change in the lives of our members. Here are six of their stories.</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <blockquote>The soil sensor told me my field was dry two days before I would have noticed. I watered just in time and saved my entire maize crop. Technology for farmers is not a luxury — it is a lifeline.</blockquote>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:rgba(82,201,125,0.15);">👩</div>
+                    <div class="author-info">
+                        <div class="name">Grace Mwansa</div>
+                        <div class="loc">Mufulira District, Copperbelt</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>I used to sell maize for whatever the market offered. Now with blockchain, buyers can see my farm's quality record and I command a premium price. GREVO gave me negotiating power I never had before.</blockquote>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:rgba(0,212,255,0.15);">👨</div>
+                    <div class="author-info">
+                        <div class="name">Solomon Tembo</div>
+                        <div class="loc">Kitwe District, Copperbelt</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>Before GREVO, I was farming by guessing. Now the AI tells me exactly when to plant and how much fertiliser to use. My soybean yield doubled in the first season. I am a believer.</blockquote>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:rgba(201,168,76,0.15);">👩</div>
+                    <div class="author-info">
+                        <div class="name">Agnes Mwansa</div>
+                        <div class="loc">Ndola District, Copperbelt</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>The AI told me when to spray — I saved 40% on pesticides this season. That saving paid for my daughter's school fees. Technology and family — I did not think they could be connected like this.</blockquote>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:rgba(11,61,32,0.15);">👨</div>
+                    <div class="author-info">
+                        <div class="name">Patrick Banda</div>
+                        <div class="loc">Kitwe District, Copperbelt</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>As a female farmer, GREVO gave me training, respect, and a market. I am now a training assistant helping other women farmers in my area. GREVO does not just give you tools — it gives you a future.</blockquote>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:rgba(233,30,99,0.1);">👩</div>
+                    <div class="author-info">
+                        <div class="name">Mary Chilufya</div>
+                        <div class="loc">Mufulira District, Copperbelt</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>The drone survey found a pest infestation on one corner of my field that I had not seen. I treated it immediately and lost nothing. Without that drone, I would have lost a quarter of my harvest. Incredible technology.</blockquote>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:rgba(82,201,125,0.1);">👨</div>
+                    <div class="author-info">
+                        <div class="name">James Kalumba</div>
+                        <div class="loc">Chingola District, Copperbelt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Transparency & Annual Table -->
+<section class="transparency-section">
+    <div class="transp-inner">
+        <div class="transp-text">
+            <h2>Financial Transparency</h2>
+            <p>GREVO publishes annual impact and financial summaries for members and stakeholders. We believe transparency is the foundation of trust — and trust is the foundation of a cooperative.</p>
+            <p>To request a full copy of our Annual Impact Report, email: <a href="mailto:grevomultipurpose@gmail.com">grevomultipurpose@gmail.com</a> with the subject "Annual Report Request".</p>
+            <p style="margin-top:16px;padding:16px;background:rgba(255,255,255,0.06);border-radius:8px;font-size:0.85rem;color:rgba(255,255,255,0.5);">Reports are available to members, registered stakeholders, partner organisations, and the media. Personal member data is always anonymised in public reports.</p>
+        </div>
+        <div>
+            <h3 style="color:var(--glow);font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:20px;">Annual Impact Summary</h3>
+            <table class="impact-table">
+                <thead>
+                    <tr><th>Year</th><th>Members</th><th>Acres</th><th>Revenue Generated</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>2021</td><td>48</td><td>120</td><td><strong>ZMW 84,000</strong></td></tr>
+                    <tr><td>2022</td><td>320</td><td>640</td><td><strong>ZMW 340,000</strong></td></tr>
+                    <tr><td>2023</td><td>1,100</td><td>2,200</td><td><strong>ZMW 820,000</strong></td></tr>
+                    <tr><td>2024</td><td>1,800</td><td>4,200</td><td><strong>ZMW 1,156,000</strong></td></tr>
+                </tbody>
+            </table>
+            <p style="color:rgba(255,255,255,0.35);font-size:0.78rem;margin-top:12px;">Revenue generated refers to total market income received by member farmers through GREVO cooperative channels. Figures are unaudited summaries; full audited accounts available on request.</p>
+        </div>
+    </div>
+</section>
+
+<footer style="background:#0d1a10;padding:48px 60px 24px;border-top:1px solid rgba(82,201,125,0.12);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div style="display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;">
+            <div style="flex:2;min-width:220px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:12px;">
+                    <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+                    <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:white;letter-spacing:3px;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+                </a>
+                <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:1.7;max-width:300px;">Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Quick Links</h4>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                    <li><a href="products.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Products &amp; Produce</a></li>
+                    <li><a href="membership.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Membership</a></li>
+                    <li><a href="gallery.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Gallery</a></li>
+                    <li><a href="news.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">News &amp; Blog</a></li>
+                    <li><a href="faq.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">FAQ</a></li>
+                    <li><a href="find-us.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Find Us</a></li>
+                </ul>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Contact</h4>
+                <div style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:2;">
+                    <div>📍 Luansobe, Mufulira, Copperbelt, Zambia</div>
+                    <div>✉️ <a href="mailto:grevomultipurpose@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">grevomultipurpose@gmail.com</a></div>
+                    <div>📱 <a href="https://wa.me/260761441893" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">+260 761 441 893</a></div>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">© 2020–2026 GREVO Multipurpose Cooperative Society. All rights reserved.</p>
+            <div style="display:flex;gap:20px;">
+                <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Privacy Policy</a>
+                <a href="terms-of-use.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Terms of Use</a>
+                <a href="data-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Data Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<a href="https://wa.me/260761441893?text=Hello%20GREVO%20Team!" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:900;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(37,211,102,0.5);text-decoration:none;" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+<script>
+// Count-up animation
+function countUp(el) {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    const isDecimal = target % 1 !== 0;
+    const duration = 2000;
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    const interval = setInterval(() => {
+        current = Math.min(current + increment, target);
+        el.textContent = prefix + (isDecimal ? current.toFixed(1) : Math.floor(current).toLocaleString()) + suffix;
+        if (current >= target) { el.textContent = prefix + (isDecimal ? target.toFixed(1) : target.toLocaleString()) + suffix; clearInterval(interval); }
+    }, duration / steps);
+}
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+            entry.target.dataset.animated = 'true';
+            entry.target.querySelectorAll('[data-target]').forEach(countUp);
+        }
+    });
+}, { threshold: 0.3 });
+
+const statsGrid = document.querySelector('.stats-grid');
+if (statsGrid) observer.observe(statsGrid);
+</script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Terms of Use — GREVO Multipurpose Cooperative Society. The rules and conditions governing use of our website and services.">
+    <title>Terms of Use — GREVO AgriTech Cooperative</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f0f4f0'/%3E%3Cpath d='M100 155 a55 55 0 1 1 55-55' fill='none' stroke='%231040a0' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --forest: #0b3d20; --canopy: #145c30; --moss: #1e7a42;
+            --leaf: #52c97d; --glow: #a8f5c2; --tech: #00d4ff;
+            --cobalt: #1040a0; --gold: #c9a84c; --parchment: #f5f1e8;
+            --ink: #0d1a10; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--parchment); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+        a { color: var(--moss); }
+        a:hover { color: var(--leaf); }
+
+        .hero {
+            background: linear-gradient(135deg, #0a1f3a 0%, var(--cobalt) 40%, var(--forest) 100%);
+            padding: 140px 60px 80px;
+            text-align: center;
+        }
+        .breadcrumb { color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+        .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--glow); }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; color: white; margin-bottom: 16px; }
+        .hero .subtitle { color: rgba(255,255,255,0.6); font-size: 1rem; }
+        .last-updated { display: inline-block; margin-top: 16px; background: rgba(168,245,194,0.15); border: 1px solid rgba(168,245,194,0.3); color: var(--glow); padding: 6px 18px; border-radius: 20px; font-size: 0.82rem; letter-spacing: 1px; }
+
+        .content-wrap { max-width: 860px; margin: 0 auto; padding: 64px 40px 80px; }
+        .toc { background: white; border-left: 4px solid var(--cobalt); border-radius: 0 8px 8px 0; padding: 28px 32px; margin-bottom: 56px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+        .toc h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--cobalt); margin-bottom: 16px; }
+        .toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+        .toc li a { color: var(--cobalt); text-decoration: none; font-size: 0.92rem; }
+        .toc li a:hover { color: var(--forest); text-decoration: underline; }
+
+        .section { margin-bottom: 52px; }
+        .section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 700; color: var(--forest); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid rgba(16,64,160,0.2); }
+        .section p { color: #334; font-size: 0.95rem; line-height: 1.85; margin-bottom: 16px; }
+        .section ul, .section ol { padding-left: 24px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .section li { color: #334; font-size: 0.95rem; line-height: 1.7; }
+        .warning-box { background: #fff8e7; border: 1px solid #e8c870; border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+        .warning-box p { margin: 0; font-size: 0.9rem; color: #5a4010; }
+        .info-box { background: rgba(11,61,32,0.05); border: 1px solid rgba(82,201,125,0.2); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+        .info-box p { margin: 0; font-size: 0.9rem; }
+        .contact-card { background: linear-gradient(135deg, var(--cobalt), var(--forest)); color: white; border-radius: 12px; padding: 32px; margin-top: 40px; }
+        .contact-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--glow); margin-bottom: 12px; }
+        .contact-card p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 8px; }
+        .contact-card a { color: var(--glow); }
+
+        @media (max-width: 768px) {
+            .hero { padding: 120px 24px 60px; }
+            .content-wrap { padding: 40px 20px 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(11,61,32,0.97);backdrop-filter:blur(24px);box-shadow:0 4px 40px rgba(0,0,0,0.3);">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:white;letter-spacing:3px;text-transform:uppercase;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <a href="index.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Home</a>
+        <a href="products.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Products</a>
+        <a href="membership.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Membership</a>
+        <a href="news.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">News</a>
+        <a href="faq.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">FAQ</a>
+        <a href="index.html#contact" style="background:#52c97d;color:#0b3d20;padding:10px 22px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Contact</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Terms of Use</div>
+    <h1>Terms of Use</h1>
+    <p class="subtitle">The rules and conditions governing use of the GREVO website and services</p>
+    <span class="last-updated">Last Updated: March 2026</span>
+</section>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#acceptance">Acceptance of Terms</a></li>
+            <li><a href="#use-of-site">Use of This Website</a></li>
+            <li><a href="#intellectual-property">Intellectual Property</a></li>
+            <li><a href="#user-content">User-Submitted Content</a></li>
+            <li><a href="#disclaimer">Disclaimer of Warranties</a></li>
+            <li><a href="#liability">Limitation of Liability</a></li>
+            <li><a href="#links">Third-Party Links</a></li>
+            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#governing-law">Governing Law</a></li>
+            <li><a href="#changes">Changes to These Terms</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ol>
+    </div>
+
+    <div class="section" id="acceptance">
+        <h2>1. Acceptance of Terms</h2>
+        <p>Welcome to the GREVO Multipurpose Cooperative Society website ("the Website"). By accessing or using this Website, you agree to be bound by these Terms of Use ("Terms"). These Terms form a legally binding agreement between you and GREVO Multipurpose Cooperative Society, a cooperative society registered under the laws of the Republic of Zambia, with its principal place of business at Luansobe Area, Mufulira District, Copperbelt Province, Zambia.</p>
+        <p>If you do not agree with any part of these Terms, you must immediately discontinue your use of this Website. Your continued use of the Website following the posting of any changes to these Terms constitutes your acceptance of those changes.</p>
+        <div class="warning-box">
+            <p><strong>Please read these Terms carefully before using this Website.</strong> If you are accessing this Website on behalf of an organisation, you represent that you have the authority to bind that organisation to these Terms.</p>
+        </div>
+    </div>
+
+    <div class="section" id="use-of-site">
+        <h2>2. Use of This Website</h2>
+        <p>You agree to use this Website only for lawful purposes and in a manner that does not infringe the rights of others or restrict or inhibit their use of the Website. Specifically, you agree not to:</p>
+        <ul>
+            <li>Use the Website in any way that violates applicable Zambian or international laws or regulations</li>
+            <li>Transmit any unsolicited or unauthorised advertising or promotional material</li>
+            <li>Knowingly introduce viruses, trojans, worms, logic bombs, or other malicious or technologically harmful material</li>
+            <li>Attempt to gain unauthorised access to any part of the Website, its servers, or any database connected to the Website</li>
+            <li>Use automated tools (bots, scrapers, crawlers) to extract data from the Website without our prior written consent</li>
+            <li>Impersonate GREVO, its officers, employees, members, or any other person</li>
+            <li>Use the Website to transmit or post content that is defamatory, offensive, hateful, or discriminatory</li>
+            <li>Engage in any conduct that disrupts or damages GREVO's reputation or the experience of other users</li>
+            <li>Collect or harvest personal information about other Website users without their consent</li>
+        </ul>
+        <p>GREVO reserves the right to restrict or terminate your access to the Website at any time without notice if you violate these Terms or if we determine such action is in the best interests of the cooperative and its members.</p>
+        <p>You acknowledge that the Website may be temporarily unavailable due to maintenance, technical issues, or circumstances beyond our control. GREVO will endeavour to minimise disruptions but accepts no liability for downtime.</p>
+    </div>
+
+    <div class="section" id="intellectual-property">
+        <h2>3. Intellectual Property</h2>
+        <p>All content on this Website — including but not limited to text, graphics, logos, icons, images, audio clips, data compilations, software, and the GREVO brand identity — is the property of GREVO Multipurpose Cooperative Society or its content suppliers and is protected by Zambian and international intellectual property laws.</p>
+        <p>The GREVO name, logo, "GREVO AGRI•TECH" wordmark, the FarmPulse™ name, AeroCrop™ name, and YieldMind™ name are the trademarks and trade names of GREVO Multipurpose Cooperative Society. You may not use these marks without our prior written permission.</p>
+        <p>You are permitted to:</p>
+        <ul>
+            <li>View and print pages from this Website for your personal, non-commercial use</li>
+            <li>Share links to our Website on social media or in communications, with appropriate attribution</li>
+            <li>Quote brief extracts from our content with clear attribution to GREVO and a link to the source</li>
+        </ul>
+        <p>You are not permitted to:</p>
+        <ul>
+            <li>Reproduce, copy, sell, resell, or exploit any material from this Website for commercial purposes without written consent</li>
+            <li>Modify or alter any material from this Website</li>
+            <li>Remove any copyright, trademark, or other proprietary notices from any content</li>
+            <li>Create derivative works based on our content without express permission</li>
+        </ul>
+        <p>To request permission for use beyond the above, contact us at <a href="mailto:grevomultipurpose@gmail.com">grevomultipurpose@gmail.com</a>.</p>
+    </div>
+
+    <div class="section" id="user-content">
+        <h2>4. User-Submitted Content</h2>
+        <p>If you submit content to us through our contact forms, membership applications, or any other submission mechanism (including photographs, testimonials, stories, or feedback), you:</p>
+        <ul>
+            <li>Grant GREVO a non-exclusive, royalty-free, perpetual licence to use, reproduce, publish, and distribute that content in connection with GREVO's activities and publications</li>
+            <li>Warrant that you own or have the right to submit such content and that it does not violate the rights of any third party</li>
+            <li>Confirm that the content is accurate, not misleading, and does not contain defamatory, offensive, or unlawful material</li>
+        </ul>
+        <p>GREVO reserves the right to remove or refuse any user-submitted content at its sole discretion, without obligation to provide reasons.</p>
+    </div>
+
+    <div class="section" id="disclaimer">
+        <h2>5. Disclaimer of Warranties</h2>
+        <p>This Website is provided on an "as is" and "as available" basis without any warranties, express or implied. To the fullest extent permissible under applicable law, GREVO disclaims all warranties including:</p>
+        <ul>
+            <li>Warranties of merchantability, fitness for a particular purpose, and non-infringement</li>
+            <li>Warranties that the Website will be uninterrupted, error-free, or free of viruses or other harmful components</li>
+            <li>Warranties regarding the accuracy, completeness, or timeliness of information on the Website</li>
+        </ul>
+        <div class="info-box">
+            <p><strong>Agricultural Information:</strong> Crop advisory content, yield projections, weather forecasts, and agricultural recommendations on this Website are provided for general informational purposes only. They are not a substitute for professional agronomic advice tailored to your specific conditions. GREVO members receive personalised support through official programme channels.</p>
+        </div>
+        <p>GREVO makes no warranty that the information on this Website is suitable for use in any particular jurisdiction outside Zambia, or that the Website will meet your specific requirements.</p>
+    </div>
+
+    <div class="section" id="liability">
+        <h2>6. Limitation of Liability</h2>
+        <p>To the maximum extent permitted by Zambian law, GREVO Multipurpose Cooperative Society, its officers, directors, members, employees, agents, and partners shall not be liable for:</p>
+        <ul>
+            <li>Any direct, indirect, incidental, special, consequential, or punitive damages arising from your use of, or inability to use, this Website</li>
+            <li>Any loss of data, revenue, profits, goodwill, or business opportunities</li>
+            <li>Any reliance you place on information contained on this Website</li>
+            <li>Any errors or omissions in the content of this Website</li>
+            <li>Any damage to your computer, mobile device, or software resulting from accessing this Website</li>
+            <li>Unauthorised access to or alteration of your data transmitted to or from this Website</li>
+        </ul>
+        <p>This limitation applies whether the alleged liability is based on contract, tort (including negligence), strict liability, or any other legal theory, even if GREVO has been advised of the possibility of such damage.</p>
+        <p>Nothing in these Terms shall limit GREVO's liability for death or personal injury caused by negligence, fraud, or any other liability that cannot be excluded under Zambian law.</p>
+    </div>
+
+    <div class="section" id="links">
+        <h2>7. Third-Party Links</h2>
+        <p>This Website may contain links to third-party websites, platforms, or resources (such as WhatsApp, Google Maps, Formspree, or partner organisations). These links are provided for your convenience only. GREVO:</p>
+        <ul>
+            <li>Has no control over the content, policies, or practices of third-party websites</li>
+            <li>Does not endorse or make any representations about third-party websites or their content</li>
+            <li>Is not responsible for any loss or damage that may arise from your use of linked sites</li>
+        </ul>
+        <p>You access linked websites entirely at your own risk and should review their own terms and privacy policies before use. In particular, when using WhatsApp to contact GREVO, you are subject to Meta Platform's terms and privacy policy.</p>
+    </div>
+
+    <div class="section" id="privacy">
+        <h2>8. Privacy</h2>
+        <p>Your use of this Website is also governed by our <a href="privacy-policy.html">Privacy Policy</a> and <a href="data-policy.html">Data Policy</a>, which are incorporated into these Terms by reference. By using the Website, you consent to our collection and use of your data as described in those policies.</p>
+    </div>
+
+    <div class="section" id="governing-law">
+        <h2>9. Governing Law &amp; Jurisdiction</h2>
+        <p>These Terms of Use are governed by and construed in accordance with the laws of the Republic of Zambia, without regard to its conflict of law provisions. The Zambia Co-operative Societies Act and related commercial legislation shall apply where relevant.</p>
+        <p>Any disputes arising from or in connection with these Terms or your use of this Website shall be subject to the exclusive jurisdiction of the courts of Zambia, and both parties irrevocably submit to that jurisdiction.</p>
+        <p>GREVO operates primarily within Zambia and the African continent. While this Website can be accessed internationally, we make no representation that its content is appropriate or legal for use in all jurisdictions. Users accessing the Website from outside Zambia do so at their own initiative and are responsible for compliance with applicable local laws.</p>
+    </div>
+
+    <div class="section" id="changes">
+        <h2>10. Changes to These Terms</h2>
+        <p>GREVO reserves the right to modify these Terms at any time. Material changes will be communicated by:</p>
+        <ul>
+            <li>Updating the "Last Updated" date at the top of this page</li>
+            <li>Posting a prominent notice on the Website homepage</li>
+            <li>Where reasonably practicable, notifying registered members via email</li>
+        </ul>
+        <p>Your continued use of the Website after any such changes constitutes your acceptance of the new Terms. If you do not agree to the new Terms, you must stop using the Website.</p>
+        <p>We recommend that you review these Terms periodically. The date of the most recent revision is always indicated at the top of this page.</p>
+    </div>
+
+    <div class="section" id="contact">
+        <h2>11. Contact</h2>
+        <p>If you have any questions about these Terms of Use, please contact us:</p>
+        <div class="contact-card">
+            <h3>GREVO Legal &amp; Compliance</h3>
+            <p>GREVO Multipurpose Cooperative Society</p>
+            <p>Luansobe Area, Mufulira District, Copperbelt Province, Zambia</p>
+            <p>Email: <a href="mailto:grevomultipurpose@gmail.com">grevomultipurpose@gmail.com</a></p>
+            <p>WhatsApp: <a href="https://wa.me/260761441893">+260 761 441 893</a></p>
+            <p style="margin-top:16px;font-size:0.85rem;color:rgba(255,255,255,0.5);">These Terms were last reviewed by GREVO leadership in March 2026.</p>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#0d1a10;padding:48px 60px 24px;border-top:1px solid rgba(82,201,125,0.12);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div style="display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;">
+            <div style="flex:2;min-width:220px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:12px;">
+                    <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+                    <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:white;letter-spacing:3px;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+                </a>
+                <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:1.7;max-width:300px;">Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Quick Links</h4>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                    <li><a href="products.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Products &amp; Produce</a></li>
+                    <li><a href="membership.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Membership</a></li>
+                    <li><a href="gallery.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Gallery</a></li>
+                    <li><a href="news.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">News &amp; Blog</a></li>
+                    <li><a href="faq.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">FAQ</a></li>
+                    <li><a href="find-us.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Find Us</a></li>
+                </ul>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Contact</h4>
+                <div style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:2;">
+                    <div>📍 Luansobe, Mufulira, Copperbelt, Zambia</div>
+                    <div>✉️ <a href="mailto:grevomultipurpose@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">grevomultipurpose@gmail.com</a></div>
+                    <div>📱 <a href="https://wa.me/260761441893" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">+260 761 441 893</a></div>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">© 2020–2026 GREVO Multipurpose Cooperative Society. All rights reserved.</p>
+            <div style="display:flex;gap:20px;">
+                <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Privacy Policy</a>
+                <a href="terms-of-use.html" style="color:#a8f5c2;font-size:0.8rem;text-decoration:none;">Terms of Use</a>
+                <a href="data-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Data Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/260761441893?text=Hello%20GREVO%20Team!" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:900;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(37,211,102,0.5);text-decoration:none;" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GREVO AgriTech Products & Produce — Broiler chickens, white maize, soybeans, groundnuts, and fresh vegetables from Zambia's Copperbelt.">
+    <title>Products & Produce — GREVO AgriTech Cooperative</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f0f4f0'/%3E%3Cpath d='M100 155 a55 55 0 1 1 55-55' fill='none' stroke='%231040a0' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --forest: #0b3d20; --canopy: #145c30; --moss: #1e7a42;
+            --leaf: #52c97d; --glow: #a8f5c2; --tech: #00d4ff;
+            --cobalt: #1040a0; --gold: #c9a84c; --parchment: #f5f1e8;
+            --ink: #0d1a10; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--parchment); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+        .hero {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--canopy) 60%, var(--moss) 100%);
+            padding: 140px 60px 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center bottom, rgba(82,201,125,0.15) 0%, transparent 70%);
+        }
+        .breadcrumb { color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; position: relative; }
+        .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--glow); }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 6vw, 4.2rem); font-weight: 700; color: white; margin-bottom: 16px; position: relative; }
+        .hero .subtitle { color: rgba(255,255,255,0.65); font-size: 1.05rem; position: relative; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; background: rgba(82,201,125,0.15); border: 1px solid rgba(82,201,125,0.35); color: var(--glow); padding: 8px 20px; border-radius: 24px; font-size: 0.82rem; letter-spacing: 1px; position: relative; }
+
+        .section-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 40px; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 700; color: var(--forest); margin-bottom: 12px; }
+        .section-sub { color: #556; font-size: 0.95rem; margin-bottom: 56px; }
+
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 32px; }
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            transition: transform 0.3s var(--easing), box-shadow 0.3s;
+        }
+        .product-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+        .product-banner {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+        .availability-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.73rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .avail-weekly { background: rgba(82,201,125,0.15); color: #0b3d20; border: 1px solid rgba(82,201,125,0.3); }
+        .avail-seasonal { background: rgba(201,168,76,0.15); color: #5a3800; border: 1px solid rgba(201,168,76,0.3); }
+        .product-body { padding: 28px 28px 24px; }
+        .product-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
+        .product-body p { color: #556; font-size: 0.9rem; line-height: 1.7; margin-bottom: 16px; }
+        .price-row { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.07); }
+        .price { font-size: 1rem; font-weight: 700; color: var(--forest); }
+        .price span { font-size: 0.8rem; font-weight: 400; color: #889; display: block; margin-bottom: 2px; }
+        .order-btn {
+            background: var(--leaf);
+            color: var(--forest);
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: background 0.2s;
+        }
+        .order-btn:hover { background: var(--glow); }
+
+        /* How to Order */
+        .order-section { background: var(--forest); color: white; padding: 80px 40px; }
+        .order-inner { max-width: 1000px; margin: 0 auto; }
+        .order-title { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 700; color: white; text-align: center; margin-bottom: 12px; }
+        .order-sub { color: rgba(255,255,255,0.6); text-align: center; margin-bottom: 56px; }
+        .steps-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; }
+        .step { display: flex; gap: 20px; align-items: flex-start; }
+        .step-num { width: 48px; height: 48px; min-width: 48px; background: var(--leaf); color: var(--forest); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
+        .step-content h4 { color: var(--glow); font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+        .step-content p { color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.6; }
+
+        /* Bulk Orders */
+        .bulk-section { background: white; padding: 72px 40px; border-top: 1px solid rgba(0,0,0,0.06); }
+        .bulk-inner { max-width: 900px; margin: 0 auto; display: flex; gap: 48px; align-items: center; flex-wrap: wrap; }
+        .bulk-text { flex: 1; min-width: 260px; }
+        .bulk-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--forest); margin-bottom: 16px; }
+        .bulk-text p { color: #556; font-size: 0.93rem; margin-bottom: 12px; }
+        .bulk-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+        .bulk-tag { background: rgba(11,61,32,0.07); color: var(--forest); padding: 6px 14px; border-radius: 4px; font-size: 0.82rem; font-weight: 600; }
+        .bulk-cta { flex: 0 0 auto; display: flex; flex-direction: column; gap: 14px; }
+        .btn-wa { display: flex; align-items: center; gap: 10px; background: #25D366; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: transform 0.2s; }
+        .btn-wa:hover { transform: translateY(-2px); }
+        .btn-email { display: flex; align-items: center; gap: 10px; background: var(--forest); color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: transform 0.2s; }
+        .btn-email:hover { transform: translateY(-2px); }
+
+        /* CTA section */
+        .cta-section { background: linear-gradient(135deg, var(--ink) 0%, var(--forest) 100%); padding: 80px 40px; text-align: center; }
+        .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; color: white; margin-bottom: 16px; }
+        .cta-section p { color: rgba(255,255,255,0.6); margin-bottom: 36px; }
+        .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .cta-wa { background: #25D366; color: white; padding: 16px 36px; border-radius: 8px; text-decoration: none; font-weight: 700; letter-spacing: 1px; font-size: 0.95rem; }
+        .cta-em { background: transparent; color: white; padding: 15px 36px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.3); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .cta-em:hover { border-color: var(--glow); }
+
+        @media (max-width: 768px) {
+            .hero { padding: 120px 24px 70px; }
+            .section-wrap { padding: 56px 20px; }
+            .products-grid { grid-template-columns: 1fr; }
+            .order-section { padding: 60px 20px; }
+            .bulk-section { padding: 56px 20px; }
+            .cta-section { padding: 60px 20px; }
+        }
+    </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(11,61,32,0.97);backdrop-filter:blur(24px);box-shadow:0 4px 40px rgba(0,0,0,0.3);">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:white;letter-spacing:3px;text-transform:uppercase;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <a href="index.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Home</a>
+        <a href="products.html" style="color:#a8f5c2;text-decoration:none;font-size:0.85rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">Products</a>
+        <a href="membership.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Membership</a>
+        <a href="news.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">News</a>
+        <a href="faq.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">FAQ</a>
+        <a href="index.html#contact" style="background:#52c97d;color:#0b3d20;padding:10px 22px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Products &amp; Produce</div>
+    <h1>What We Grow &amp; Sell</h1>
+    <p class="subtitle">Fresh from Copperbelt farms — grown with precision technology, sold with integrity</p>
+    <div class="hero-badge">🌾 Direct from Farm to Table · Copperbelt, Zambia</div>
+</section>
+
+<!-- Products Grid -->
+<div class="section-wrap">
+    <h2 class="section-title">Our Products</h2>
+    <p class="section-sub">All GREVO produce is grown using IoT-monitored soil data, drone surveillance, and AI-optimised input management — ensuring quality you can trust.</p>
+
+    <div class="products-grid">
+        <!-- Broiler Chickens -->
+        <div class="product-card">
+            <div class="product-banner" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2);">
+                🐔
+                <span class="availability-badge avail-weekly">Weekly Available</span>
+            </div>
+            <div class="product-body">
+                <h3>Broiler Chickens</h3>
+                <p>GREVO operates a large-scale broiler programme with 500+ birds per cycle. Our chickens are raised in managed conditions with proper nutrition and veterinary oversight, resulting in healthy, market-ready birds every week.</p>
+                <ul style="padding-left:18px;color:#556;font-size:0.88rem;margin-bottom:16px;display:flex;flex-direction:column;gap:4px;">
+                    <li>500+ birds per production cycle</li>
+                    <li>Available weekly — fresh live weight</li>
+                    <li>Veterinary health monitored</li>
+                    <li>Available for collection or local delivery</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price">
+                        <span>Price per bird</span>
+                        ZMW 120 – 150
+                    </div>
+                    <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20broiler%20chickens%20from%20GREVO" class="order-btn" target="_blank">Order Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- White Maize -->
+        <div class="product-card">
+            <div class="product-banner" style="background: linear-gradient(135deg, #f9fbe7, #f0f4c3);">
+                🌽
+                <span class="availability-badge avail-seasonal">Seasonal (May–Jul)</span>
+            </div>
+            <div class="product-body">
+                <h3>White Maize</h3>
+                <p>Premium-grade white maize grown across GREVO member farms throughout the Copperbelt. Cultivated using soil-moisture IoT sensors and AI-optimised planting schedules for consistent, high-quality yields. Packed in durable 50kg bags.</p>
+                <ul style="padding-left:18px;color:#556;font-size:0.88rem;margin-bottom:16px;display:flex;flex-direction:column;gap:4px;">
+                    <li>Premium grade — post-harvest quality checked</li>
+                    <li>Packed in clean 50kg bags</li>
+                    <li>Available post-harvest: May–July</li>
+                    <li>Bulk orders welcome</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price">
+                        <span>Price per 50kg bag</span>
+                        ZMW 250 – 300
+                    </div>
+                    <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20white%20maize%20from%20GREVO" class="order-btn" target="_blank">Order Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Soybeans -->
+        <div class="product-card">
+            <div class="product-banner" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9);">
+                🫘
+                <span class="availability-badge avail-seasonal">Seasonal</span>
+            </div>
+            <div class="product-body">
+                <h3>Soybeans</h3>
+                <p>High-protein soybean varieties suited for animal feed, oil processing, and direct consumption. GREVO's soybeans are cultivated with precision nutrition management, ensuring excellent protein content and minimal aflatoxin contamination.</p>
+                <ul style="padding-left:18px;color:#556;font-size:0.88rem;margin-bottom:16px;display:flex;flex-direction:column;gap:4px;">
+                    <li>High-protein variety — tested &amp; graded</li>
+                    <li>Suitable for feed mills &amp; oil processors</li>
+                    <li>50kg bags — clean and dry</li>
+                    <li>Available post-harvest season</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price">
+                        <span>Price per 50kg bag</span>
+                        ZMW 280 – 320
+                    </div>
+                    <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20soybeans%20from%20GREVO" class="order-btn" target="_blank">Order Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Groundnuts -->
+        <div class="product-card">
+            <div class="product-banner" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0);">
+                🥜
+                <span class="availability-badge avail-seasonal">Seasonal</span>
+            </div>
+            <div class="product-body">
+                <h3>Groundnuts</h3>
+                <p>Both roasting-grade and oil-grade groundnut varieties from GREVO farms. Our groundnuts are sun-dried, cleaned, and graded before packaging. Ideal for individual buyers, processors, small businesses, and cooking oil producers.</p>
+                <ul style="padding-left:18px;color:#556;font-size:0.88rem;margin-bottom:16px;display:flex;flex-direction:column;gap:4px;">
+                    <li>Roasting &amp; oil varieties available</li>
+                    <li>Sun-dried, cleaned, and sorted</li>
+                    <li>50kg bag packaging</li>
+                    <li>Suitable for processing &amp; direct sale</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price">
+                        <span>Price per 50kg bag</span>
+                        ZMW 180 – 220
+                    </div>
+                    <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20groundnuts%20from%20GREVO" class="order-btn" target="_blank">Order Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vegetables -->
+        <div class="product-card">
+            <div class="product-banner" style="background: linear-gradient(135deg, #e0f7e9, #b2dfdb);">
+                🥬
+                <span class="availability-badge avail-weekly">In Season</span>
+            </div>
+            <div class="product-body">
+                <h3>Fresh Vegetables</h3>
+                <p>Seasonal vegetables grown by GREVO smallholder members across the Copperbelt. Current offerings include tomatoes, rape, and cabbage — grown without excess chemical inputs thanks to our IoT soil monitoring and pest-alert systems.</p>
+                <ul style="padding-left:18px;color:#556;font-size:0.88rem;margin-bottom:16px;display:flex;flex-direction:column;gap:4px;">
+                    <li>Tomatoes — crates (subject to season)</li>
+                    <li>Rape (Brassica) — bundles or crates</li>
+                    <li>Cabbage — heads or crates</li>
+                    <li>Contact for current availability &amp; pricing</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price">
+                        <span>Pricing</span>
+                        Per crate (contact us)
+                    </div>
+                    <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20vegetables%20from%20GREVO" class="order-btn" target="_blank">Enquire</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coming Soon -->
+        <div class="product-card" style="border: 2px dashed rgba(82,201,125,0.3); box-shadow: none;">
+            <div class="product-banner" style="background: linear-gradient(135deg, #f5f1e8, #e8e4d8);">
+                🌱
+            </div>
+            <div class="product-body">
+                <h3 style="color:#889;">Sunflower &amp; More — Coming Soon</h3>
+                <p style="color:#aaa;">GREVO is expanding its crop portfolio to include sunflower, sweet potato, and cowpeas in the next growing season. Members are already trialling these crops with AI-guided cultivation plans.</p>
+                <div style="margin-top:20px;padding:12px 16px;background:rgba(82,201,125,0.06);border-radius:6px;">
+                    <p style="font-size:0.85rem;color:#889;margin:0;">Join our WhatsApp updates list to be notified when new produce is available.</p>
+                </div>
+                <div class="price-row">
+                    <div class="price" style="color:#aaa;">
+                        <span>Availability</span>
+                        2026 Season
+                    </div>
+                    <a href="https://wa.me/260761441893?text=I%27d%20like%20updates%20on%20new%20GREVO%20produce" class="order-btn" target="_blank" style="background:rgba(82,201,125,0.15);color:var(--forest);">Get Notified</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How to Order -->
+<section class="order-section">
+    <div class="order-inner">
+        <h2 class="order-title">How to Order</h2>
+        <p class="order-sub">Simple, fast, and direct — no middlemen, just farm-fresh produce.</p>
+        <div class="steps-row">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h4>Contact Us</h4>
+                    <p>Reach out via WhatsApp +260 761 441 893 or email grevomultipurpose@gmail.com. Tell us what product and quantity you need.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h4>Confirm Your Order</h4>
+                    <p>We confirm availability, agree on quantity, delivery method, and final price. Bulk discounts are available for large orders from NGOs, schools, and restaurants.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h4>Pay &amp; Receive</h4>
+                    <p>Complete payment via mobile money or agreed method. Collect at our Luansobe farm or arrange local delivery (Mufulira area). Done.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bulk Orders -->
+<section class="bulk-section">
+    <div class="bulk-inner">
+        <div class="bulk-text">
+            <h2>Bulk Orders Welcome</h2>
+            <p>GREVO is proud to supply institutions, processors, and community organisations with large-volume, consistent, quality-checked agricultural produce directly from our cooperative network.</p>
+            <p>We work with NGOs, government food programmes, schools, supermarkets, restaurants, animal feed mills, and cooking oil producers. Custom packaging and delivery can be arranged for established buyers.</p>
+            <div class="bulk-tags">
+                <span class="bulk-tag">NGOs</span>
+                <span class="bulk-tag">Schools</span>
+                <span class="bulk-tag">Restaurants</span>
+                <span class="bulk-tag">Feed Mills</span>
+                <span class="bulk-tag">Supermarkets</span>
+                <span class="bulk-tag">Food Processors</span>
+            </div>
+        </div>
+        <div class="bulk-cta">
+            <a href="https://wa.me/260761441893?text=I%20am%20interested%20in%20a%20bulk%20order%20from%20GREVO" target="_blank" class="btn-wa">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                WhatsApp Us
+            </a>
+            <a href="mailto:grevomultipurpose@gmail.com?subject=Bulk%20Order%20Enquiry" class="btn-email">
+                ✉️ Email Enquiry
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <h2>Ready to Order?</h2>
+    <p>Contact our team directly — fast response guaranteed. We're farmers, not bureaucrats.</p>
+    <div class="cta-btns">
+        <a href="https://wa.me/260761441893?text=I%27d%20like%20to%20place%20an%20order%20with%20GREVO" target="_blank" class="cta-wa">📱 WhatsApp +260 761 441 893</a>
+        <a href="mailto:grevomultipurpose@gmail.com" class="cta-em">✉️ grevomultipurpose@gmail.com</a>
+    </div>
+</section>
+
+<footer style="background:#0d1a10;padding:48px 60px 24px;border-top:1px solid rgba(82,201,125,0.12);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div style="display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;">
+            <div style="flex:2;min-width:220px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:12px;">
+                    <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+                    <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:white;letter-spacing:3px;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+                </a>
+                <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:1.7;max-width:300px;">Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Quick Links</h4>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                    <li><a href="products.html" style="color:#a8f5c2;text-decoration:none;font-size:0.88rem;">Products &amp; Produce</a></li>
+                    <li><a href="membership.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Membership</a></li>
+                    <li><a href="gallery.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Gallery</a></li>
+                    <li><a href="news.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">News &amp; Blog</a></li>
+                    <li><a href="faq.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">FAQ</a></li>
+                    <li><a href="find-us.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Find Us</a></li>
+                </ul>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Contact</h4>
+                <div style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:2;">
+                    <div>📍 Luansobe, Mufulira, Copperbelt, Zambia</div>
+                    <div>✉️ <a href="mailto:grevomultipurpose@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">grevomultipurpose@gmail.com</a></div>
+                    <div>📱 <a href="https://wa.me/260761441893" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">+260 761 441 893</a></div>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">© 2020–2026 GREVO Multipurpose Cooperative Society. All rights reserved.</p>
+            <div style="display:flex;gap:20px;">
+                <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Privacy Policy</a>
+                <a href="terms-of-use.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Terms of Use</a>
+                <a href="data-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Data Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<a href="https://wa.me/260761441893?text=Hello%20GREVO%20Team!" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:900;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(37,211,102,0.5);text-decoration:none;" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+</body>
+</html>

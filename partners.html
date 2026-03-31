@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Partners & Funders — GREVO AgriTech Cooperative. Our strategic partnerships building Zambia's green agricultural future.">
+    <title>Partners & Funders — GREVO AgriTech Cooperative</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f0f4f0'/%3E%3Cpath d='M100 155 a55 55 0 1 1 55-55' fill='none' stroke='%231040a0' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --forest: #0b3d20; --canopy: #145c30; --moss: #1e7a42;
+            --leaf: #52c97d; --glow: #a8f5c2; --tech: #00d4ff;
+            --cobalt: #1040a0; --gold: #c9a84c; --parchment: #f5f1e8;
+            --ink: #0d1a10; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--parchment); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+        .hero { background: linear-gradient(135deg, #0a2a50 0%, var(--cobalt) 40%, var(--forest) 100%); padding: 140px 60px 80px; text-align: center; }
+        .breadcrumb { color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+        .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700; color: white; margin-bottom: 16px; }
+        .hero .subtitle { color: rgba(255,255,255,0.6); font-size: 1.05rem; }
+
+        .section-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 40px; }
+        .section-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--leaf); margin-bottom: 12px; }
+        .section-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--forest); margin-bottom: 12px; }
+        .section-p { color: #556; margin-bottom: 48px; font-size: 0.95rem; }
+
+        .partners-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+        .partner-card { background: white; border-radius: 14px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; border-top: 3px solid transparent; }
+        .partner-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+        .partner-badge { display: inline-flex; align-items: center; justify-content: center; padding: 8px 20px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+        .partner-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
+        .partner-card p { color: #556; font-size: 0.88rem; line-height: 1.65; }
+        .partner-type { display: inline-block; margin-top: 12px; padding: 3px 10px; border-radius: 4px; background: rgba(82,201,125,0.1); color: var(--moss); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Partnership types */
+        .partner-with { background: var(--forest); padding: 80px 40px; }
+        .partner-with-inner { max-width: 1000px; margin: 0 auto; }
+        .partner-with h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; color: white; text-align: center; margin-bottom: 12px; }
+        .partner-with .sub { color: rgba(255,255,255,0.6); text-align: center; margin-bottom: 48px; }
+        .types-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 56px; }
+        .type-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; text-align: center; }
+        .type-icon { font-size: 2rem; margin-bottom: 12px; }
+        .type-card h4 { color: var(--glow); font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 8px; }
+        .type-card p { color: rgba(255,255,255,0.55); font-size: 0.85rem; line-height: 1.6; }
+
+        /* Form */
+        .form-section { background: white; padding: 80px 40px; }
+        .form-inner { max-width: 680px; margin: 0 auto; }
+        .form-card { background: var(--parchment); border-radius: 16px; padding: 48px; border: 1px solid rgba(0,0,0,0.08); }
+        .form-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--forest); margin-bottom: 8px; }
+        .form-card .sub { color: #778; font-size: 0.9rem; margin-bottom: 32px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #556; margin-bottom: 8px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1.5px solid rgba(0,0,0,0.12); border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.92rem; color: var(--ink); background: white; transition: border-color 0.2s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--leaf); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .submit-btn { width: 100%; padding: 16px; background: var(--forest); color: white; border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+        .submit-btn:hover { background: var(--canopy); }
+
+        @media (max-width: 768px) { .hero { padding: 120px 24px 60px; } .section-wrap { padding: 56px 20px; } .partner-with { padding: 60px 20px; } .form-section { padding: 56px 20px; } .form-card { padding: 28px 20px; } }
+    </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(11,61,32,0.97);backdrop-filter:blur(24px);box-shadow:0 4px 40px rgba(0,0,0,0.3);">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:white;letter-spacing:3px;text-transform:uppercase;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <a href="index.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Home</a>
+        <a href="products.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Products</a>
+        <a href="membership.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Membership</a>
+        <a href="news.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">News</a>
+        <a href="faq.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">FAQ</a>
+        <a href="index.html#contact" style="background:#52c97d;color:#0b3d20;padding:10px 22px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Partners &amp; Funders</div>
+    <h1>Building Zambia's Green Future Together</h1>
+    <p class="subtitle">GREVO's strategic partnerships power our technology, expand our reach, and amplify our impact</p>
+</section>
+
+<div class="section-wrap">
+    <p class="section-label">Strategic Partners</p>
+    <h2 class="section-h2">Our Partners &amp; Funders</h2>
+    <p class="section-p">GREVO's success is built on collaborative relationships with leading agricultural, technology, and development organisations across Africa and the world.</p>
+
+    <div class="partners-grid">
+        <div class="partner-card" style="border-top-color:#c9a84c;">
+            <div class="partner-badge" style="background:rgba(201,168,76,0.15);color:#7a5a00;">timbuktoo</div>
+            <h3>timbuktoo GreenTech Hub</h3>
+            <p>Pan-African accelerator programme under UNDP's timbuktoo initiative, supporting technology-driven climate and agricultural solutions across Africa. GREVO submitted its 2026 application to access mentorship, funding, and scale-up support for our IoT and AI platform.</p>
+            <span class="partner-type">Accelerator Programme</span>
+        </div>
+        <div class="partner-card" style="border-top-color:#00a651;">
+            <div class="partner-badge" style="background:rgba(0,166,81,0.12);color:#004d25;">AGRA</div>
+            <h3>AGRA — Alliance for a Green Revolution in Africa</h3>
+            <p>Continental partnership advancing food security and smallholder farmer prosperity. GREVO aligns with AGRA's mission of sustainable agricultural transformation and has applied for AGRA's Innovation Grant to expand our AI forecasting platform to 10,000 farmers.</p>
+            <span class="partner-type">Funder &amp; Network</span>
+        </div>
+        <div class="partner-card" style="border-top-color:#0065b3;">
+            <div class="partner-badge" style="background:rgba(0,101,179,0.12);color:#003d7a;">AfDB</div>
+            <h3>African Development Bank — Innovation Fund</h3>
+            <p>The AfDB Agriculture Innovation Fund supports scalable AgriTech solutions across the continent. GREVO is an active applicant for AfDB funding to finance Phase 3 of the FarmPulse network expansion and mobile application 2.0 development.</p>
+            <span class="partner-type">Funder (Application Active)</span>
+        </div>
+        <div class="partner-card" style="border-top-color:#8b0000;">
+            <div class="partner-badge" style="background:rgba(139,0,0,0.08);color:#5a0000;">MU</div>
+            <h3>Mukuba University</h3>
+            <p>Research partnership with Zambia's Mukuba University School of Agriculture. Joint studies on soil health, climate adaptation, and the effectiveness of precision agriculture interventions — with GREVO farms serving as living research sites.</p>
+            <span class="partner-type">Research Partner</span>
+        </div>
+        <div class="partner-card" style="border-top-color:#f26522;">
+            <div class="partner-badge" style="background:rgba(242,101,34,0.12);color:#7a3010;">ZATP II</div>
+            <h3>ZATP II — Zambia Agricultural Transformation Programme</h3>
+            <p>The Zambia Agricultural Transformation Programme (Phase II) has provided critical early-stage grant funding that enabled GREVO's IoT infrastructure, drone fleet acquisition, and YieldMind AI development. Phase 2 milestones were completed in June 2025.</p>
+            <span class="partner-type">Government Grant Programme</span>
+        </div>
+        <div class="partner-card" style="border-top-color:#009fdf;">
+            <div class="partner-badge" style="background:rgba(0,159,223,0.12);color:#005a80;">UN FSS</div>
+            <h3>UN Food Systems Summit</h3>
+            <p>GREVO's model of cooperative-led precision agriculture was presented at the UN Food Systems Summit national dialogue in Zambia. This recognition has elevated GREVO's profile with international development partners and potential funders.</p>
+            <span class="partner-type">Recognition &amp; Network</span>
+        </div>
+        <div class="partner-card" style="border-top-color:#009edb;">
+            <div class="partner-badge" style="background:rgba(0,158,219,0.12);color:#004a70;">UNDP</div>
+            <h3>UNDP Zambia</h3>
+            <p>UNDP Zambia's support for digital agriculture and cooperative development aligns directly with GREVO's model. Through the timbuktoo programme and SDG acceleration initiatives, UNDP Zambia has been a key institutional advocate for GREVO's scale-up strategy.</p>
+            <span class="partner-type">Development Partner</span>
+        </div>
+        <div class="partner-card" style="border-top-color:#c9a84c;">
+            <div class="partner-badge" style="background:rgba(201,168,76,0.12);color:#6a4a00;">MoA</div>
+            <h3>Ministry of Agriculture — Zambia</h3>
+            <p>GREVO cooperates with the Ministry of Agriculture on farmer registration, crop data reporting, and policy alignment. Our FarmPulse data contributes to the national crop monitoring database, and we participate in the Ministry's extension and farmer support programmes.</p>
+            <span class="partner-type">Government Partner</span>
+        </div>
+    </div>
+</div>
+
+<!-- Partner With Us -->
+<section class="partner-with">
+    <div class="partner-with-inner">
+        <h2>Partner With GREVO</h2>
+        <p class="sub">We welcome partnerships that share our commitment to farmer-first technology and dignified agricultural livelihoods</p>
+        <div class="types-grid">
+            <div class="type-card">
+                <div class="type-icon">💰</div>
+                <h4>Funding &amp; Grants</h4>
+                <p>Support GREVO's technology infrastructure, expansion, or specific programmes with financial partnerships.</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">⚙️</div>
+                <h4>Technology</h4>
+                <p>Provide IoT hardware, cloud services, satellite data, or AI tools that advance our farmer-facing platform.</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">🌍</div>
+                <h4>Market Access</h4>
+                <p>Help GREVO members access premium buyers, export markets, and food supply chains across Africa.</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">📚</div>
+                <h4>Training &amp; Knowledge</h4>
+                <p>Partner on training programmes, curriculum development, or certification for GREVO member farmers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partnership Form -->
+<section class="form-section" id="partner-form">
+    <div class="form-inner">
+        <div class="form-card">
+            <h2>Express Partnership Interest</h2>
+            <p class="sub">Tell us about your organisation and how you'd like to collaborate. Our team responds within 5 business days.</p>
+            <form id="partnerForm" action="https://formspree.io/f/maqlqyaa" method="POST">
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" name="name" required placeholder="Full name">
+                </div>
+                <div class="form-group">
+                    <label>Organisation *</label>
+                    <input type="text" name="organisation" required placeholder="Organisation / Company name">
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" name="email" required placeholder="your@organisation.com">
+                </div>
+                <div class="form-group">
+                    <label>Partnership Type</label>
+                    <select name="partnership_type">
+                        <option value="">Select type</option>
+                        <option>Funding / Grant</option>
+                        <option>Technology / Hardware</option>
+                        <option>Market Access / Distribution</option>
+                        <option>Training / Knowledge</option>
+                        <option>Research / Academic</option>
+                        <option>Media / Communications</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message *</label>
+                    <textarea name="message" required placeholder="Describe your organisation and how you'd like to work with GREVO..."></textarea>
+                </div>
+                <input type="hidden" name="_subject" value="GREVO Partnership Enquiry">
+                <button type="submit" class="submit-btn">Send Partnership Enquiry →</button>
+            </form>
+            <div id="partnerSuccess" style="display:none;text-align:center;padding:32px;">
+                <div style="font-size:2.5rem;margin-bottom:12px;">🤝</div>
+                <h3 style="font-family:'Cormorant Garamond',serif;color:var(--forest);font-size:1.8rem;margin-bottom:8px;">Enquiry Received!</h3>
+                <p style="color:#556;">Thank you for your interest in partnering with GREVO. We will be in touch within 5 business days.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer style="background:#0d1a10;padding:48px 60px 24px;border-top:1px solid rgba(82,201,125,0.12);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div style="display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;">
+            <div style="flex:2;min-width:220px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:12px;">
+                    <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+                    <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:white;letter-spacing:3px;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+                </a>
+                <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:1.7;max-width:300px;">Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Quick Links</h4>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                    <li><a href="products.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Products &amp; Produce</a></li>
+                    <li><a href="membership.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Membership</a></li>
+                    <li><a href="gallery.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Gallery</a></li>
+                    <li><a href="news.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">News &amp; Blog</a></li>
+                    <li><a href="faq.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">FAQ</a></li>
+                    <li><a href="find-us.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Find Us</a></li>
+                </ul>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Contact</h4>
+                <div style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:2;">
+                    <div>📍 Luansobe, Mufulira, Copperbelt, Zambia</div>
+                    <div>✉️ <a href="mailto:grevomultipurpose@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">grevomultipurpose@gmail.com</a></div>
+                    <div>📱 <a href="https://wa.me/260761441893" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">+260 761 441 893</a></div>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">© 2020–2026 GREVO Multipurpose Cooperative Society. All rights reserved.</p>
+            <div style="display:flex;gap:20px;">
+                <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Privacy Policy</a>
+                <a href="terms-of-use.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Terms of Use</a>
+                <a href="data-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Data Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<a href="https://wa.me/260761441893?text=Hello%20GREVO%20Team!" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:900;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(37,211,102,0.5);text-decoration:none;" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+<script>
+document.getElementById('partnerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.submit-btn');
+    btn.textContent = 'Sending...'; btn.disabled = true;
+    try {
+        const res = await fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } });
+        if (res.ok) { this.style.display = 'none'; document.getElementById('partnerSuccess').style.display = 'block'; }
+        else { btn.textContent = 'Error — Try Again'; btn.disabled = false; }
+    } catch { btn.textContent = 'Error — Try Again'; btn.disabled = false; }
+});
+</script>
+</body>
+</html>

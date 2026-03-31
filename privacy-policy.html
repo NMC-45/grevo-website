@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy — GREVO Multipurpose Cooperative Society. How we collect, use, and protect your personal data.">
+    <title>Privacy Policy — GREVO AgriTech Cooperative</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f0f4f0'/%3E%3Cpath d='M100 155 a55 55 0 1 1 55-55' fill='none' stroke='%231040a0' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --forest: #0b3d20; --canopy: #145c30; --moss: #1e7a42;
+            --leaf: #52c97d; --glow: #a8f5c2; --tech: #00d4ff;
+            --cobalt: #1040a0; --gold: #c9a84c; --parchment: #f5f1e8;
+            --ink: #0d1a10; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--parchment); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+        a { color: var(--moss); }
+        a:hover { color: var(--leaf); }
+
+        .hero {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--canopy) 50%, var(--ink) 100%);
+            padding: 140px 60px 80px;
+            text-align: center;
+        }
+        .breadcrumb { color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+        .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--glow); }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; color: white; margin-bottom: 16px; }
+        .hero .subtitle { color: rgba(255,255,255,0.6); font-size: 1rem; }
+        .last-updated { display: inline-block; margin-top: 16px; background: rgba(82,201,125,0.15); border: 1px solid rgba(82,201,125,0.3); color: var(--glow); padding: 6px 18px; border-radius: 20px; font-size: 0.82rem; letter-spacing: 1px; }
+
+        .content-wrap { max-width: 860px; margin: 0 auto; padding: 64px 40px 80px; }
+        .toc { background: white; border-left: 4px solid var(--leaf); border-radius: 0 8px 8px 0; padding: 28px 32px; margin-bottom: 56px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+        .toc h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--forest); margin-bottom: 16px; }
+        .toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+        .toc li a { color: var(--moss); text-decoration: none; font-size: 0.92rem; }
+        .toc li a:hover { color: var(--forest); text-decoration: underline; }
+
+        .section { margin-bottom: 52px; }
+        .section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 700; color: var(--forest); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid rgba(82,201,125,0.25); }
+        .section p { color: #334; font-size: 0.95rem; line-height: 1.85; margin-bottom: 16px; }
+        .section ul, .section ol { padding-left: 24px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .section li { color: #334; font-size: 0.95rem; line-height: 1.7; }
+        .highlight-box { background: rgba(11,61,32,0.05); border: 1px solid rgba(82,201,125,0.2); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+        .highlight-box p { margin: 0; font-size: 0.9rem; }
+        .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.88rem; }
+        .data-table th { background: var(--forest); color: white; padding: 12px 16px; text-align: left; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.07); color: #334; }
+        .data-table tr:nth-child(even) td { background: rgba(82,201,125,0.05); }
+        .contact-card { background: var(--forest); color: white; border-radius: 12px; padding: 32px; margin-top: 40px; }
+        .contact-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--glow); margin-bottom: 12px; }
+        .contact-card p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 8px; }
+        .contact-card a { color: var(--glow); }
+
+        @media (max-width: 768px) {
+            .hero { padding: 120px 24px 60px; }
+            .content-wrap { padding: 40px 20px 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(11,61,32,0.97);backdrop-filter:blur(24px);box-shadow:0 4px 40px rgba(0,0,0,0.3);">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:white;letter-spacing:3px;text-transform:uppercase;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <a href="index.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Home</a>
+        <a href="products.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Products</a>
+        <a href="membership.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Membership</a>
+        <a href="news.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">News</a>
+        <a href="faq.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">FAQ</a>
+        <a href="index.html#contact" style="background:#52c97d;color:#0b3d20;padding:10px 22px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Contact</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Privacy Policy</div>
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">How GREVO collects, uses, and protects your personal information</p>
+    <span class="last-updated">Last Updated: March 2026</span>
+</section>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#data-collected">Data We Collect</a></li>
+            <li><a href="#how-we-use">How We Use Your Data</a></li>
+            <li><a href="#data-sharing">Data Sharing &amp; Disclosure</a></li>
+            <li><a href="#cookies">Cookies &amp; Tracking</a></li>
+            <li><a href="#your-rights">Your Rights</a></li>
+            <li><a href="#data-security">Data Security</a></li>
+            <li><a href="#retention">Data Retention</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#updates">Policy Updates</a></li>
+        </ol>
+    </div>
+
+    <!-- 1. Introduction -->
+    <div class="section" id="introduction">
+        <h2>1. Introduction</h2>
+        <p>GREVO Multipurpose Cooperative Society ("GREVO", "we", "us", or "our") is committed to protecting the privacy and personal data of our members, website visitors, partners, and all individuals who interact with our services. This Privacy Policy describes how we collect, use, disclose, and safeguard your information when you visit our website or engage with our agricultural services.</p>
+        <p>We are a registered cooperative headquartered in Luansobe, Mufulira, Copperbelt Province, Zambia. Our operations are governed by Zambian law, and we also align our data practices with internationally recognised standards including the General Data Protection Regulation (GDPR) principles, particularly as we engage with international partners and funders.</p>
+        <p>By using our website or submitting your information to us, you consent to the practices described in this policy. If you do not agree with this policy, please do not use our services or provide us with your personal information.</p>
+        <div class="highlight-box">
+            <p><strong>Summary:</strong> We collect only what we need, use it only for legitimate purposes, never sell your data, and give you full control over what you share with us.</p>
+        </div>
+    </div>
+
+    <!-- 2. Data We Collect -->
+    <div class="section" id="data-collected">
+        <h2>2. Data We Collect</h2>
+        <p>We collect several categories of personal data depending on how you interact with us:</p>
+        <table class="data-table">
+            <thead>
+                <tr><th>Category</th><th>Examples</th><th>How Collected</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Identity Data</td><td>Full name, national ID number</td><td>Membership forms, direct contact</td></tr>
+                <tr><td>Contact Data</td><td>Email address, phone number, WhatsApp</td><td>Contact forms, membership registration</td></tr>
+                <tr><td>Location Data</td><td>District, province, village/farm address</td><td>Membership forms, farm surveys</td></tr>
+                <tr><td>Farm Data</td><td>Farm size, crops grown, yield data</td><td>IoT sensors, farmer reports, field surveys</td></tr>
+                <tr><td>Technical Data</td><td>IP address, browser type, device info, pages visited</td><td>Automatically via cookies and web analytics</td></tr>
+                <tr><td>Communication Data</td><td>Enquiry messages, WhatsApp messages</td><td>Contact forms, WhatsApp, email</td></tr>
+                <tr><td>Financial Data</td><td>Membership fee payment reference (no card data)</td><td>Payment confirmation records</td></tr>
+            </tbody>
+        </table>
+        <p>We do <strong>not</strong> collect sensitive personal data such as racial or ethnic origin, political opinions, religious beliefs, genetic data, biometric data for identification purposes, health data, or sexual orientation, unless required by law or expressly consented to for a specific programme.</p>
+    </div>
+
+    <!-- 3. How We Use Data -->
+    <div class="section" id="how-we-use">
+        <h2>3. How We Use Your Data</h2>
+        <p>We use the personal data we collect for the following purposes:</p>
+        <ul>
+            <li><strong>Member Management:</strong> Processing membership applications, issuing GREVO farmer IDs, managing member records and communications.</li>
+            <li><strong>Service Delivery:</strong> Providing access to our IoT sensor network, drone services, AI forecasting tools (YieldMind), and training programmes.</li>
+            <li><strong>Agricultural Support:</strong> Analysing farm data to provide personalised crop recommendations, yield forecasting, and pest/disease alerts.</li>
+            <li><strong>Communications:</strong> Responding to enquiries, sending programme updates, news, and agricultural advisories to members who have opted in.</li>
+            <li><strong>Research &amp; Impact Reporting:</strong> Aggregating anonymised farm data to measure cooperative impact, prepare reports for funders, and conduct agricultural research.</li>
+            <li><strong>Legal Compliance:</strong> Maintaining records as required under Zambian cooperative law and responding to lawful government requests.</li>
+            <li><strong>Website Improvement:</strong> Analysing website usage patterns to improve our digital services and user experience.</li>
+            <li><strong>Grant Applications:</strong> Using anonymised aggregate data to support applications to funders like timbuktoo, AGRA, and AfDB.</li>
+        </ul>
+        <p>We will never use your data for automated decision-making that produces significant legal effects on you without your explicit consent and the ability to seek human review.</p>
+    </div>
+
+    <!-- 4. Data Sharing -->
+    <div class="section" id="data-sharing">
+        <h2>4. Data Sharing &amp; Disclosure</h2>
+        <p>We do not sell, rent, or trade your personal data. We may share your data only in the following limited circumstances:</p>
+        <ul>
+            <li><strong>Service Partners:</strong> Third-party technology providers (e.g., IoT platform vendors, drone operators, cloud hosting providers) who process data on our behalf under strict data processing agreements.</li>
+            <li><strong>Cooperative Partners:</strong> Research institutions such as Mukuba University for agricultural studies, only with your knowledge and in anonymised or aggregated form where possible.</li>
+            <li><strong>Funders &amp; Auditors:</strong> Programme funders (AGRA, ZATP II, etc.) and auditors who require impact evidence — only aggregated, anonymised data is shared unless your individual consent is obtained.</li>
+            <li><strong>Regulatory Authorities:</strong> Zambian government bodies including the Registrar of Societies or the Patents and Companies Registration Agency (PACRA) as required by law.</li>
+            <li><strong>Legal Requirements:</strong> When disclosure is necessary to comply with a legal obligation, court order, or to protect the rights, property, or safety of GREVO, our members, or the public.</li>
+        </ul>
+        <div class="highlight-box">
+            <p><strong>We will never sell your personal data to advertisers, data brokers, or any commercial third parties.</strong></p>
+        </div>
+        <p>Where we share data with international partners (e.g., pan-African networks or UN bodies), we ensure appropriate safeguards are in place including standard contractual clauses or equivalent protections.</p>
+    </div>
+
+    <!-- 5. Cookies -->
+    <div class="section" id="cookies">
+        <h2>5. Cookies &amp; Tracking Technologies</h2>
+        <p>Our website uses cookies and similar technologies to enhance your browsing experience. We use the following types:</p>
+        <ul>
+            <li><strong>Strictly Necessary Cookies:</strong> Essential for the website to function. These cannot be disabled (e.g., session management, form security tokens).</li>
+            <li><strong>Analytics Cookies:</strong> Help us understand how visitors use our website (e.g., page views, time on page). We use privacy-respecting analytics and anonymise IP addresses where possible.</li>
+            <li><strong>Functional Cookies:</strong> Remember your preferences such as language or region settings.</li>
+        </ul>
+        <p>We do <strong>not</strong> use advertising/tracking cookies, retargeting pixels, or social media tracking widgets that report your behaviour to third parties without consent.</p>
+        <p>You can control cookies through your browser settings. Disabling strictly necessary cookies may impair website functionality. For more details, see our <a href="data-policy.html">Data Policy</a>.</p>
+    </div>
+
+    <!-- 6. Your Rights -->
+    <div class="section" id="your-rights">
+        <h2>6. Your Rights</h2>
+        <p>Under the Zambia Data Protection Act and GDPR principles, you have the following rights regarding your personal data:</p>
+        <ul>
+            <li><strong>Right to Access:</strong> Request a copy of all personal data we hold about you.</li>
+            <li><strong>Right to Rectification:</strong> Request correction of inaccurate or incomplete data.</li>
+            <li><strong>Right to Erasure:</strong> Request deletion of your personal data ("right to be forgotten") where there is no legitimate reason to continue processing it.</li>
+            <li><strong>Right to Restrict Processing:</strong> Request that we limit how we use your data while a dispute is resolved.</li>
+            <li><strong>Right to Data Portability:</strong> Receive your personal data in a structured, machine-readable format.</li>
+            <li><strong>Right to Object:</strong> Object to processing based on legitimate interests or direct marketing.</li>
+            <li><strong>Right to Withdraw Consent:</strong> Where processing is based on consent, withdraw it at any time without affecting prior lawful processing.</li>
+            <li><strong>Right to Complain:</strong> Lodge a complaint with the relevant Zambian data protection authority.</li>
+        </ul>
+        <p>To exercise any of these rights, contact us at <a href="mailto:grevomultipurpose@gmail.com">grevomultipurpose@gmail.com</a>. We will respond within 30 days.</p>
+    </div>
+
+    <!-- 7. Data Security -->
+    <div class="section" id="data-security">
+        <h2>7. Data Security</h2>
+        <p>We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, loss, destruction, or alteration. Our security measures include:</p>
+        <ul>
+            <li>HTTPS encryption for all data transmitted via our website</li>
+            <li>Access controls limiting who within GREVO can access member data</li>
+            <li>Regular review of our data handling practices and systems</li>
+            <li>Staff training on data protection and confidentiality obligations</li>
+            <li>Secure disposal of physical records containing personal data</li>
+        </ul>
+        <p>Despite these measures, no data transmission over the internet or storage system can be guaranteed to be 100% secure. If you suspect a data breach affecting your information, please contact us immediately.</p>
+    </div>
+
+    <!-- 8. Retention -->
+    <div class="section" id="retention">
+        <h2>8. Data Retention</h2>
+        <p>We retain personal data only as long as necessary for the purposes for which it was collected or as required by law:</p>
+        <ul>
+            <li><strong>Member records:</strong> Retained for the duration of membership plus 7 years after termination, as required for cooperative accounting and legal purposes.</li>
+            <li><strong>Enquiry/contact data:</strong> Retained for 2 years unless a continuing relationship develops.</li>
+            <li><strong>Farm &amp; IoT data:</strong> Aggregated and anonymised for long-term agricultural research; identifiable records retained for 5 years.</li>
+            <li><strong>Website analytics:</strong> Retained for 13 months in anonymised form.</li>
+            <li><strong>Financial transaction references:</strong> Retained for 7 years in compliance with Zambian tax and audit requirements.</li>
+        </ul>
+        <p>When data is no longer needed, we securely delete or anonymise it.</p>
+    </div>
+
+    <!-- 9. Contact -->
+    <div class="section" id="contact">
+        <h2>9. Contact Us</h2>
+        <p>For any privacy-related enquiries, to exercise your rights, or to report concerns, please contact us:</p>
+        <div class="contact-card">
+            <h3>GREVO Data &amp; Privacy Contact</h3>
+            <p>GREVO Multipurpose Cooperative Society</p>
+            <p>Luansobe Area, Mufulira District, Copperbelt Province, Zambia</p>
+            <p>Email: <a href="mailto:grevomultipurpose@gmail.com">grevomultipurpose@gmail.com</a></p>
+            <p>WhatsApp: <a href="https://wa.me/260761441893">+260 761 441 893</a></p>
+            <p style="margin-top:16px;font-size:0.85rem;color:rgba(255,255,255,0.5);">We aim to respond to all privacy requests within 30 days of receipt.</p>
+        </div>
+    </div>
+
+    <!-- 10. Updates -->
+    <div class="section" id="updates">
+        <h2>10. Policy Updates</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our practices, legal requirements, or services. When we make material changes, we will:</p>
+        <ul>
+            <li>Update the "Last Updated" date at the top of this page</li>
+            <li>Notify registered members via email or WhatsApp where the changes are significant</li>
+            <li>Post a notice on our website homepage for at least 30 days</li>
+        </ul>
+        <p>We encourage you to review this policy periodically. Continued use of our website or services after changes are posted constitutes your acceptance of the updated policy.</p>
+        <p>This policy was last substantially reviewed and updated in <strong>March 2026</strong>.</p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#0d1a10;padding:48px 60px 24px;border-top:1px solid rgba(82,201,125,0.12);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div style="display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;">
+            <div style="flex:2;min-width:220px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:12px;">
+                    <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+                    <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:white;letter-spacing:3px;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+                </a>
+                <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:1.7;max-width:300px;">Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Quick Links</h4>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                    <li><a href="products.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Products &amp; Produce</a></li>
+                    <li><a href="membership.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Membership</a></li>
+                    <li><a href="gallery.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Gallery</a></li>
+                    <li><a href="news.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">News &amp; Blog</a></li>
+                    <li><a href="faq.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">FAQ</a></li>
+                    <li><a href="find-us.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Find Us</a></li>
+                </ul>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Contact</h4>
+                <div style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:2;">
+                    <div>📍 Luansobe, Mufulira, Copperbelt, Zambia</div>
+                    <div>✉️ <a href="mailto:grevomultipurpose@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">grevomultipurpose@gmail.com</a></div>
+                    <div>📱 <a href="https://wa.me/260761441893" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">+260 761 441 893</a></div>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">© 2020–2026 GREVO Multipurpose Cooperative Society. All rights reserved.</p>
+            <div style="display:flex;gap:20px;">
+                <a href="privacy-policy.html" style="color:#a8f5c2;font-size:0.8rem;text-decoration:none;">Privacy Policy</a>
+                <a href="terms-of-use.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Terms of Use</a>
+                <a href="data-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Data Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/260761441893?text=Hello%20GREVO%20Team!" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:900;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(37,211,102,0.5);text-decoration:none;" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+</body>
+</html>

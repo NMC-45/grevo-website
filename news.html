@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="News & Blog — GREVO AgriTech Cooperative. Latest updates from the field — technology milestones, harvest records, and programme news from Zambia.">
+    <title>News & Blog — GREVO AgriTech Cooperative</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f0f4f0'/%3E%3Cpath d='M100 155 a55 55 0 1 1 55-55' fill='none' stroke='%231040a0' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --forest: #0b3d20; --canopy: #145c30; --moss: #1e7a42;
+            --leaf: #52c97d; --glow: #a8f5c2; --tech: #00d4ff;
+            --cobalt: #1040a0; --gold: #c9a84c; --parchment: #f5f1e8;
+            --ink: #0d1a10; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--parchment); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+        .hero { background: linear-gradient(135deg, var(--canopy) 0%, var(--forest) 50%, var(--ink) 100%); padding: 140px 60px 80px; text-align: center; }
+        .breadcrumb { color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+        .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700; color: white; margin-bottom: 16px; }
+        .hero .subtitle { color: rgba(255,255,255,0.6); font-size: 1.05rem; }
+
+        .news-wrap { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+        .section-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--leaf); margin-bottom: 12px; }
+
+        .news-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-bottom: 64px; }
+        .article-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; }
+        .article-card:hover { transform: translateY(-5px); box-shadow: 0 14px 48px rgba(0,0,0,0.12); }
+        .article-banner { height: 180px; display: flex; align-items: flex-end; justify-content: flex-start; padding: 20px; position: relative; }
+        .article-category { padding: 5px 12px; border-radius: 4px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; backdrop-filter: blur(8px); }
+        .cat-tech { background: rgba(0,212,255,0.15); color: #003060; border: 1px solid rgba(0,212,255,0.3); }
+        .cat-farm { background: rgba(82,201,125,0.2); color: #0b3d20; border: 1px solid rgba(82,201,125,0.4); }
+        .cat-milestone { background: rgba(201,168,76,0.2); color: #5a3800; border: 1px solid rgba(201,168,76,0.4); }
+        .cat-programme { background: rgba(16,64,160,0.12); color: #0a2a6a; border: 1px solid rgba(16,64,160,0.25); }
+        .article-body { padding: 24px 28px; }
+        .article-date { color: #889; font-size: 0.8rem; margin-bottom: 8px; }
+        .article-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 700; color: var(--forest); margin-bottom: 10px; line-height: 1.35; }
+        .article-body p { color: #556; font-size: 0.88rem; line-height: 1.65; margin-bottom: 18px; }
+        .read-more { color: var(--moss); text-decoration: none; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+        .read-more:hover { color: var(--forest); }
+
+        /* Newsletter */
+        .newsletter-section { background: var(--forest); padding: 72px 40px; }
+        .newsletter-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+        .newsletter-inner h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; color: white; margin-bottom: 12px; }
+        .newsletter-inner p { color: rgba(255,255,255,0.65); margin-bottom: 32px; }
+        .newsletter-form { display: flex; gap: 12px; }
+        .newsletter-form input { flex: 1; padding: 14px 18px; border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.92rem; }
+        .newsletter-form input:focus { outline: 2px solid var(--leaf); }
+        .newsletter-form button { padding: 14px 28px; background: var(--leaf); color: var(--forest); border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+        .newsletter-form button:hover { background: var(--glow); }
+        .newsletter-success { display: none; color: var(--glow); font-size: 1rem; padding: 16px; background: rgba(168,245,194,0.1); border-radius: 8px; border: 1px solid rgba(168,245,194,0.3); }
+
+        @media (max-width: 768px) {
+            .hero { padding: 120px 24px 60px; }
+            .news-wrap { padding: 56px 20px; }
+            .news-grid { grid-template-columns: 1fr; }
+            .newsletter-section { padding: 56px 20px; }
+            .newsletter-form { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(11,61,32,0.97);backdrop-filter:blur(24px);box-shadow:0 4px 40px rgba(0,0,0,0.3);">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:white;letter-spacing:3px;text-transform:uppercase;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <a href="index.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Home</a>
+        <a href="products.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Products</a>
+        <a href="membership.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Membership</a>
+        <a href="news.html" style="color:#a8f5c2;text-decoration:none;font-size:0.85rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">News</a>
+        <a href="faq.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">FAQ</a>
+        <a href="index.html#contact" style="background:#52c97d;color:#0b3d20;padding:10px 22px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; News &amp; Blog</div>
+    <h1>Latest from the Field</h1>
+    <p class="subtitle">Technology milestones, harvest records, programme updates, and stories from GREVO's cooperative farms</p>
+</section>
+
+<div class="news-wrap">
+    <p class="section-label" style="margin-bottom:32px;">Recent Articles</p>
+    <div class="news-grid">
+
+        <!-- Article 1 -->
+        <div class="article-card">
+            <div class="article-banner" style="background:linear-gradient(135deg,#0a2a50,#1040a0,#3060c0);">
+                <span class="article-category cat-programme">Grant Application</span>
+            </div>
+            <div class="article-body">
+                <div class="article-date">March 2026</div>
+                <h2>GREVO Applies for timbuktoo GreenTech Hub 2026</h2>
+                <p>In a landmark move for Zambian AgriTech, GREVO has submitted a competitive application to the timbuktoo GreenTech Hub — a pan-African accelerator for climate and food technology solutions backed by UNDP. The application spotlights our FarmPulse network and YieldMind AI.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+        </div>
+
+        <!-- Article 2 -->
+        <div class="article-card">
+            <div class="article-banner" style="background:linear-gradient(135deg,#1a5c30,#2fa830,#68d94e);">
+                <span class="article-category cat-farm">Harvest Record</span>
+            </div>
+            <div class="article-body">
+                <div class="article-date">February 2026</div>
+                <h2>Record Maize Harvest: 87% Yield Increase Across All Member Farms</h2>
+                <p>The 2025/2026 maize season has delivered GREVO's best harvest on record. Across all 1,800+ member farms, average yields increased by 87% compared to pre-GREVO baselines, driven by precise IoT soil management and AI planting recommendations from YieldMind.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+        </div>
+
+        <!-- Article 3 -->
+        <div class="article-card">
+            <div class="article-banner" style="background:linear-gradient(135deg,#0a3050,#006080,#00c0e0);">
+                <span class="article-category cat-tech">Technology</span>
+            </div>
+            <div class="article-body">
+                <div class="article-date">December 2025</div>
+                <h2>New Drone Fleet Arrives: AeroCrop Expands to 6 Units</h2>
+                <p>GREVO's AeroCrop programme has doubled its capacity with the arrival of three new multispectral drones, bringing the fleet to six active units. The expanded fleet can now survey all 4,200 acres of FarmPulse-monitored land within a single week, enabling monthly aerial crop health assessments for every member.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+        </div>
+
+        <!-- Article 4 -->
+        <div class="article-card">
+            <div class="article-banner" style="background:linear-gradient(135deg,#145c30,#1e7a42,#52c97d);">
+                <span class="article-category cat-milestone">Milestone</span>
+            </div>
+            <div class="article-body">
+                <div class="article-date">October 2025</div>
+                <h2>FarmPulse IoT Network Crosses 4,200 Acres Milestone</h2>
+                <p>The FarmPulse sensor network — GREVO's backbone IoT infrastructure — has crossed the 4,200-acre coverage milestone, making it Zambia's largest smallholder-focused agricultural IoT deployment. Sensors are now active across all 12 cooperative districts, providing real-time soil data to 1,800+ farmers.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+        </div>
+
+        <!-- Article 5 -->
+        <div class="article-card">
+            <div class="article-banner" style="background:linear-gradient(135deg,#3a1f60,#6a35b0,#a060e0);">
+                <span class="article-category cat-tech">Platform</span>
+            </div>
+            <div class="article-body">
+                <div class="article-date">August 2025</div>
+                <h2>1,800 Farmers Now Using GREVO Mobile App</h2>
+                <p>GREVO's farmer-facing mobile application has reached 1,800 registered users — matching the cooperative's total membership. The app provides access to FarmPulse data, YieldMind AI recommendations, market prices, and cooperative news in both English and Bemba. The milestone marks full digital inclusion of the membership.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+        </div>
+
+        <!-- Article 6 -->
+        <div class="article-card">
+            <div class="article-banner" style="background:linear-gradient(135deg,#5a3800,#c9a84c,#f0d070);">
+                <span class="article-category cat-programme">Programme Update</span>
+            </div>
+            <div class="article-body">
+                <div class="article-date">June 2025</div>
+                <h2>ZATP II Grant Milestone: Phase 2 Complete</h2>
+                <p>GREVO has successfully completed all Phase 2 deliverables under the Zambia Agricultural Transformation Programme (ZATP II), unlocking final grant disbursement and setting the stage for Phase 3 expansion. Phase 2 included the deployment of 320 FarmPulse sensors, training of 800 new members, and establishment of cooperative market linkages in 8 districts.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Newsletter -->
+<section class="newsletter-section">
+    <div class="newsletter-inner">
+        <h2>Stay Updated from the Field</h2>
+        <p>Get GREVO news, harvest updates, and technology milestones delivered directly to your inbox — no spam, just the important stuff.</p>
+        <form id="newsletterForm" action="https://formspree.io/f/maqlqyaa" method="POST">
+            <div class="newsletter-form">
+                <input type="email" name="email" required placeholder="your@email.com">
+                <input type="hidden" name="_subject" value="GREVO Newsletter Subscription">
+                <button type="submit">Subscribe →</button>
+            </div>
+        </form>
+        <div class="newsletter-success" id="nlSuccess">You're subscribed! Welcome to GREVO's farming community.</div>
+        <p style="color:rgba(255,255,255,0.35);font-size:0.78rem;margin-top:16px;">By subscribing, you consent to receive occasional email updates from GREVO. Unsubscribe at any time. See our <a href="privacy-policy.html" style="color:rgba(255,255,255,0.5);">Privacy Policy</a>.</p>
+    </div>
+</section>
+
+<footer style="background:#0d1a10;padding:48px 60px 24px;border-top:1px solid rgba(82,201,125,0.12);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div style="display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;">
+            <div style="flex:2;min-width:220px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:12px;">
+                    <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+                    <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:white;letter-spacing:3px;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+                </a>
+                <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:1.7;max-width:300px;">Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Quick Links</h4>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                    <li><a href="products.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Products &amp; Produce</a></li>
+                    <li><a href="membership.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Membership</a></li>
+                    <li><a href="gallery.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Gallery</a></li>
+                    <li><a href="news.html" style="color:#a8f5c2;text-decoration:none;font-size:0.88rem;">News &amp; Blog</a></li>
+                    <li><a href="faq.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">FAQ</a></li>
+                    <li><a href="find-us.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Find Us</a></li>
+                </ul>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Contact</h4>
+                <div style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:2;">
+                    <div>📍 Luansobe, Mufulira, Copperbelt, Zambia</div>
+                    <div>✉️ <a href="mailto:grevomultipurpose@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">grevomultipurpose@gmail.com</a></div>
+                    <div>📱 <a href="https://wa.me/260761441893" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">+260 761 441 893</a></div>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">© 2020–2026 GREVO Multipurpose Cooperative Society. All rights reserved.</p>
+            <div style="display:flex;gap:20px;">
+                <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Privacy Policy</a>
+                <a href="terms-of-use.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Terms of Use</a>
+                <a href="data-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Data Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<a href="https://wa.me/260761441893?text=Hello%20GREVO%20Team!" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:900;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(37,211,102,0.5);text-decoration:none;" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+<script>
+document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button');
+    btn.textContent = '...'; btn.disabled = true;
+    try {
+        const res = await fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } });
+        if (res.ok) { this.style.display = 'none'; document.getElementById('nlSuccess').style.display = 'block'; }
+        else { btn.textContent = 'Error'; btn.disabled = false; }
+    } catch { btn.textContent = 'Error'; btn.disabled = false; }
+});
+</script>
+</body>
+</html>

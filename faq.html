@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Frequently Asked Questions — GREVO AgriTech Cooperative Zambia. Everything about membership, technology, crops, and more.">
+    <title>FAQ — GREVO AgriTech Cooperative Zambia</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f0f4f0'/%3E%3Cpath d='M100 155 a55 55 0 1 1 55-55' fill='none' stroke='%231040a0' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --forest: #0b3d20; --canopy: #145c30; --moss: #1e7a42;
+            --leaf: #52c97d; --glow: #a8f5c2; --tech: #00d4ff;
+            --cobalt: #1040a0; --gold: #c9a84c; --parchment: #f5f1e8;
+            --ink: #0d1a10; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--parchment); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+        .hero { background: linear-gradient(135deg, var(--canopy) 0%, var(--forest) 60%, var(--ink) 100%); padding: 140px 60px 90px; text-align: center; }
+        .breadcrumb { color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+        .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700; color: white; margin-bottom: 16px; }
+        .hero .subtitle { color: rgba(255,255,255,0.6); font-size: 1.05rem; }
+        .search-hint { display: inline-block; margin-top: 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); padding: 8px 20px; border-radius: 24px; font-size: 0.82rem; }
+
+        .faq-wrap { max-width: 820px; margin: 0 auto; padding: 72px 40px 80px; }
+        .category-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--forest); margin: 48px 0 20px; padding-bottom: 8px; border-bottom: 2px solid rgba(82,201,125,0.25); display: flex; align-items: center; gap: 12px; }
+        .category-title:first-of-type { margin-top: 0; }
+
+        .faq-item { background: white; border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.05); transition: box-shadow 0.2s; }
+        .faq-item.open { box-shadow: 0 6px 30px rgba(0,0,0,0.1); }
+        .faq-question {
+            width: 100%; background: none; border: none; text-align: left;
+            padding: 20px 24px; cursor: pointer;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+            font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--ink);
+            transition: background 0.2s;
+        }
+        .faq-question:hover { background: rgba(82,201,125,0.04); }
+        .faq-item.open .faq-question { background: rgba(82,201,125,0.05); color: var(--forest); }
+        .faq-icon { width: 26px; height: 26px; min-width: 26px; background: var(--forest); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--glow); font-size: 1rem; font-weight: 700; transition: transform 0.3s, background 0.2s; }
+        .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--leaf); color: var(--forest); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--easing), padding 0.3s; }
+        .faq-answer.open { max-height: 500px; }
+        .faq-answer-inner { padding: 0 24px 20px; color: #445; font-size: 0.9rem; line-height: 1.75; }
+        .faq-answer-inner a { color: var(--moss); }
+
+        .cta-section { background: var(--forest); padding: 64px 40px; text-align: center; }
+        .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: white; margin-bottom: 12px; }
+        .cta-section p { color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+        .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .cta-btns a { padding: 14px 30px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; }
+        .btn-g { background: var(--leaf); color: var(--forest); }
+        .btn-o { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.3); }
+
+        @media (max-width: 768px) { .hero { padding: 120px 24px 60px; } .faq-wrap { padding: 48px 16px 60px; } .cta-section { padding: 48px 20px; } }
+    </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(11,61,32,0.97);backdrop-filter:blur(24px);box-shadow:0 4px 40px rgba(0,0,0,0.3);">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:white;letter-spacing:3px;text-transform:uppercase;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <a href="index.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Home</a>
+        <a href="products.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Products</a>
+        <a href="membership.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">Membership</a>
+        <a href="news.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;">News</a>
+        <a href="faq.html" style="color:#a8f5c2;text-decoration:none;font-size:0.85rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">FAQ</a>
+        <a href="index.html#contact" style="background:#52c97d;color:#0b3d20;padding:10px 22px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; FAQ</div>
+    <h1>Got Questions? We've Got Answers.</h1>
+    <p class="subtitle">Everything you need to know about GREVO — from membership to technology</p>
+    <span class="search-hint">18 Questions Answered Below</span>
+</section>
+
+<div class="faq-wrap">
+    <!-- About GREVO -->
+    <div class="category-title">🌾 About GREVO</div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            What is GREVO?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">GREVO Multipurpose Cooperative Society is Zambia's leading youth-led AgriTech cooperative, headquartered in Luansobe, Mufulira, Copperbelt Province. Founded in 2020 with 48 founding members, GREVO has grown to over 1,800 active members across 12 districts. We combine IoT sensor technology, AI yield forecasting, drone crop monitoring, blockchain traceability, and traditional cooperative values to empower smallholder farmers with dignified livelihoods and access to pan-African markets.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            Where does GREVO operate?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">GREVO is headquartered in Luansobe Area, Mufulira District, Copperbelt Province, Zambia. Our membership currently spans 12 districts, with the highest concentration in the Copperbelt (Mufulira, Kitwe, Ndola, Chingola). We are actively expanding across all 10 provinces of Zambia and have established a strategic roadmap for pan-African expansion to neighbouring countries including Malawi, Zimbabwe, and DRC.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            Is GREVO a registered organisation?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">Yes. GREVO Multipurpose Cooperative Society is officially registered under the Zambia Cooperative Societies Act with the Registrar of Societies. Our registration provides legal standing to hold assets, enter contracts, apply for grants, and operate as a formal cooperative entity. Copies of our registration certificate are available on request via email: <a href="mailto:grevomultipurpose@gmail.com">grevomultipurpose@gmail.com</a>.</div>
+        </div>
+    </div>
+
+    <!-- Membership -->
+    <div class="category-title">👥 Membership</div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            How do I join GREVO?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">Joining is simple. Complete our <a href="membership.html#apply">online membership application</a>, pay the ZMW 500 once-off joining fee, attend an orientation session, and receive your GREVO Farmer ID. You can also apply in person at our Luansobe office or contact us on WhatsApp at +260 761 441 893 to be guided through the process by a membership coordinator.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            What is the joining fee?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">The once-off registration fee is <strong>ZMW 500</strong>. This covers your GREVO Farmer ID card, orientation session materials, and initial platform onboarding. Annual membership fees (if any) are determined by the membership at the Annual General Meeting (AGM). We ensure that no farmer is denied membership purely on financial grounds — please contact us if circumstances are difficult.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            Can women join? Are they actively included?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">Absolutely yes. GREVO actively encourages and prioritises the inclusion of women at every level — from general membership to leadership positions. Over 40% of our current members are women. We have specific training tracks, mentorship programmes, and leadership development pathways designed for women farmers. GREVO's co-founder and Training Coordinator Kezia Mwale leads our gender inclusion programme, which aligns with SDG 5 (Gender Equality).</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            How are profits shared among members?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">GREVO operates on the cooperative principle of equitable surplus distribution. At the end of each financial year, after operational costs and reserve requirements are met, any surplus is distributed to members proportional to their participation and production contribution. Specific distribution ratios are approved at the Annual General Meeting. Since 2021, GREVO members have collectively received over ZMW 2.4 million in income and surplus distributions.</div>
+        </div>
+    </div>
+
+    <!-- Technology -->
+    <div class="category-title">📡 Technology</div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            Do I need a smartphone to benefit from GREVO?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">No. While a smartphone greatly enhances access to the GREVO mobile app, IoT data dashboards, and AI recommendations, it is not a requirement for membership. Our field coordinators provide personalised support for members without smartphones, delivering data reports in person or via SMS. We also conduct regular in-person group sessions at community hubs where all members can access the platform together.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            How does the IoT sensor work on my farm?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">FarmPulse IoT sensors are installed in your field by GREVO-trained technicians. The sensors continuously measure soil moisture, temperature, pH, and nutrient levels at depth, transmitting data via cellular networks to our cloud platform. You receive alerts on your phone if critical thresholds are crossed (e.g., soil too dry, frost risk). Drone surveys add aerial imagery to complete the picture. All data feeds into the YieldMind AI for personalised recommendations.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            What is the FarmPulse network?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">FarmPulse is GREVO's proprietary IoT sensor network that monitors agricultural conditions across all member farms in real time. As of 2025, FarmPulse covers over 4,200 acres across 12 districts. The network provides an integrated picture of soil health, weather patterns, and crop stress across the cooperative — enabling both individual farm recommendations and collective early warning systems for pests and disease outbreaks.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            How do drones help my farm?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">GREVO's AeroCrop drone fleet (6 units active as of 2025) performs regular aerial surveys of member farms. Drones capture multispectral imagery that reveals crop stress, pest pressure, weed invasion, waterlogging, and irrigation gaps — often weeks before these are visible to the naked eye. This early detection allows members to take corrective action in time, significantly reducing crop losses. Drone surveys are scheduled seasonally for all members.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            What is YieldMind AI?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">YieldMind is GREVO's artificial intelligence system trained on historical agricultural data, satellite imagery, soil science, and regional weather patterns. It analyses each member's farm data to provide personalised recommendations: optimal planting dates, fertiliser schedules, irrigation timing, pest management interventions, and expected yield ranges. YieldMind achieves 92% forecasting accuracy on maize yield projections across Copperbelt member farms, based on 2024 validation data.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            Is blockchain traceability free for members?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">Yes. Blockchain traceability is included as part of standard GREVO membership for produce sold through cooperative market channels. GREVO uses a lightweight blockchain ledger to record the chain of custody for member produce — from planting to processing to delivery. This allows premium buyers, exporters, and food companies to verify origin and quality, enabling members to command premium prices. There is no additional fee for this service.</div>
+        </div>
+    </div>
+
+    <!-- Languages & Access -->
+    <div class="category-title">🌍 Languages, Access &amp; Programmes</div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            What languages does GREVO support?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">GREVO delivers all its training, orientation, and farmer support in both <strong>English and Bemba</strong>. Bemba is the primary language of the Copperbelt, and we are committed to ensuring no language barrier prevents any farmer from fully benefiting from our programmes. We are also exploring support for Nyanja, Tonga, and other widely spoken Zambian languages as we expand to new provinces.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            What crops does GREVO support?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">GREVO currently supports maize (white maize), soybeans, groundnuts, sunflower, and various vegetables (tomatoes, rape, cabbage). Our broiler chicken programme is also well-established. IoT and AI support is most advanced for maize and soybeans. We are expanding support to sweet potato, cowpeas, and cassava in the 2026 season, driven by member demand and nutritional diversity goals.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            Does GREVO offer loans or input financing?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">Currently, GREVO does not operate a formal loan programme, but we facilitate access to input financing through our ZATP II programme partnerships and connect members with approved microfinance institutions. Our cooperative model also enables bulk purchasing of seeds, fertiliser, and chemicals at subsidised group rates — which significantly reduces upfront costs for members. A formal cooperative savings and credit scheme is under development for 2026–2027.</div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            What is the timbuktoo application GREVO submitted?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">In March 2026, GREVO submitted a competitive application to the <strong>timbuktoo GreenTech Hub</strong> — a pan-African accelerator for technology-driven climate and agricultural solutions. This programme, part of UNDP's timbuktoo initiative, would provide GREVO with mentorship, funding, pan-African market connections, and scale-up support. Our application highlights our IoT network, AI platform, and impact on over 1,800 Zambian farmers. Results are expected in mid-2026.</div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="category-title">📞 Contact &amp; Support</div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+            How do I contact GREVO?
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-inner">
+                You can reach us through multiple channels:<br><br>
+                📱 <strong>WhatsApp:</strong> <a href="https://wa.me/260761441893">+260 761 441 893</a> (fastest response)<br>
+                ✉️ <strong>Email:</strong> <a href="mailto:grevomultipurpose@gmail.com">grevomultipurpose@gmail.com</a><br>
+                📍 <strong>In person:</strong> Luansobe Area, Mufulira District, Copperbelt Province, Zambia<br>
+                🕐 <strong>Office hours:</strong> Monday–Friday 08:00–17:00, Saturday 09:00–13:00
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+    <h2>Still Have Questions?</h2>
+    <p>Our team is available on WhatsApp seven days a week. Don't be shy — we're farmers too.</p>
+    <div class="cta-btns">
+        <a href="https://wa.me/260761441893?text=I%20have%20a%20question%20about%20GREVO" class="btn-g" target="_blank">📱 Ask Us on WhatsApp</a>
+        <a href="membership.html#apply" class="btn-o">Join GREVO Today</a>
+    </div>
+</section>
+
+<footer style="background:#0d1a10;padding:48px 60px 24px;border-top:1px solid rgba(82,201,125,0.12);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div style="display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;">
+            <div style="flex:2;min-width:220px;">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:12px;">
+                    <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M100 162 a62 62 0 1 1 62-62" fill="none" stroke="#1a6abf" stroke-width="20" stroke-linecap="round"/><path d="M100 38 a62 62 0 0 1 42 16" fill="none" stroke="#1040a0" stroke-width="20" stroke-linecap="round"/><g transform="translate(100,105)"><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#2fa830" transform="rotate(-36)"/><rect x="-4" y="-62" width="8" height="58" rx="4" fill="#3dc048" transform="rotate(-24)"/><rect x="-4" y="-62" width="8" height="62" rx="4" fill="#52c97d" transform="rotate(-12)"/><rect x="-4" y="-62" width="8" height="60" rx="4" fill="#68d94e" transform="rotate(0)"/><rect x="-4" y="-62" width="8" height="55" rx="4" fill="#52c97d" transform="rotate(12)"/><rect x="-4" y="-62" width="8" height="50" rx="4" fill="#3dc048" transform="rotate(24)"/><rect x="-4" y="-62" width="8" height="42" rx="4" fill="#2fa830" transform="rotate(36)"/></g></svg>
+                    <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:white;letter-spacing:3px;">GREVO <span style="color:#a8f5c2;">AGRI•TECH</span></span>
+                </a>
+                <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:1.7;max-width:300px;">Zambia's leading AgriTech cooperative — empowering smallholder farmers with precision technology, dignified livelihoods, and pan-African market access.</p>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Quick Links</h4>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                    <li><a href="products.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Products &amp; Produce</a></li>
+                    <li><a href="membership.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Membership</a></li>
+                    <li><a href="gallery.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Gallery</a></li>
+                    <li><a href="news.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">News &amp; Blog</a></li>
+                    <li><a href="faq.html" style="color:#a8f5c2;text-decoration:none;font-size:0.88rem;">FAQ</a></li>
+                    <li><a href="find-us.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.88rem;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Find Us</a></li>
+                </ul>
+            </div>
+            <div style="flex:1;min-width:140px;">
+                <h4 style="color:white;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Contact</h4>
+                <div style="color:rgba(255,255,255,0.45);font-size:0.85rem;line-height:2;">
+                    <div>📍 Luansobe, Mufulira, Copperbelt, Zambia</div>
+                    <div>✉️ <a href="mailto:grevomultipurpose@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">grevomultipurpose@gmail.com</a></div>
+                    <div>📱 <a href="https://wa.me/260761441893" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">+260 761 441 893</a></div>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">© 2020–2026 GREVO Multipurpose Cooperative Society. All rights reserved.</p>
+            <div style="display:flex;gap:20px;">
+                <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Privacy Policy</a>
+                <a href="terms-of-use.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Terms of Use</a>
+                <a href="data-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#a8f5c2'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Data Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<a href="https://wa.me/260761441893?text=Hello%20GREVO%20Team!" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:900;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(37,211,102,0.5);text-decoration:none;" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+<script>
+function toggleFAQ(btn) {
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').classList.remove('open');
+    });
+    if (!isOpen) {
+        item.classList.add('open');
+        answer.classList.add('open');
+    }
+}
+</script>
+</body>
+</html>
