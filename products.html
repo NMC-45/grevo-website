@@ -126,6 +126,22 @@
         .cta-em { background: transparent; color: white; padding: 15px 36px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.3); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
         .cta-em:hover { border-color: var(--glow); }
 
+        .product-photo {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+            display: block;
+        }
+        .product-photo-placeholder {
+            width: 100%;
+            height: 220px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
         @media (max-width: 768px) {
             .hero { padding: 120px 24px 70px; }
             .section-wrap { padding: 56px 20px; }
@@ -165,75 +181,101 @@
     <p class="section-sub">All GREVO produce is grown using IoT-monitored soil data, drone surveillance, and AI-optimised input management — ensuring quality you can trust.</p>
 
     <div class="products-grid">
-        <!-- Broiler Chickens -->
+
+        <!-- Layer Hens & Fresh Eggs -->
         <div class="product-card">
-            <div class="product-banner" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2);">
-                🐔
-                <span class="availability-badge avail-weekly">Weekly Available</span>
+            <div style="position:relative;">
+                <img src="images/poultry.jpg" alt="Layer hens in GREVO's poultry unit, Mufulira" class="product-photo" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="product-photo-placeholder" style="display:none;background:linear-gradient(135deg,#fff3e0,#ffe0b2);">🐔</div>
+                <span class="availability-badge avail-weekly" style="position:absolute;top:14px;right:14px;">Available Daily</span>
             </div>
             <div class="product-body">
-                <h3>Broiler Chickens</h3>
-                <p>GREVO operates a large-scale broiler programme with 500+ birds per cycle. Our chickens are raised in managed conditions with proper nutrition and veterinary oversight, resulting in healthy, market-ready birds every week.</p>
-                <ul style="padding-left:18px;color:#556;font-size:0.88rem;margin-bottom:16px;display:flex;flex-direction:column;gap:4px;">
-                    <li>500+ birds per production cycle</li>
-                    <li>Available weekly — fresh live weight</li>
-                    <li>Veterinary health monitored</li>
-                    <li>Available for collection or local delivery</li>
-                </ul>
+                <h3>Layer Hens &amp; Fresh Eggs</h3>
+                <p>GREVO operates a laying hen unit producing fresh eggs daily. Eggs available for collection from our Mufulira farm or local market delivery. We also supply live broiler birds by order.</p>
                 <div class="price-row">
                     <div class="price">
-                        <span>Price per bird</span>
-                        ZMW 120 – 150
+                        <span>Price</span>
+                        ZMW 5–6 per egg | ZMW 120–150 per live bird
                     </div>
-                    <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20broiler%20chickens%20from%20GREVO" class="order-btn" target="_blank">Order Now</a>
+                    <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20eggs%20or%20poultry%20from%20GREVO" class="order-btn" target="_blank">Order Now</a>
                 </div>
             </div>
         </div>
 
-        <!-- White Maize -->
+        <!-- Maize -->
         <div class="product-card">
-            <div class="product-banner" style="background: linear-gradient(135deg, #f9fbe7, #f0f4c3);">
-                🌽
-                <span class="availability-badge avail-seasonal">Seasonal (May–Jul)</span>
+            <div style="position:relative;">
+                <img src="images/maize.jpg" alt="GREVO maize field — Copperbelt member farms" class="product-photo" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="product-photo-placeholder" style="display:none;background:linear-gradient(135deg,#f9fbe7,#f0f4c3);">🌽</div>
+                <span class="availability-badge avail-seasonal" style="position:absolute;top:14px;right:14px;">Seasonal May–July</span>
             </div>
             <div class="product-body">
-                <h3>White Maize</h3>
-                <p>Premium-grade white maize grown across GREVO member farms throughout the Copperbelt. Cultivated using soil-moisture IoT sensors and AI-optimised planting schedules for consistent, high-quality yields. Packed in durable 50kg bags.</p>
-                <ul style="padding-left:18px;color:#556;font-size:0.88rem;margin-bottom:16px;display:flex;flex-direction:column;gap:4px;">
-                    <li>Premium grade — post-harvest quality checked</li>
-                    <li>Packed in clean 50kg bags</li>
-                    <li>Available post-harvest: May–July</li>
-                    <li>Bulk orders welcome</li>
-                </ul>
+                <h3>Maize (White Maize)</h3>
+                <p>Premium white maize grown across our Copperbelt member farms. Available post-harvest May–July. Sold in 50kg bags — ideal for households, schools, and food processors.</p>
                 <div class="price-row">
                     <div class="price">
                         <span>Price per 50kg bag</span>
-                        ZMW 250 – 300
+                        ZMW 250–300
                     </div>
                     <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20white%20maize%20from%20GREVO" class="order-btn" target="_blank">Order Now</a>
                 </div>
             </div>
         </div>
 
-        <!-- Soybeans -->
+        <!-- Red Kidney Beans -->
         <div class="product-card">
-            <div class="product-banner" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9);">
-                🫘
-                <span class="availability-badge avail-seasonal">Seasonal</span>
+            <div style="position:relative;">
+                <img src="images/beans.jpg" alt="Red kidney beans — GREVO member farms, post-harvest 2025" class="product-photo" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="product-photo-placeholder" style="display:none;background:linear-gradient(135deg,#fce4ec,#f8bbd0);">🫘</div>
+                <span class="availability-badge avail-weekly" style="position:absolute;top:14px;right:14px;">Available Now</span>
             </div>
             <div class="product-body">
-                <h3>Soybeans</h3>
-                <p>High-protein soybean varieties suited for animal feed, oil processing, and direct consumption. GREVO's soybeans are cultivated with precision nutrition management, ensuring excellent protein content and minimal aflatoxin contamination.</p>
-                <ul style="padding-left:18px;color:#556;font-size:0.88rem;margin-bottom:16px;display:flex;flex-direction:column;gap:4px;">
-                    <li>High-protein variety — tested &amp; graded</li>
-                    <li>Suitable for feed mills &amp; oil processors</li>
-                    <li>50kg bags — clean and dry</li>
-                    <li>Available post-harvest season</li>
-                </ul>
+                <h3>Red Kidney Beans</h3>
+                <p>High-quality red kidney beans grown by GREVO member farmers. Rich in protein, ideal for household consumption and commercial buyers. Available in 50kg and 25kg bags.</p>
                 <div class="price-row">
                     <div class="price">
                         <span>Price per 50kg bag</span>
-                        ZMW 280 – 320
+                        ZMW 200–240
+                    </div>
+                    <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20red%20kidney%20beans%20from%20GREVO" class="order-btn" target="_blank">Order Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Greenhouse Seedlings & Vegetables -->
+        <div class="product-card">
+            <div style="position:relative;">
+                <img src="images/greenhouse.jpg" alt="GREVO greenhouse with seedling trays and irrigation system, Mufulira" class="product-photo" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="product-photo-placeholder" style="display:none;background:linear-gradient(135deg,#e0f7e9,#b2dfdb);">🥬</div>
+                <span class="availability-badge avail-weekly" style="position:absolute;top:14px;right:14px;">Year-Round</span>
+            </div>
+            <div class="product-body">
+                <h3>Greenhouse Seedlings &amp; Vegetables</h3>
+                <p>GREVO's greenhouse produces vegetable seedlings and fresh vegetables including rape, cabbage, tomatoes, and kale. Seedlings sold to other farmers; fresh veg supplied to local markets and households.</p>
+                <div class="price-row">
+                    <div class="price">
+                        <span>Pricing</span>
+                        Seedlings from ZMW 2 each | Veg by crate
+                    </div>
+                    <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20seedlings%20or%20vegetables%20from%20GREVO" class="order-btn" target="_blank">Enquire</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Soybeans -->
+        <div class="product-card">
+            <div style="position:relative;">
+                <img src="" alt="" class="product-photo" style="display:none;">
+                <div class="product-photo-placeholder" style="display:flex;background:linear-gradient(135deg,#145c30,#0b3d20);">🌿</div>
+                <span class="availability-badge avail-seasonal" style="position:absolute;top:14px;right:14px;">Seasonal</span>
+            </div>
+            <div class="product-body">
+                <h3>Soybeans</h3>
+                <p>High-protein soybeans grown by GREVO members — suitable for animal feed, cooking oil processing, and direct consumption. Available post-harvest in 50kg bags.</p>
+                <div class="price-row">
+                    <div class="price">
+                        <span>Price per 50kg bag</span>
+                        ZMW 280–320
                     </div>
                     <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20soybeans%20from%20GREVO" class="order-btn" target="_blank">Order Now</a>
                 </div>
@@ -242,74 +284,24 @@
 
         <!-- Groundnuts -->
         <div class="product-card">
-            <div class="product-banner" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0);">
-                🥜
-                <span class="availability-badge avail-seasonal">Seasonal</span>
+            <div style="position:relative;">
+                <img src="" alt="" class="product-photo" style="display:none;">
+                <div class="product-photo-placeholder" style="display:flex;background:linear-gradient(135deg,#8B4513,#5a2d0c);">🥜</div>
+                <span class="availability-badge avail-seasonal" style="position:absolute;top:14px;right:14px;">Post-Harvest</span>
             </div>
             <div class="product-body">
                 <h3>Groundnuts</h3>
-                <p>Both roasting-grade and oil-grade groundnut varieties from GREVO farms. Our groundnuts are sun-dried, cleaned, and graded before packaging. Ideal for individual buyers, processors, small businesses, and cooking oil producers.</p>
-                <ul style="padding-left:18px;color:#556;font-size:0.88rem;margin-bottom:16px;display:flex;flex-direction:column;gap:4px;">
-                    <li>Roasting &amp; oil varieties available</li>
-                    <li>Sun-dried, cleaned, and sorted</li>
-                    <li>50kg bag packaging</li>
-                    <li>Suitable for processing &amp; direct sale</li>
-                </ul>
+                <p>Roasting and oil varieties of groundnuts grown across member farms. Available after harvest for households, processors, and bulk buyers.</p>
                 <div class="price-row">
                     <div class="price">
                         <span>Price per 50kg bag</span>
-                        ZMW 180 – 220
+                        ZMW 180–220
                     </div>
                     <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20groundnuts%20from%20GREVO" class="order-btn" target="_blank">Order Now</a>
                 </div>
             </div>
         </div>
 
-        <!-- Vegetables -->
-        <div class="product-card">
-            <div class="product-banner" style="background: linear-gradient(135deg, #e0f7e9, #b2dfdb);">
-                🥬
-                <span class="availability-badge avail-weekly">In Season</span>
-            </div>
-            <div class="product-body">
-                <h3>Fresh Vegetables</h3>
-                <p>Seasonal vegetables grown by GREVO smallholder members across the Copperbelt. Current offerings include tomatoes, rape, and cabbage — grown without excess chemical inputs thanks to our IoT soil monitoring and pest-alert systems.</p>
-                <ul style="padding-left:18px;color:#556;font-size:0.88rem;margin-bottom:16px;display:flex;flex-direction:column;gap:4px;">
-                    <li>Tomatoes — crates (subject to season)</li>
-                    <li>Rape (Brassica) — bundles or crates</li>
-                    <li>Cabbage — heads or crates</li>
-                    <li>Contact for current availability &amp; pricing</li>
-                </ul>
-                <div class="price-row">
-                    <div class="price">
-                        <span>Pricing</span>
-                        Per crate (contact us)
-                    </div>
-                    <a href="https://wa.me/260761441893?text=I%20want%20to%20order%20vegetables%20from%20GREVO" class="order-btn" target="_blank">Enquire</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Coming Soon -->
-        <div class="product-card" style="border: 2px dashed rgba(82,201,125,0.3); box-shadow: none;">
-            <div class="product-banner" style="background: linear-gradient(135deg, #f5f1e8, #e8e4d8);">
-                🌱
-            </div>
-            <div class="product-body">
-                <h3 style="color:#889;">Sunflower &amp; More — Coming Soon</h3>
-                <p style="color:#aaa;">GREVO is expanding its crop portfolio to include sunflower, sweet potato, and cowpeas in the next growing season. Members are already trialling these crops with AI-guided cultivation plans.</p>
-                <div style="margin-top:20px;padding:12px 16px;background:rgba(82,201,125,0.06);border-radius:6px;">
-                    <p style="font-size:0.85rem;color:#889;margin:0;">Join our WhatsApp updates list to be notified when new produce is available.</p>
-                </div>
-                <div class="price-row">
-                    <div class="price" style="color:#aaa;">
-                        <span>Availability</span>
-                        2026 Season
-                    </div>
-                    <a href="https://wa.me/260761441893?text=I%27d%20like%20updates%20on%20new%20GREVO%20produce" class="order-btn" target="_blank" style="background:rgba(82,201,125,0.15);color:var(--forest);">Get Notified</a>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
